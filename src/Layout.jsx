@@ -1,63 +1,240 @@
 import { useState, useEffect } from "react";
 import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
-import { MessageCircle, ShieldCheck, Phone } from "lucide-react";
-import { C, FD, FB, WA, TEL, LICENSE, wrap, primaryBtn } from "./theme.jsx";
+import { ChevronDown, ChevronUp, Menu, Phone, Search, ShieldCheck, X } from "lucide-react";
+import { C, FD, FB, R, S, SHADOW, TEL, LICENSE, BROKERAGE, wrap } from "./theme.jsx";
 import FormModal from "./FormModal.jsx";
 
 const NAV = [
-  { to:'/cozumler',   label:'Çözümler' },
-  { to:'/oranlar',    label:'Oranlar' },
-  { to:'/araclar',    label:'Araçlar' },
-  { to:'/hakkimizda', label:'Hakkımızda' },
+  { key:'cozumler', to:'/cozumler',   label:'Çözümler', mega:true },
+  { key:'araclar',  to:'/araclar',    label:'Araçlar', mega:true },
+  { key:'ogren',    to:'/ogren',      label:'Öğren' },
+  { key:'hakkimizda', to:'/hakkimizda', label:'Hakkımızda' },
 ];
 
-function TopBar() {
+const MEGA_MENUS = {
+  cozumler: {
+    label: 'Çözümler',
+    groups: [
+      {
+        title: 'Kime yardım ediyoruz?',
+        className: 'kb-mega-who',
+        items: [
+          { label:'İlk ev alıcıları', href:'/cozumler#ilk-ev' },
+          { label:'Ev sahipleri', href:'/cozumler#ev-sahipleri' },
+          { label:'Ev sahipleri / yatırımcılar', href:'/cozumler#yatirimcilar' },
+          { label:'Şirket sahibi / serbest meslek', href:'/cozumler#serbest-meslek' },
+          { label:'Kanada’ya yeni gelenler', href:'/cozumler#yeni-gelenler' },
+        ],
+      },
+      {
+        title: 'Ne konuda yardım ediyoruz?',
+        className: 'kb-mega-what',
+        items: [
+          { label:'Ev almak', desc:'Bütçe ve mortgage seçenekleri', href:'/cozumler#ev-almak' },
+          { label:'Ev kredimi yenilemek', desc:'Yenileme ve refinansman seçenekleri', href:'/cozumler#ev-kredimi-yenilemek' },
+          { label:'Tadilat finansmanı', desc:'Ev değerinden yararlanarak planlayın', href:'/cozumler#tadilat-finansmani' },
+          { label:'Borç ödemelerini rahatlatmak', desc:'Borç birleştirme seçenekleri', href:'/cozumler#borc-odemelerini-rahatlatmak' },
+          { label:'Ev değerinden yararlanmak', desc:'HELOC / ikinci mortgage', href:'/cozumler#ev-degerinden-yararlanmak' },
+          { label:'Mortgage seçeneklerini karşılaştırmak', desc:'Size uygun oran ve ürünleri görün', href:'/cozumler#mortgage-seceneklerini-karsilastirmak' },
+        ],
+      },
+    ],
+  },
+  araclar: {
+    label: 'Araçlar',
+    groups: [
+      {
+        title: 'Araçlar',
+        className: 'kb-mega-tools',
+        items: [
+          { label:'Mortgage yol bulucu', desc:'Kişisel başlangıç önerisi', href:'/araclar#mortgage-yol-bulucu' },
+          { label:'Ön onay', desc:'Yaklaşık alım gücünü görün', href:'/araclar#on-onay' },
+          { label:'İlk ev alıcı hesaplayıcı', desc:'Program uygunluğunu görün', href:'/araclar#ilk-ev-alici-hesaplayici' },
+          { label:'Mortgage hesaplayıcı', desc:'Aylık ödeme tahmini', href:'/araclar#mortgage-hesaplayici' },
+          { label:'Mortgage yenileme hesaplayıcı', desc:'Yenileme bütçesi', href:'/araclar#mortgage-yenileme-hesaplayici' },
+          { label:'Uygunluk hesaplayıcı', desc:'Maksimum alım gücü', href:'/araclar#uygunluk-hesaplayici' },
+          { label:'Tapu devir vergisi', desc:'Vergi maliyeti', href:'/araclar#tapu-devir-vergisi' },
+          { label:'Kapanış masrafı', desc:'Toplam kapanış gideri', href:'/araclar#kapanis-masrafi' },
+          { label:'Ödeme karşılaştırması', desc:'Mevcut ve yeni ödeme farkı', href:'/araclar#odeme-karsilastirmasi' },
+          { label:'Kiralamak mı almak mı?', desc:'Seçenekleri karşılaştırın', href:'/araclar#kiralamak-mi-almak-mi' },
+          { label:'Tadilat hesaplayıcı', desc:'Ev sermayesi limiti', href:'/araclar#tadilat-hesaplayici' },
+          { label:'Mortgage ceza hesaplayıcı', desc:'Bozma maliyeti', href:'/araclar#mortgage-ceza-hesaplayici' },
+        ],
+      },
+    ],
+  },
+};
+
+function Logo() {
   return (
-    <div style={{background:C.navy,color:'#fff'}}>
-      <div style={{...wrap,display:'flex',alignItems:'center',justifyContent:'space-between',
-                   height:38,fontSize:12.5,fontFamily:FB}}>
-        <span style={{display:'flex',alignItems:'center',gap:7,opacity:.85}}>
-          <ShieldCheck size={13}/> FSRA Lisanslı Mortgage Brokerage · {LICENSE}
+    <Link to="/" className="kb-logo" aria-label="Kredibaba ana sayfa">
+      <span>Kredi</span>
+      <span>baba</span>
+    </Link>
+  );
+}
+
+function TopBar({ onCTA }) {
+  return (
+    <div className="kb-top-promo">
+      <div style={{...wrap}} className="kb-top-promo-inner">
+        <span className="kb-top-promo-text">
+          <Search size={15}/> Ücretsiz mortgage hesaplaması
         </span>
-        <a href={`tel:${TEL}`} style={{display:'flex',alignItems:'center',gap:7,color:'#fff',textDecoration:'none',opacity:.9}}>
-          <Phone size={13}/> {TEL}
-        </a>
+        <button onClick={onCTA} className="kb-top-promo-cta">Hemen başla</button>
+      </div>
+    </div>
+  );
+}
+
+function MegaPanel({ menuKey, onClose }) {
+  const menu = MEGA_MENUS[menuKey];
+  if (!menu) return null;
+
+  return (
+    <div className="kb-mega-panel" onMouseEnter={() => {}} onMouseLeave={onClose}>
+      <div style={{maxWidth:wrap.maxWidth,margin:wrap.margin}} className="kb-mega-inner">
+        {menu.groups.map((group) => (
+          <div key={group.title} className={`kb-mega-group ${group.className}`}>
+            {menuKey === 'cozumler' && (
+              <h2 className="kb-mega-title">{group.title}</h2>
+            )}
+            <div className="kb-mega-items">
+              {group.items.map((item) => (
+                <Link key={item.href} to={item.href} className="kb-mega-item" onClick={onClose}>
+                  <span className="kb-mega-item-title">{item.label}</span>
+                  {item.desc && <span className="kb-mega-item-desc">{item.desc}</span>}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileGroup({ title, items, open, onToggle, onClose }) {
+  return (
+    <div className="kb-mobile-group">
+      <button className="kb-mobile-group-trigger" onClick={onToggle} aria-expanded={open}>
+        <span>{title}</span>
+        {open ? <ChevronUp size={18}/> : <ChevronDown size={18}/>}
+      </button>
+      {open && (
+        <div className="kb-mobile-group-list">
+          {items.map((item) => (
+            <Link key={item.href} to={item.href} className="kb-mobile-menu-item" onClick={onClose}>
+              <span>{item.label}</span>
+              {item.desc && <small>{item.desc}</small>}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MobileDrawer({ open, currentGroup, setCurrentGroup, onClose }) {
+  if (!open) return null;
+  const solutionItems = MEGA_MENUS.cozumler.groups.flatMap((group) => group.items);
+  const toolItems = MEGA_MENUS.araclar.groups[0].items;
+
+  return (
+    <div className="kb-mobile-drawer">
+      <div className="kb-mobile-drawer-inner">
+        <MobileGroup
+          title="Çözümler"
+          items={solutionItems}
+          open={currentGroup === 'cozumler'}
+          onToggle={() => setCurrentGroup(currentGroup === 'cozumler' ? '' : 'cozumler')}
+          onClose={onClose}
+        />
+        <MobileGroup
+          title="Araçlar"
+          items={toolItems}
+          open={currentGroup === 'araclar'}
+          onToggle={() => setCurrentGroup(currentGroup === 'araclar' ? '' : 'araclar')}
+          onClose={onClose}
+        />
+        <NavLink to="/ogren" className="kb-mobile-simple-link" onClick={onClose}>Öğren</NavLink>
+        <NavLink to="/hakkimizda" className="kb-mobile-simple-link" onClick={onClose}>Hakkımızda</NavLink>
       </div>
     </div>
   );
 }
 
 function Navbar({onCTA}) {
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileGroup, setMobileGroup] = useState('cozumler');
+  const { pathname } = useLocation();
+  const closeMenus = () => {
+    setActiveMenu(null);
+    setMobileOpen(false);
+  };
+
+  useEffect(() => {
+    setActiveMenu(null);
+    setMobileOpen(false);
+  }, [pathname]);
+
   return (
-    <nav style={{position:'sticky',top:0,zIndex:50,background:'rgba(255,255,255,0.92)',
-                 backdropFilter:'blur(10px)',borderBottom:`1px solid ${C.border}`}}>
-      <div style={{...wrap,display:'flex',alignItems:'center',justifyContent:'space-between',height:66}}>
-        <div style={{display:'flex',alignItems:'center',gap:36}}>
-          <Link to="/" style={{display:'flex',alignItems:'baseline',gap:1,textDecoration:'none'}}>
-            <span style={{fontFamily:FD,fontSize:23,fontWeight:600,color:C.navy}}>Kredi</span>
-            <span style={{fontFamily:FD,fontSize:23,fontWeight:600,color:C.blue}}>baba</span>
-          </Link>
-          <div className="kb-navlinks" style={{display:'flex',gap:26}}>
-            {NAV.map(n=>(
-              <NavLink key={n.to} to={n.to}
-                style={({isActive})=>({fontSize:14.5,color:isActive?C.blue:C.body,cursor:'pointer',
-                  fontFamily:FB,fontWeight:isActive?600:500,textDecoration:'none'})}>
-                {n.label}
-              </NavLink>
+    <nav className="kb-navbar" onMouseLeave={() => setActiveMenu(null)}>
+      <div style={{...wrap}} className="kb-nav-inner">
+        <div className="kb-nav-left">
+          <Logo />
+          <div className="kb-desktop-nav" onMouseEnter={() => {}}>
+            {NAV.map((n) => (
+              n.mega ? (
+                <button
+                  key={n.key}
+                  className={`kb-nav-item kb-nav-button ${activeMenu === n.key ? 'is-active' : ''}`}
+                  onMouseEnter={() => setActiveMenu(n.key)}
+                  onFocus={() => setActiveMenu(n.key)}
+                  onClick={() => setActiveMenu(activeMenu === n.key ? null : n.key)}
+                  aria-expanded={activeMenu === n.key}
+                  aria-haspopup="true"
+                >
+                  {n.label} <ChevronDown size={15}/>
+                </button>
+              ) : (
+                <NavLink
+                  key={n.key}
+                  to={n.to}
+                  className={({isActive}) => `kb-nav-item ${isActive ? 'is-active' : ''}`}
+                  onMouseEnter={() => setActiveMenu(null)}
+                >
+                  {n.label}
+                </NavLink>
+              )
             ))}
           </div>
         </div>
-        <div style={{display:'flex',gap:10,alignItems:'center'}}>
-          <a href={`https://wa.me/${WA}`} className="kb-nav-wa"
-             style={{display:'flex',alignItems:'center',gap:6,padding:'8px 12px',textDecoration:'none',
-                     color:C.body,fontSize:14,fontWeight:500,fontFamily:FB}}>
-            <MessageCircle size={15} color={C.wa}/> WhatsApp
-          </a>
-          <button onClick={onCTA} style={primaryBtn({padding:'10px 18px',fontSize:14.5})}>
-            Ön Onay Al
+        <div className="kb-desktop-actions">
+          <button onClick={onCTA} className="kb-primary-nav-cta">
+            Ücretsiz Hesap Aç
+          </button>
+        </div>
+        <div className="kb-mobile-actions">
+          <button onClick={onCTA} className="kb-primary-nav-cta">Ücretsiz Hesap Aç</button>
+          <button
+            className="kb-mobile-menu-button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+          >
+            Menü {mobileOpen ? <X size={17}/> : <Menu size={17}/>}
           </button>
         </div>
       </div>
+      <MegaPanel menuKey={activeMenu} onClose={() => setActiveMenu(null)} />
+      <MobileDrawer
+        open={mobileOpen}
+        currentGroup={mobileGroup}
+        setCurrentGroup={setMobileGroup}
+        onClose={closeMenus}
+      />
     </nav>
   );
 }
@@ -65,22 +242,22 @@ function Navbar({onCTA}) {
 function Footer() {
   const cols=[
     {h:'Çözümler', links:[
-      {t:'Ev satın alma',     to:'/cozumler'},
-      {t:'Mortgage yenileme', to:'/cozumler'},
-      {t:'Refinansman',       to:'/cozumler'},
-      {t:'HELOC',             to:'/cozumler'},
+      {t:'İlk ev alıcıları', to:'/cozumler'},
+      {t:'Ev sahipleri',     to:'/cozumler'},
+      {t:'Yatırımcılar',     to:'/cozumler'},
+      {t:'Yeni gelenler',    to:'/cozumler'},
     ]},
-    {h:'Araçlar', links:[
-      {t:'Oran karşılaştırma', to:'/oranlar'},
-      {t:'Ödeme hesaplama',    to:'/araclar'},
-      {t:'Uygunluk hesaplama', to:'/araclar'},
-      {t:'Ön onay',            to:'/araclar'},
+    {h:'Yardımcı Araçlar', links:[
+      {t:'Mortgage hesaplayıcı', to:'/araclar'},
+      {t:'Uygunluk hesaplama',   to:'/araclar'},
+      {t:'Bugünün en düşük oranı',to:'/oranlar'},
+      {t:'Kapanış masrafları',   to:'/araclar'},
     ]},
-    {h:'Kurumsal', links:[
-      {t:'Hakkımızda',       to:'/hakkimizda'},
-      {t:'Ekibimiz',         to:'/hakkimizda'},
-      {t:'Danışma Kurulu',   to:'/hakkimizda'},
-      {t:'İletişim',         to:'/hakkimizda'},
+    {h:'Öğren', links:[
+      {t:'Mortgage sözlüğü',     to:'/ogren'},
+      {t:'Ev alma rehberi',      to:'/ogren'},
+      {t:'Yenileme ve ceza',     to:'/ogren'},
+      {t:'Sık sorulan sorular',  to:'/ogren'},
     ]},
   ];
   return (
@@ -90,10 +267,11 @@ function Footer() {
           <div>
             <Link to="/" style={{display:'flex',alignItems:'baseline',gap:1,marginBottom:14,textDecoration:'none'}}>
               <span style={{fontFamily:FD,fontSize:22,fontWeight:600,color:'#fff'}}>Kredi</span>
-              <span style={{fontFamily:FD,fontSize:22,fontWeight:600,color:'#6FA8F0'}}>baba</span>
+              <span style={{fontFamily:FD,fontSize:22,fontWeight:600,color:C.blueLight}}>baba</span>
             </Link>
-            <p style={{fontSize:13.5,lineHeight:1.7,maxWidth:280,fontFamily:FB}}>
-              Kanada'daki Türk topluluğunun bağımsız mortgage uzmanı. Şeffaf, çok dilli ve sizin çıkarınıza.
+            <p style={{fontSize:13.5,lineHeight:1.7,maxWidth:310,fontFamily:FB}}>
+              Kanada’daki Türk topluluğu için mortgage (konut kredisi) sürecini sadeleştiren,
+              {` ${BROKERAGE}`} bünyesinde sunulan Türkçe mortgage deneyimi.
             </p>
             <div style={{marginTop:18,display:'flex',alignItems:'center',gap:8,fontSize:13,color:'rgba(255,255,255,0.6)'}}>
               <Phone size={14}/> {TEL}
@@ -101,7 +279,7 @@ function Footer() {
           </div>
           {cols.map((c,i)=>(
             <div key={i}>
-              <h4 style={{fontSize:13,color:'#fff',fontWeight:600,marginBottom:14,fontFamily:FB,letterSpacing:.3}}>{c.h}</h4>
+              <h4 style={{fontSize:13,color:'#fff',fontWeight:700,marginBottom:14,fontFamily:FB,letterSpacing:.3}}>{c.h}</h4>
               <div style={{display:'flex',flexDirection:'column',gap:10}}>
                 {c.links.map((l,j)=>(
                   <Link key={j} to={l.to} style={{fontSize:13.5,cursor:'pointer',fontFamily:FB,textDecoration:'none',color:'inherit'}}>{l.t}</Link>
@@ -112,26 +290,22 @@ function Footer() {
         </div>
         <div style={{borderTop:'1px solid rgba(255,255,255,0.12)',paddingTop:24,
                      display:'flex',flexDirection:'column',gap:14}}>
-          {/* FSRA açıklaması */}
           <div style={{display:'flex',gap:10,alignItems:'flex-start'}}>
-            <ShieldCheck size={16} color="#6FA8F0" style={{flexShrink:0,marginTop:2}}/>
+            <ShieldCheck size={16} color={C.blueLight} style={{flexShrink:0,marginTop:2}}/>
             <p style={{fontSize:12,lineHeight:1.7,color:'rgba(255,255,255,0.62)',margin:0,fontFamily:FB}}>
-              <strong style={{color:'rgba(255,255,255,0.85)'}}>FSRA nedir?</strong>{' '}
-              FSRA (Financial Services Regulatory Authority of Ontario / Ontario Finansal Hizmetler Düzenleme Kurumu),
-              Ontario'daki mortgage brokerage'larını ve agentlarını denetleyen resmi devlet kurumudur. FSRA lisansı,
-              hizmetin yasal düzenlemelere ve tüketici koruma standartlarına uygun şekilde sunulduğunu gösterir. Lisans No: {LICENSE}.
+              <strong style={{color:'rgba(255,255,255,0.85)'}}>Yasal açıklama:</strong>{' '}
+              Kredibaba, Ontario’da faaliyet gösteren {BROKERAGE} lisanslı mortgage brokerage bünyesinde sunulan
+              bir hizmet markasıdır. FSRA lisansı, mortgage aracılığı hizmetinin Ontario düzenlemelerine tabi olduğunu gösterir. Lisans No: {LICENSE}.
             </p>
           </div>
-          {/* Yasal uyarı */}
           <p style={{fontSize:11.5,lineHeight:1.8,color:'rgba(255,255,255,0.5)',margin:0,fontFamily:FB}}>
-            Bu site yalnızca bilgilendirme amaçlıdır ve kredi taahhüdü oluşturmaz. Mortgage koşulları lender ve
-            başvuruya göre değişir; oranlar commitment aşamasında kesinleşir, garanti edilmez.
+            Bu site yalnızca bilgilendirme amaçlıdır; kredi onayı, oran garantisi veya lender taahhüdü oluşturmaz.
+            Nihai oran ve onay; gelir, kredi geçmişi, mülk, peşinat, lender koşulları ve yazılı commitment aşamasında kesinleşir.
+            Mortgage brokerage ücretleri veya lender tarafından ödenen komisyonlar, geçerli olduğunda yazılı olarak açıklanır.
           </p>
-          {/* RMA Mortgage künyesi — düşük öncelik */}
           <p style={{fontSize:11,lineHeight:1.7,color:'rgba(255,255,255,0.38)',margin:0,fontFamily:FB,
                      borderTop:'1px solid rgba(255,255,255,0.08)',paddingTop:14}}>
-            Kredibaba, Ontario, Kanada'da faaliyet gösteren lisanslı mortgage brokerage RMA Mortgage bünyesinde
-            sunulan bir hizmet markasıdır. © {new Date().getFullYear()} Kredibaba. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Kredibaba. Tüm hakları saklıdır. Yayına alınmadan önce RMA Mortgage / Principal Broker uyum onayı gereklidir.
           </p>
         </div>
       </div>
@@ -143,15 +317,27 @@ export default function Layout() {
   const [showForm, setShowForm] = useState(false);
   const open  = () => setShowForm(true);
   const close = () => setShowForm(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     document.body.style.overflow = showForm ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [showForm]);
 
-  // Scroll to top on route change
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    requestAnimationFrame(() => {
+      try {
+        const target = document.querySelector(decodeURIComponent(hash));
+        if (target) target.scrollIntoView({ block: 'start' });
+      } catch {
+        window.scrollTo(0, 0);
+      }
+    });
+  }, [pathname, hash]);
 
   return (
     <div style={{background:C.bg,color:C.text,fontFamily:FB,minHeight:'100vh'}}>
@@ -160,20 +346,80 @@ export default function Layout() {
         body{background:${C.bg};-webkit-font-smoothing:antialiased;}
         ::selection{background:${C.blueFaint};color:${C.navy};}
         a{color:inherit;}
-        @media(max-width:860px){
+        button:hover{filter:brightness(.98)}
+        [id]{scroll-margin-top:128px;}
+        .kb-top-promo{background:${C.navy};color:#fff;}
+        .kb-top-promo-inner{min-height:42px;display:flex;align-items:center;justify-content:center;gap:${S[16]}px;font-family:${FB};}
+        .kb-top-promo-text{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:800;letter-spacing:-.1px;}
+        .kb-top-promo-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:13.5px;font-weight:800;padding:8px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
+        .kb-navbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid ${C.border};}
+        .kb-nav-inner{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:18px;}
+        .kb-nav-left{display:flex;align-items:center;gap:34px;min-width:0;}
+        .kb-logo{display:flex;align-items:baseline;gap:1px;text-decoration:none;flex-shrink:0;}
+        .kb-logo span{font-family:${FD};font-size:24px;font-weight:700;}
+        .kb-logo span:first-child{color:${C.navy};}
+        .kb-logo span:last-child{color:${C.blue};}
+        .kb-desktop-nav{display:flex;align-items:center;gap:8px;}
+        .kb-nav-item{display:inline-flex;align-items:center;gap:5px;border:none;background:transparent;color:${C.body};cursor:pointer;font-family:${FB};font-size:15px;font-weight:800;text-decoration:none;white-space:nowrap;padding:11px 12px;border-radius:${R.control}px;transition:background .15s,color .15s;}
+        .kb-nav-item:hover,.kb-nav-item.is-active{background:${C.blueFaint};color:${C.blue};}
+        .kb-nav-button svg{transition:transform .15s;}
+        .kb-nav-button.is-active svg{transform:rotate(180deg);}
+        .kb-desktop-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+        .kb-primary-nav-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:14.5px;font-weight:800;padding:11px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
+        .kb-mega-panel{position:absolute;left:0;right:0;top:100%;z-index:45;background:${C.bg};border-bottom:1px solid ${C.border};box-shadow:${SHADOW.elevated};}
+        .kb-mega-inner{display:grid;grid-template-columns:.82fr 1.7fr;gap:${S[56]}px;padding:${S[48]}px ${S[24]}px ${S[64]}px;}
+        .kb-mega-title{display:inline-block;font-family:${FD};font-size:28px;line-height:1.1;color:${C.navy};font-weight:500;margin-bottom:30px;background:linear-gradient(transparent 60%,${C.blueFaint} 60%);}
+        .kb-mega-items{display:grid;gap:${S[12]}px;}
+        .kb-mega-what .kb-mega-items{grid-template-columns:repeat(2,minmax(230px,1fr));gap:${S[12]}px ${S[32]}px;}
+        .kb-mega-tools{grid-column:1 / -1;}
+        .kb-mega-tools .kb-mega-items{grid-template-columns:repeat(3,minmax(230px,1fr));gap:${S[12]}px ${S[32]}px;}
+        .kb-mega-tools .kb-mega-item:nth-child(10){grid-column:auto;}
+        .kb-mega-item{position:relative;display:block;text-decoration:none;min-height:56px;padding:${S[12]}px ${S[16]}px ${S[12]}px ${S[16]}px;border:1px solid transparent;border-left:3px solid ${C.blue};border-radius:${R.control}px;transition:background .15s,border-color .15s;}
+        .kb-mega-item:hover{background:${C.blueFaint};border-color:${C.border};border-left-color:${C.blue};}
+        .kb-mega-item-title{display:block;color:${C.navy};font-family:${FB};font-size:18px;font-weight:800;line-height:1.2;letter-spacing:-.2px;}
+        .kb-mega-item-desc{display:block;color:${C.muted};font-family:${FB};font-size:13.5px;font-weight:700;line-height:1.35;margin-top:6px;}
+        .kb-mega-item:hover .kb-mega-item-title{color:${C.blue};}
+        .kb-mobile-actions{display:none;align-items:center;gap:9px;flex-shrink:0;}
+        .kb-mobile-menu-button{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:${R.control}px;background:${C.navy};color:#fff;font-family:${FB};font-size:14px;font-weight:800;padding:11px 15px;cursor:pointer;}
+        .kb-mobile-drawer{display:none;background:${C.bg};border-top:1px solid ${C.border};box-shadow:${SHADOW.elevated};}
+        .kb-mobile-drawer-inner{max-width:${wrap.maxWidth}px;margin:0 auto;padding:${S[24]}px ${S[24]}px ${S[40]}px;display:grid;gap:${S[12]}px;}
+        .kb-mobile-group-trigger,.kb-mobile-simple-link{width:100%;min-height:52px;border:1px solid ${C.border};border-radius:${R.control}px;background:${C.blueFaint};color:${C.navy};font-family:${FB};font-size:16px;font-weight:800;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:0 ${S[20]}px;cursor:pointer;}
+        .kb-mobile-group-list{padding:${S[16]}px 0 ${S[24]}px;display:grid;gap:${S[12]}px;}
+        .kb-mobile-menu-item{position:relative;display:block;text-decoration:none;padding:${S[12]}px ${S[16]}px;border:1px solid ${C.borderL};border-left:3px solid ${C.blue};border-radius:${R.control}px;background:#fff;}
+        .kb-mobile-menu-item span{display:block;font-size:16px;font-weight:800;color:${C.navy};line-height:1.2;}
+        .kb-mobile-menu-item small{display:block;font-size:12.5px;font-weight:700;color:${C.muted};margin-top:5px;line-height:1.3;}
+        @media(max-width:920px){
           .kb-hero-grid{grid-template-columns:1fr!important;gap:40px!important}
           .kb-2col{grid-template-columns:1fr!important}
+          .kb-4col{grid-template-columns:1fr 1fr!important}
           .kb-foot{grid-template-columns:1fr 1fr!important}
-          .kb-navlinks{display:none!important}
+          .kb-desktop-nav,.kb-desktop-actions,.kb-mega-panel{display:none!important}
+          .kb-mobile-actions{display:flex!important}
+          .kb-mobile-drawer{display:block!important}
+          .kb-nav-inner{min-height:72px}
+          .kb-nav-left{gap:18px}
         }
         @media(max-width:680px){
           .kb-3col{grid-template-columns:1fr!important}
-          .kb-stats{grid-template-columns:1fr 1fr!important;gap:28px 16px!important}
-          .kb-nav-wa{display:none!important}
+          .kb-4col{grid-template-columns:1fr!important}
+          .kb-mini-3col{grid-template-columns:1fr!important}
+          .kb-stats{grid-template-columns:1fr 1fr!important;gap:14px!important}
+          .kb-top-promo-inner{flex-direction:column;gap:9px;padding-top:9px;padding-bottom:10px}
+          .kb-top-promo-text{font-size:13.5px;text-align:center}
+          .kb-top-promo-cta{padding:7px 16px}
+          .kb-logo span{font-size:22px}
+          .kb-primary-nav-cta{padding:10px 13px;font-size:13.5px}
+          .kb-mobile-menu-button{padding:10px 12px;font-size:13.5px}
+        }
+        @media(max-width:430px){
+          .kb-nav-inner{padding-left:16px!important;padding-right:16px!important;gap:10px}
+          .kb-mobile-actions{gap:7px}
+          .kb-primary-nav-cta{padding:9px 11px}
+          .kb-mobile-menu-button{padding:9px 10px}
         }
       `}</style>
 
-      <TopBar/>
+      <TopBar onCTA={open}/>
       <Navbar onCTA={open}/>
       <Outlet context={{ openForm: open }}/>
       <Footer/>

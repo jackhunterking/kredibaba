@@ -10,8 +10,10 @@ export const C = {
   card:      '#FFFFFF',
   navy:      '#0A2540',
   navyD:     '#06192C',
+  navyM:     '#123A62',
   blue:      '#1B5FCC',
   blueD:     '#154BA3',
+  blueLight: '#9FC4F0',
   blueFaint: '#EAF1FC',
   text:      '#0A2540',
   body:      '#3F4F60',
@@ -23,7 +25,34 @@ export const C = {
   amber:     '#B7791F',
   amberFaint:'#FBF3E2',
   star:      '#E6A817',
+  danger:    '#C0392B',
   wa:        '#1FA855',
+};
+export const R = {
+  control: 8,
+  chip: 8,
+  icon: 12,
+  card: 16,
+  panel: 18,
+  media: 20,
+  circle: '50%',
+};
+export const S = {
+  4: 4,
+  8: 8,
+  12: 12,
+  16: 16,
+  20: 20,
+  24: 24,
+  32: 32,
+  40: 40,
+  48: 48,
+  56: 56,
+  64: 64,
+};
+export const SHADOW = {
+  card: '0 8px 28px rgba(10,37,64,0.06)',
+  elevated: '0 24px 50px rgba(10,37,64,0.12)',
 };
 export const FD = "'Fraunces', Georgia, serif";
 export const FB = "'Inter', system-ui, sans-serif";
@@ -32,6 +61,34 @@ export const WA  = '14161234567';        // ← Replace with real number
 export const TEL = '+14161234567';
 export const CAL = 'https://calendly.com/kredibaba/danisma';
 export const LICENSE = 'FSRA #XXXXX';
+export const BROKERAGE = 'RMA Mortgage';
+export const LOWEST_RATE = {
+  rate: '3.89%',
+  term: '5 yıl sabit',
+  product: 'Sigortalı mortgage',
+  updated: '30 Mayıs 2026',
+  note: 'Yalnızca güçlü kredi, uygun gelir ve lender koşullarını sağlayan dosyalar için örnek gösterge orandır.',
+};
+export const HERO_RATES = [
+  {
+    label: 'Sabit oran',
+    term: LOWEST_RATE.term,
+    rate: LOWEST_RATE.rate,
+    product: LOWEST_RATE.product,
+    updated: LOWEST_RATE.updated,
+    note: LOWEST_RATE.note,
+    qualification: 'Güçlü kredi, doğrulanabilir gelir, uygun mülk ve lender koşulları gerekir.',
+  },
+  {
+    label: 'Değişken oran',
+    term: '5 yıl değişken',
+    rate: 'Güncelleniyor',
+    product: 'Değişken mortgage',
+    updated: LOWEST_RATE.updated,
+    note: 'Onaylı değişken oran verisi geldiğinde yayınlanır; örnek oran uydurulmaz.',
+    qualification: 'Prime oranı, lender indirimi ve dosya koşulları kişiye göre değişebilir.',
+  },
+];
 
 // Contextual stock imagery (Unsplash — replace with branded photography when ready)
 export const IMG = {
@@ -43,12 +100,13 @@ export const IMG = {
 };
 
 export const wrap = { maxWidth: 1120, margin: '0 auto', padding: '0 24px' };
+export const sectionPad = { ...wrap, paddingTop: S[56], paddingBottom: S[56] };
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // BUTTON HELPERS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export const btn = (extra={}) => ({
-  border:'none', borderRadius:8, cursor:'pointer', fontFamily:FB,
+  border:'none', borderRadius:R.control, cursor:'pointer', fontFamily:FB,
   fontWeight:600, fontSize:15, padding:'13px 22px', transition:'all .15s', ...extra,
 });
 export const primaryBtn = (extra={}) => ({ ...btn(extra), background:C.blue, color:'#fff' });
@@ -69,8 +127,8 @@ export function SectionLabel({ children }) {
 export function Avatar({ initials, size = 72, ring = C.blue }) {
   return (
     <div style={{
-      width:size, height:size, borderRadius:'50%', flexShrink:0,
-      background:'linear-gradient(135deg,#0A2540 0%,#163E66 100%)',
+      width:size, height:size, borderRadius:R.circle, flexShrink:0,
+      background:`linear-gradient(135deg,${C.navy} 0%,${C.navyM} 100%)`,
       border:`2px solid ${ring}40`, color:'#fff',
       display:'flex', alignItems:'center', justifyContent:'center',
       fontFamily:FD, fontWeight:600, fontSize:size*0.34, letterSpacing:'0.5px',
@@ -82,10 +140,10 @@ export function Avatar({ initials, size = 72, ring = C.blue }) {
 
 export function TrustRow({compact}) {
   const items=[
-    {icon:<ShieldCheck size={15}/>, text:'FSRA Lisanslı Brokerage'},
+    {icon:<ShieldCheck size={15}/>, text:'FSRA Lisanslı Mortgage Aracılığı'},
     {icon:<Globe size={15}/>,       text:'Türkçe & İngilizce Destek'},
-    {icon:<Award size={15}/>,       text:'50+ Lender Ortağı'},
-    {icon:<Star size={15}/>,        text:'4.9 / 5 Müşteri Puanı'},
+    {icon:<Award size={15}/>,       text:'Birden Fazla Lender Karşılaştırması'},
+    {icon:<Star size={15}/>,        text:'Şeffaf Oran ve Süreç Takibi'},
   ];
   return (
     <div style={{display:'flex',flexWrap:'wrap',gap:compact?'10px 18px':'12px 28px',
@@ -104,7 +162,7 @@ export function PageHero({ label, title, sub }) {
   return (
     <section style={{background:`linear-gradient(180deg,#fff 0%,${C.surface} 100%)`,
                      borderBottom:`1px solid ${C.border}`}}>
-      <div style={{...wrap,paddingTop:56,paddingBottom:48,textAlign:'center',maxWidth:760}}>
+      <div style={{...wrap,paddingTop:S[56],paddingBottom:S[48],textAlign:'center',maxWidth:760}}>
         {label && <SectionLabel>{label}</SectionLabel>}
         <h1 style={{fontFamily:FD,fontSize:'clamp(32px,5vw,46px)',fontWeight:500,color:C.navy,
                     lineHeight:1.12,letterSpacing:'-0.5px',marginBottom:16}}>{title}</h1>
