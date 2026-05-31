@@ -6,64 +6,27 @@ import {
   ShieldCheck, TrendingDown, Unlock, Wallet, X,
 } from "lucide-react";
 import {
-  BROKERAGE, C, FB, FD, HERO_RATES, R, S, SectionLabel, SHADOW,
-  TrustRow, ghostBtn, primaryBtn, wrap,
+  BROKERAGE, C, FB, HERO_RATES, R, S, SectionLabel, SHADOW,
+  TrustRow, ghostBtn, IMG, primaryBtn, wrap,
 } from "../theme.jsx";
 
-function HeroRateCard({ item }) {
+function HeroRateMini({ item }) {
   const pending = item.rate === 'Güncelleniyor';
   return (
     <div style={{
-      background:'#fff',
-      border:`1px solid ${pending ? C.border : `${C.blue}35`}`,
-      borderRadius:R.card,
-      padding:'24px 22px',
-      boxShadow:SHADOW.card,
-      minHeight:218,
-      display:'flex',
-      flexDirection:'column',
-      justifyContent:'space-between',
+      padding:'18px 14px',
+      textAlign:'center',
+      minWidth:0,
     }}>
-      <div>
-        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:12,marginBottom:18}}>
-          <span style={{
-            display:'inline-flex',
-            alignItems:'center',
-            gap:7,
-            fontSize:12,
-            color:pending ? C.amber : C.green,
-            background:pending ? C.amberFaint : C.greenFaint,
-            border:`1px solid ${pending ? `${C.amber}25` : `${C.green}25`}`,
-            borderRadius:R.chip,
-            padding:'7px 10px',
-            fontWeight:900,
-            fontFamily:FB,
-          }}>
-            <TrendingDown size={14}/> {item.label}
-          </span>
-          <span style={{fontSize:12,color:C.muted,fontWeight:800,fontFamily:FB}}>{item.updated}</span>
-        </div>
-        <p style={{fontSize:13.5,color:C.muted,fontWeight:800,fontFamily:FB,marginBottom:7}}>{item.product}</p>
-        <h3 style={{fontFamily:FD,fontSize:28,color:C.navy,fontWeight:600,lineHeight:1.08,marginBottom:14}}>
-          {item.term}
-        </h3>
-      </div>
-      <div>
-        <div style={{
-          fontFamily:FD,
-          fontSize:pending ? 'clamp(32px,4vw,44px)' : 'clamp(52px,7vw,72px)',
-          color:pending ? C.muted : C.navy,
-          fontWeight:700,
-          lineHeight:.95,
-          letterSpacing:'-.7px',
-          marginBottom:14,
-        }}>
-          {pending ? item.rate : item.rate}
-        </div>
-        <p style={{fontSize:12.5,color:C.muted,lineHeight:1.45,fontFamily:FB,margin:0}}>
-          {item.qualification}
-        </p>
-      </div>
+      <span className="kb-hero-rate-term" style={{display:'block',fontFamily:FB,color:C.muted}}>
+        {item.term}
+      </span>
+      <strong
+        className={`kb-hero-rate-value${pending ? ' is-pending' : ''}`}
+        style={{display:'block',fontFamily:FB,color:pending ? C.muted : C.navy}}
+      >
+        {item.rate}
+      </strong>
     </div>
   );
 }
@@ -100,7 +63,7 @@ function DisclosureModal({ onClose }) {
         <div style={{display:'flex',alignItems:'start',justifyContent:'space-between',gap:20,marginBottom:18}}>
           <div>
             <SectionLabel>Açıklama</SectionLabel>
-            <h2 style={{fontFamily:FD,fontSize:30,color:C.navy,fontWeight:600,lineHeight:1.12}}>
+            <h2 style={{fontFamily:FB,fontSize:30,color:C.navy,fontWeight:600,lineHeight:1.12}}>
               Oranlar nasıl okunmalı?
             </h2>
           </div>
@@ -163,84 +126,86 @@ function Hero({ onCTA }) {
       background:`linear-gradient(180deg,#fff 0%,${C.surface} 100%)`,
       borderBottom:`1px solid ${C.border}`,
     }}>
-      <div style={{...wrap,paddingTop:S[64],paddingBottom:S[56]}}>
-        <div style={{textAlign:'center',maxWidth:860,margin:'0 auto 34px'}}>
-          <SectionLabel>Türkçe mortgage karşılaştırması</SectionLabel>
-          <h1 style={{
-            fontFamily:FD,
-            fontSize:'clamp(38px,6vw,62px)',
-            fontWeight:500,
-            color:C.navy,
-            lineHeight:1.04,
-            letterSpacing:'-1px',
-            marginBottom:18,
-          }}>
-            Kanada’da mortgage oranlarını Türkçe karşılaştırın.
+      <div style={{...wrap,paddingTop:S[48],paddingBottom:S[48]}}>
+        <div style={{textAlign:'center',maxWidth:780,margin:`0 auto ${S[32]}px`}}>
+          <h1 className="kb-hero-title" style={{fontFamily:FB,color:C.navy}}>
+            Kanada’da Bugünün En Düşük Mortgage Oranları
           </h1>
-          <p style={{
-            fontSize:'clamp(16px,2.3vw,19px)',
-            color:C.body,
-            lineHeight:1.6,
-            maxWidth:690,
-            margin:'0 auto',
-            fontFamily:FB,
-          }}>
-            Ev almak, yenilemek veya ödemelerinizi düzenlemek için seçenekleri sade şekilde görün.
-          </p>
         </div>
 
-        <div style={{
-          background:'#fff',
-          border:`1px solid ${C.border}`,
-          borderRadius:R.panel,
-          boxShadow:SHADOW.elevated,
-          padding:'28px',
-        }}>
-          <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:18,marginBottom:18,flexWrap:'wrap'}}>
-            <div>
-              <h2 style={{fontFamily:FD,fontSize:'clamp(24px,4vw,34px)',color:C.navy,fontWeight:600,lineHeight:1.12}}>
-                Bugünün öne çıkan oranları
-              </h2>
-              <p style={{fontSize:13.5,color:C.muted,fontWeight:700,lineHeight:1.45,marginTop:7}}>
-                Oranlar dosya koşullarına göre değişir; garanti veya onay anlamına gelmez.
-              </p>
-            </div>
-            <button
-              onClick={() => setShowDisclosure(true)}
-              style={{
-                ...ghostBtn({padding:'12px 16px',display:'inline-flex',alignItems:'center',gap:8}),
-                color:C.blue,
-              }}
-            >
-              <Info size={16}/> Açıklama
-            </button>
-          </div>
-
-          <div className="kb-2col" style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:18}}>
-            {HERO_RATES.map((item) => (
-              <HeroRateCard key={item.label} item={item}/>
-            ))}
-          </div>
-
-          <div style={{
+        <div className="kb-hero-grid" style={{display:'grid',gridTemplateColumns:'0.98fr 1.02fr',gap:S[24],alignItems:'stretch'}}>
+          <div className="kb-hero-rate-card" style={{
+            background:'#fff',
+            border:`1px solid ${C.border}`,
+            borderRadius:R.panel,
+            boxShadow:SHADOW.elevated,
+            padding:'30px 28px',
             display:'flex',
-            alignItems:'center',
-            justifyContent:'space-between',
-            gap:18,
-            marginTop:24,
-            paddingTop:22,
-            borderTop:`1px solid ${C.border}`,
-            flexWrap:'wrap',
+            flexDirection:'column',
+            justifyContent:'center',
+            minHeight:380,
           }}>
-            <p style={{fontSize:13,color:C.muted,lineHeight:1.5,maxWidth:610,margin:0,fontFamily:FB}}>
-              Sizin dosyanız için uygun oran; gelir, kredi geçmişi, peşinat, mülk ve lender koşulları birlikte incelenince belli olur.
-            </p>
-            <button
-              onClick={onCTA}
-              style={primaryBtn({padding:'15px 26px',fontSize:16,display:'inline-flex',alignItems:'center',gap:8})}
-            >
-              Ücretsiz Hesap Aç <ArrowRight size={17}/>
-            </button>
+            <h2 className="kb-hero-card-title" style={{fontFamily:FB,color:C.navy}}>
+              Bugünün oranları
+            </h2>
+
+            <div className="kb-hero-rate-grid" style={{
+              display:'grid',
+              gridTemplateColumns:'repeat(2,minmax(0,1fr))',
+              gap:0,
+              borderTop:`1px solid ${C.border}`,
+              borderBottom:`1px solid ${C.border}`,
+              marginBottom:S[24],
+            }}>
+              {HERO_RATES.map((item) => (
+                <div key={item.label} className="kb-hero-rate-cell">
+                  <HeroRateMini item={item}/>
+                </div>
+              ))}
+            </div>
+
+            <div style={{display:'grid',justifyItems:'center',gap:S[16]}}>
+              <button
+                onClick={onCTA}
+                style={primaryBtn({padding:'14px 26px',fontSize:15.5,width:'min(100%, 260px)',display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8})}
+              >
+                Oranları Gör <ArrowRight size={17}/>
+              </button>
+              <button
+                onClick={() => setShowDisclosure(true)}
+                style={{
+                  border:'none',
+                  background:'transparent',
+                  color:C.blue,
+                  cursor:'pointer',
+                  fontFamily:FB,
+                  fontSize:13.5,
+                  fontWeight:500,
+                  textDecoration:'underline',
+                  textUnderlineOffset:3,
+                  display:'inline-flex',
+                  alignItems:'center',
+                  gap:7,
+                  padding:0,
+                }}
+              >
+                Açıklama <Info size={14}/>
+              </button>
+            </div>
+          </div>
+
+          <div className="kb-hero-image" style={{position:'relative',borderRadius:R.media,overflow:'hidden',minHeight:380,boxShadow:SHADOW.elevated,background:C.navy}}>
+            <img
+              src={IMG.hero}
+              alt="Kanada’da modern bir ev"
+              loading="eager"
+              style={{width:'100%',height:'100%',minHeight:380,objectFit:'cover',display:'block'}}
+            />
+            <div style={{
+              position:'absolute',
+              inset:0,
+              background:'linear-gradient(180deg,rgba(6,25,44,0.02) 0%,rgba(6,25,44,0.16) 100%)',
+            }}/>
           </div>
         </div>
       </div>
@@ -278,14 +243,14 @@ function JourneyCard({ icon, title, sub, to }) {
           }}>
             {icon}
           </span>
-          <h3 style={{fontFamily:FD,fontSize:24,color:C.navy,fontWeight:600,lineHeight:1.15,marginBottom:8}}>
+          <h3 style={{fontFamily:FB,fontSize:24,color:C.navy,fontWeight:600,lineHeight:1.15,marginBottom:8}}>
             {title}
           </h3>
           <p style={{fontSize:14,color:C.body,lineHeight:1.5,margin:0,fontFamily:FB}}>
             {sub}
           </p>
         </div>
-        <span style={{display:'inline-flex',alignItems:'center',gap:7,color:C.blue,fontSize:13.5,fontWeight:900,fontFamily:FB}}>
+        <span style={{display:'inline-flex',alignItems:'center',gap:7,color:C.blue,fontSize:13.5,fontWeight:600,fontFamily:FB}}>
           Yolculuğu gör <ArrowRight size={15}/>
         </span>
       </div>
@@ -304,7 +269,7 @@ function JourneySection() {
     {
       icon:<RefreshCw size={22}/>,
       title:'Ev kredimi yenilemek',
-      sub:'Mevcut teklifinizi karşılaştırın veya daha uygun ödeme arayın',
+      sub:'Mevcut teklifinizi inceleyin veya daha uygun ödeme arayın',
       to:'/cozumler#ev-kredimi-yenilemek',
     },
     {
@@ -325,7 +290,7 @@ function JourneySection() {
     <section style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
       <div style={{textAlign:'center',maxWidth:720,margin:'0 auto 32px'}}>
         <SectionLabel>Yolculuklar</SectionLabel>
-        <h2 style={{fontFamily:FD,fontSize:'clamp(30px,4.5vw,42px)',color:C.navy,fontWeight:500,lineHeight:1.16}}>
+        <h2 style={{fontFamily:FB,fontSize:'clamp(30px,4.5vw,42px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
           Neden finansman arıyorsunuz?
         </h2>
         <p style={{fontSize:15.5,color:C.body,lineHeight:1.55,marginTop:12}}>
@@ -356,7 +321,7 @@ function WhoWeHelp({ onCTA }) {
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'end',gap:24,marginBottom:28,flexWrap:'wrap'}}>
           <div style={{maxWidth:620}}>
             <SectionLabel>Kime yardım ediyoruz?</SectionLabel>
-            <h2 style={{fontFamily:FD,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:500,lineHeight:1.16}}>
+            <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
               Durumunuz farklı olabilir; yol yine sade olmalı.
             </h2>
           </div>
@@ -389,7 +354,7 @@ function WhoWeHelp({ onCTA }) {
               }}>
                 {item.icon}
               </span>
-              <span style={{display:'block',fontFamily:FD,fontSize:21,color:C.navy,fontWeight:600,marginBottom:7,lineHeight:1.16}}>
+              <span style={{display:'block',fontFamily:FB,fontSize:21,color:C.navy,fontWeight:600,marginBottom:7,lineHeight:1.16}}>
                 {item.title}
               </span>
               <span style={{display:'block',fontSize:13.5,color:C.body,lineHeight:1.45}}>
@@ -416,7 +381,7 @@ function QuickTools() {
       <div className="kb-2col" style={{display:'grid',gridTemplateColumns:'0.78fr 1.22fr',gap:28,alignItems:'center'}}>
         <div>
           <SectionLabel>Araçlar</SectionLabel>
-          <h2 style={{fontFamily:FD,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:500,lineHeight:1.16,marginBottom:12}}>
+          <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16,marginBottom:12}}>
             Karar vermeden önce rakamları görün.
           </h2>
           <p style={{fontSize:15.5,color:C.body,lineHeight:1.55,marginBottom:20}}>
@@ -446,10 +411,10 @@ function QuickTools() {
                 }}>
                   {tool.icon}
                 </span>
-                <h3 style={{fontFamily:FD,fontSize:21,color:C.navy,fontWeight:600,marginBottom:5}}>
+                <h3 style={{fontFamily:FB,fontSize:21,color:C.navy,fontWeight:600,marginBottom:5}}>
                   {tool.title}
                 </h3>
-                <p style={{fontSize:13.5,color:C.muted,fontWeight:800,lineHeight:1.35}}>
+                <p style={{fontSize:13.5,color:C.muted,fontWeight:600,lineHeight:1.35}}>
                   {tool.sub}
                 </p>
               </div>
@@ -473,7 +438,7 @@ function LearnPreview() {
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 30px'}}>
           <SectionLabel>Öğren</SectionLabel>
-          <h2 style={{fontFamily:FD,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:500,lineHeight:1.16}}>
+          <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
             Finans dili sadeleşsin.
           </h2>
         </div>
@@ -494,7 +459,7 @@ function LearnPreview() {
                 }}>
                   {item.icon}
                 </span>
-                <h3 style={{fontFamily:FD,fontSize:22,color:C.navy,fontWeight:600,marginBottom:7}}>
+                <h3 style={{fontFamily:FB,fontSize:22,color:C.navy,fontWeight:600,marginBottom:7}}>
                   {item.title}
                 </h3>
                 <p style={{fontSize:13.5,color:C.body,lineHeight:1.45,margin:0}}>
@@ -513,7 +478,7 @@ function FinalCTA({ onCTA }) {
   return (
     <section style={{background:C.navy}}>
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[56],textAlign:'center'}}>
-        <h2 style={{fontFamily:FD,fontSize:'clamp(30px,4vw,42px)',color:'#fff',fontWeight:500,lineHeight:1.12,marginBottom:14}}>
+        <h2 style={{fontFamily:FB,fontSize:'clamp(30px,4vw,42px)',color:'#fff',fontWeight:700,lineHeight:1.12,marginBottom:14}}>
           Dosyanız için uygun seçenekleri beraber netleştirelim.
         </h2>
         <p style={{fontSize:14.5,color:'rgba(255,255,255,0.72)',lineHeight:1.55,maxWidth:720,margin:'0 auto 24px'}}>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X, ChevronLeft, MessageCircle, Check, ArrowRight, Lock } from "lucide-react";
-import { C, FD, FB, R, SHADOW, WA, CAL, LICENSE, BROKERAGE, btn, primaryBtn, ghostBtn, TrustRow } from "./theme.jsx";
+import { C, FB, R, SHADOW, WA, CAL, LICENSE, BROKERAGE, btn, primaryBtn, ghostBtn, TrustRow } from "./theme.jsx";
 
 const STEPS = [
   {
@@ -9,7 +9,7 @@ const STEPS = [
     sub:'Başlangıç noktanızı seçin.',
     opts:[
       {v:'buy',       e:'🏠', label:'Ev almak',      sub:'Bütçe ve ön onay'},
-      {v:'renew',     e:'🔄', label:'Yenilemek',     sub:'Teklif karşılaştır'},
+      {v:'renew',     e:'🔄', label:'Yenilemek',     sub:'Teklifi incele'},
       {v:'refinance', e:'💰', label:'Refinansman',   sub:'Ödeme planı'},
       {v:'heloc',     e:'🔓', label:'HELOC',         sub:'Ev değerinden kullanım'},
     ],
@@ -91,7 +91,7 @@ const RESULTS = {
     badge:'Güçlü başlangıç profili',
     headline:'Güçlü başlangıç.',
     sub:'Standart seçenekler incelenebilir.',
-    body:'Kesin onay değildir. Belgelerinizle birlikte oran ve ürün karşılaştırması yapılır.',
+    body:'Kesin onay değildir. Belgelerinizle birlikte oran ve ürün uygunluğu incelenir.',
     cta1:'Danışma randevusu al',
     cta2:'WhatsApp ile yazın',
   },
@@ -140,11 +140,11 @@ function ResultScreen({result, contact, onClose}) {
           <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',
                        background:r.faint,border:`1px solid ${r.color}40`,borderRadius:R.chip,marginBottom:22}}>
             <span style={{width:8,height:8,borderRadius:R.circle,background:r.color}}/>
-            <span style={{fontSize:12.5,fontWeight:800,color:r.color,fontFamily:FB}}>{r.badge}</span>
+            <span style={{fontSize:12.5,fontWeight:600,color:r.color,fontFamily:FB}}>{r.badge}</span>
           </div>
 
-          <h1 style={{fontFamily:FD,fontSize:32,color:C.navy,marginBottom:8,lineHeight:1.15,fontWeight:500}}>{r.headline}</h1>
-          <p style={{fontFamily:FB,fontSize:16.5,color:r.color,marginBottom:14,fontWeight:800}}>{r.sub}</p>
+          <h1 style={{fontFamily:FB,fontSize:32,color:C.navy,marginBottom:8,lineHeight:1.15,fontWeight:700}}>{r.headline}</h1>
+          <p style={{fontFamily:FB,fontSize:16.5,color:r.color,marginBottom:14,fontWeight:600}}>{r.sub}</p>
           <p style={{fontSize:15,color:C.body,lineHeight:1.55,marginBottom:8}}>{r.body}</p>
         </div>
 
@@ -229,7 +229,7 @@ export default function FormModal({onClose}) {
               <ChevronLeft size={19}/>
             </button>
             <div style={{flex:1,textAlign:'center'}}>
-              <span style={{fontSize:12.5,color:C.muted,fontWeight:800,fontFamily:FB}}>Ücretsiz Hesap · {step+1} / {STEPS.length}</span>
+              <span style={{fontSize:12.5,color:C.muted,fontWeight:600,fontFamily:FB}}>Ücretsiz Hesap · {step+1} / {STEPS.length}</span>
             </div>
             <button onClick={onClose} aria-label="Kapat"
               style={{...ghostBtn({padding:0,width:34,height:34,borderRadius:R.control}),display:'flex',alignItems:'center',justifyContent:'center',color:C.muted}}>
@@ -242,7 +242,7 @@ export default function FormModal({onClose}) {
           </div>
 
           <div style={{padding:'24px 22px 12px'}}>
-            <h2 style={{fontFamily:FD,fontSize:24,color:C.navy,marginBottom:6,lineHeight:1.22,fontWeight:500}}>{cur.q}</h2>
+            <h2 style={{fontFamily:FB,fontSize:24,color:C.navy,marginBottom:6,lineHeight:1.22,fontWeight:700}}>{cur.q}</h2>
             <p style={{fontSize:13.5,color:C.muted,margin:0,lineHeight:1.55}}>{cur.sub}</p>
             {cur.note&&(
               <div style={{marginTop:14,padding:'10px 13px',background:C.blueFaint,borderRadius:R.control,
@@ -264,7 +264,7 @@ export default function FormModal({onClose}) {
                       display:'flex', alignItems:'center', gap:13}}>
                     {opt.e&&<span style={{fontSize:21,flexShrink:0}}>{opt.e}</span>}
                     <div style={{flex:1}}>
-                      <div style={{color:C.navy,fontWeight:800}}>{opt.label}</div>
+                      <div style={{color:C.navy,fontWeight:600}}>{opt.label}</div>
                       {opt.sub&&<div style={{fontSize:12.5,color:C.muted,marginTop:2,fontWeight:500}}>{opt.sub}</div>}
                     </div>
                     {sel===opt.v&&<Check size={17} color={C.blue}/>}
@@ -279,7 +279,7 @@ export default function FormModal({onClose}) {
                   {key:'email', label:'E-posta (isteğe bağlı)',           placeholder:'ornek@email.com',     type:'email'},
                 ].map(f=>(
                   <div key={f.key}>
-                    <label style={{fontSize:12.5,color:C.body,display:'block',marginBottom:6,fontFamily:FB,fontWeight:800}}>{f.label}</label>
+                    <label style={{fontSize:12.5,color:C.body,display:'block',marginBottom:6,fontFamily:FB,fontWeight:600}}>{f.label}</label>
                     <input className="kb-input" type={f.type} placeholder={f.placeholder}
                       value={contact[f.key]}
                       onChange={e=>setContact(c=>({...c,[f.key]:e.target.value}))}
@@ -289,14 +289,14 @@ export default function FormModal({onClose}) {
                 ))}
 
                 <div>
-                  <label style={{fontSize:12.5,color:C.body,display:'block',marginBottom:8,fontFamily:FB,fontWeight:800}}>Tercih ettiğiniz dil</label>
+                  <label style={{fontSize:12.5,color:C.body,display:'block',marginBottom:8,fontFamily:FB,fontWeight:600}}>Tercih ettiğiniz dil</label>
                   <div style={{display:'flex',gap:8}}>
                     {[{v:'tr',l:'🇹🇷 Türkçe'},{v:'en',l:'🇨🇦 English'}].map(lang=>(
                       <button key={lang.v} onClick={()=>setContact(c=>({...c,lang:lang.v}))}
                         style={{...btn({flex:1,padding:11,fontSize:13.5,borderRadius:R.control}),
                           background:contact.lang===lang.v?C.blueFaint:'#fff',
                           border:`1px solid ${contact.lang===lang.v?C.blue:C.border}`,
-                          color:contact.lang===lang.v?C.blueD:C.muted,fontWeight:800}}>
+                          color:contact.lang===lang.v?C.blueD:C.muted,fontWeight:600}}>
                         {lang.l}
                       </button>
                     ))}

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronUp, Menu, Phone, Search, ShieldCheck, X } from "lucide-react";
-import { C, FD, FB, R, S, SHADOW, TEL, LICENSE, BROKERAGE, wrap } from "./theme.jsx";
+import { C, FB, R, S, SHADOW, TEL, LICENSE, BROKERAGE, wrap } from "./theme.jsx";
 import FormModal from "./FormModal.jsx";
+import kredibabaMark from "./assets/kredibaba-mark.svg";
 
 const NAV = [
   { key:'cozumler', to:'/cozumler',   label:'Çözümler', mega:true },
@@ -35,7 +36,7 @@ const MEGA_MENUS = {
           { label:'Tadilat finansmanı', desc:'Ev değerinden yararlanarak planlayın', href:'/cozumler#tadilat-finansmani' },
           { label:'Borç ödemelerini rahatlatmak', desc:'Borç birleştirme seçenekleri', href:'/cozumler#borc-odemelerini-rahatlatmak' },
           { label:'Ev değerinden yararlanmak', desc:'HELOC / ikinci mortgage', href:'/cozumler#ev-degerinden-yararlanmak' },
-          { label:'Mortgage seçeneklerini karşılaştırmak', desc:'Size uygun oran ve ürünleri görün', href:'/cozumler#mortgage-seceneklerini-karsilastirmak' },
+          { label:'Mortgage seçeneklerini incelemek', desc:'Size uygun oran ve ürünleri görün', href:'/cozumler#mortgage-seceneklerini-incelemek' },
         ],
       },
     ],
@@ -55,8 +56,8 @@ const MEGA_MENUS = {
           { label:'Uygunluk hesaplayıcı', desc:'Maksimum alım gücü', href:'/araclar#uygunluk-hesaplayici' },
           { label:'Tapu devir vergisi', desc:'Vergi maliyeti', href:'/araclar#tapu-devir-vergisi' },
           { label:'Kapanış masrafı', desc:'Toplam kapanış gideri', href:'/araclar#kapanis-masrafi' },
-          { label:'Ödeme karşılaştırması', desc:'Mevcut ve yeni ödeme farkı', href:'/araclar#odeme-karsilastirmasi' },
-          { label:'Kiralamak mı almak mı?', desc:'Seçenekleri karşılaştırın', href:'/araclar#kiralamak-mi-almak-mi' },
+          { label:'Ödeme farkı hesaplayıcı', desc:'Mevcut ve yeni ödeme farkı', href:'/araclar#odeme-farki' },
+          { label:'Kiralamak mı almak mı?', desc:'Seçenekleri görün', href:'/araclar#kiralamak-mi-almak-mi' },
           { label:'Tadilat hesaplayıcı', desc:'Ev sermayesi limiti', href:'/araclar#tadilat-hesaplayici' },
           { label:'Mortgage ceza hesaplayıcı', desc:'Bozma maliyeti', href:'/araclar#mortgage-ceza-hesaplayici' },
         ],
@@ -68,8 +69,11 @@ const MEGA_MENUS = {
 function Logo() {
   return (
     <Link to="/" className="kb-logo" aria-label="Kredibaba ana sayfa">
-      <span>Kredi</span>
-      <span>baba</span>
+      <img className="kb-logo-mark" src={kredibabaMark} alt="" aria-hidden="true" />
+      <span className="kb-logo-word">
+        <span>Kredi</span>
+        <span>baba</span>
+      </span>
     </Link>
   );
 }
@@ -265,9 +269,12 @@ function Footer() {
       <div style={{...wrap,paddingTop:56,paddingBottom:36}}>
         <div className="kb-foot" style={{display:'grid',gridTemplateColumns:'1.4fr repeat(3,1fr)',gap:32,marginBottom:44}}>
           <div>
-            <Link to="/" style={{display:'flex',alignItems:'baseline',gap:1,marginBottom:14,textDecoration:'none'}}>
-              <span style={{fontFamily:FD,fontSize:22,fontWeight:600,color:'#fff'}}>Kredi</span>
-              <span style={{fontFamily:FD,fontSize:22,fontWeight:600,color:C.blueLight}}>baba</span>
+            <Link to="/" className="kb-footer-logo">
+              <img className="kb-footer-logo-mark" src={kredibabaMark} alt="" aria-hidden="true" />
+              <span style={{display:'inline-flex',alignItems:'baseline',gap:1}}>
+                <span style={{fontFamily:FB,fontSize:22,fontWeight:600,color:'#fff'}}>Kredi</span>
+                <span style={{fontFamily:FB,fontSize:22,fontWeight:600,color:C.blueLight}}>baba</span>
+              </span>
             </Link>
             <p style={{fontSize:13.5,lineHeight:1.7,maxWidth:310,fontFamily:FB}}>
               Kanada’daki Türk topluluğu için mortgage (konut kredisi) sürecini sadeleştiren,
@@ -279,7 +286,7 @@ function Footer() {
           </div>
           {cols.map((c,i)=>(
             <div key={i}>
-              <h4 style={{fontSize:13,color:'#fff',fontWeight:700,marginBottom:14,fontFamily:FB,letterSpacing:.3}}>{c.h}</h4>
+              <h4 style={{fontSize:13,color:'#fff',fontWeight:600,marginBottom:14,fontFamily:FB,letterSpacing:.3}}>{c.h}</h4>
               <div style={{display:'flex',flexDirection:'column',gap:10}}>
                 {c.links.map((l,j)=>(
                   <Link key={j} to={l.to} style={{fontSize:13.5,cursor:'pointer',fontFamily:FB,textDecoration:'none',color:'inherit'}}>{l.t}</Link>
@@ -343,32 +350,36 @@ export default function Layout() {
     <div style={{background:C.bg,color:C.text,fontFamily:FB,minHeight:'100vh'}}>
       <style>{`
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-        body{background:${C.bg};-webkit-font-smoothing:antialiased;}
+        body{background:${C.bg};font-family:${FB};-webkit-font-smoothing:antialiased;}
         ::selection{background:${C.blueFaint};color:${C.navy};}
         a{color:inherit;}
         button:hover{filter:brightness(.98)}
         [id]{scroll-margin-top:128px;}
         .kb-top-promo{background:${C.navy};color:#fff;}
         .kb-top-promo-inner{min-height:42px;display:flex;align-items:center;justify-content:center;gap:${S[16]}px;font-family:${FB};}
-        .kb-top-promo-text{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:800;letter-spacing:-.1px;}
-        .kb-top-promo-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:13.5px;font-weight:800;padding:8px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
+        .kb-top-promo-text{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:600;letter-spacing:0;}
+        .kb-top-promo-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:13.5px;font-weight:600;padding:8px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
         .kb-navbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid ${C.border};}
         .kb-nav-inner{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:18px;}
         .kb-nav-left{display:flex;align-items:center;gap:34px;min-width:0;}
-        .kb-logo{display:flex;align-items:baseline;gap:1px;text-decoration:none;flex-shrink:0;}
-        .kb-logo span{font-family:${FD};font-size:24px;font-weight:700;}
-        .kb-logo span:first-child{color:${C.navy};}
-        .kb-logo span:last-child{color:${C.blue};}
+        .kb-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
+        .kb-logo-mark{width:34px;height:34px;object-fit:contain;display:block;}
+        .kb-logo-word{display:inline-flex;align-items:baseline;gap:1px;}
+        .kb-logo-word span{font-family:${FB};font-size:24px;font-weight:700;line-height:1;}
+        .kb-logo-word span:first-child{color:${C.navy};}
+        .kb-logo-word span:last-child{color:${C.blue};}
+        .kb-footer-logo{display:flex;align-items:center;gap:8px;margin-bottom:14px;text-decoration:none;}
+        .kb-footer-logo-mark{width:32px;height:32px;object-fit:contain;display:block;filter:brightness(0) saturate(100%) invert(77%) sepia(31%) saturate(693%) hue-rotate(180deg) brightness(97%) contrast(92%);}
         .kb-desktop-nav{display:flex;align-items:center;gap:8px;}
-        .kb-nav-item{display:inline-flex;align-items:center;gap:5px;border:none;background:transparent;color:${C.body};cursor:pointer;font-family:${FB};font-size:15px;font-weight:800;text-decoration:none;white-space:nowrap;padding:11px 12px;border-radius:${R.control}px;transition:background .15s,color .15s;}
+        .kb-nav-item{display:inline-flex;align-items:center;gap:5px;border:none;background:transparent;color:${C.body};cursor:pointer;font-family:${FB};font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;padding:11px 12px;border-radius:${R.control}px;transition:background .15s,color .15s;}
         .kb-nav-item:hover,.kb-nav-item.is-active{background:${C.blueFaint};color:${C.blue};}
         .kb-nav-button svg{transition:transform .15s;}
         .kb-nav-button.is-active svg{transform:rotate(180deg);}
         .kb-desktop-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-        .kb-primary-nav-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:14.5px;font-weight:800;padding:11px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
+        .kb-primary-nav-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:14.5px;font-weight:600;padding:11px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
         .kb-mega-panel{position:absolute;left:0;right:0;top:100%;z-index:45;background:${C.bg};border-bottom:1px solid ${C.border};box-shadow:${SHADOW.elevated};}
         .kb-mega-inner{display:grid;grid-template-columns:.82fr 1.7fr;gap:${S[56]}px;padding:${S[48]}px ${S[24]}px ${S[64]}px;}
-        .kb-mega-title{display:inline-block;font-family:${FD};font-size:28px;line-height:1.1;color:${C.navy};font-weight:500;margin-bottom:30px;background:linear-gradient(transparent 60%,${C.blueFaint} 60%);}
+        .kb-mega-title{display:inline-block;font-family:${FB};font-size:28px;line-height:1.1;color:${C.navy};font-weight:700;margin-bottom:30px;background:none;}
         .kb-mega-items{display:grid;gap:${S[12]}px;}
         .kb-mega-what .kb-mega-items{grid-template-columns:repeat(2,minmax(230px,1fr));gap:${S[12]}px ${S[32]}px;}
         .kb-mega-tools{grid-column:1 / -1;}
@@ -376,20 +387,34 @@ export default function Layout() {
         .kb-mega-tools .kb-mega-item:nth-child(10){grid-column:auto;}
         .kb-mega-item{position:relative;display:block;text-decoration:none;min-height:56px;padding:${S[12]}px ${S[16]}px ${S[12]}px ${S[16]}px;border:1px solid transparent;border-left:3px solid ${C.blue};border-radius:${R.control}px;transition:background .15s,border-color .15s;}
         .kb-mega-item:hover{background:${C.blueFaint};border-color:${C.border};border-left-color:${C.blue};}
-        .kb-mega-item-title{display:block;color:${C.navy};font-family:${FB};font-size:18px;font-weight:800;line-height:1.2;letter-spacing:-.2px;}
-        .kb-mega-item-desc{display:block;color:${C.muted};font-family:${FB};font-size:13.5px;font-weight:700;line-height:1.35;margin-top:6px;}
+        .kb-mega-item-title{display:block;color:${C.navy};font-family:${FB};font-size:18px;font-weight:600;line-height:1.2;letter-spacing:0;}
+        .kb-mega-item-desc{display:block;color:${C.muted};font-family:${FB};font-size:13.5px;font-weight:500;line-height:1.35;margin-top:6px;}
         .kb-mega-item:hover .kb-mega-item-title{color:${C.blue};}
         .kb-mobile-actions{display:none;align-items:center;gap:9px;flex-shrink:0;}
-        .kb-mobile-menu-button{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:${R.control}px;background:${C.navy};color:#fff;font-family:${FB};font-size:14px;font-weight:800;padding:11px 15px;cursor:pointer;}
+        .kb-mobile-menu-button{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:${R.control}px;background:${C.navy};color:#fff;font-family:${FB};font-size:14px;font-weight:600;padding:11px 15px;cursor:pointer;}
         .kb-mobile-drawer{display:none;background:${C.bg};border-top:1px solid ${C.border};box-shadow:${SHADOW.elevated};}
         .kb-mobile-drawer-inner{max-width:${wrap.maxWidth}px;margin:0 auto;padding:${S[24]}px ${S[24]}px ${S[40]}px;display:grid;gap:${S[12]}px;}
-        .kb-mobile-group-trigger,.kb-mobile-simple-link{width:100%;min-height:52px;border:1px solid ${C.border};border-radius:${R.control}px;background:${C.blueFaint};color:${C.navy};font-family:${FB};font-size:16px;font-weight:800;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:0 ${S[20]}px;cursor:pointer;}
+        .kb-mobile-group-trigger,.kb-mobile-simple-link{width:100%;min-height:52px;border:1px solid ${C.border};border-radius:${R.control}px;background:${C.blueFaint};color:${C.navy};font-family:${FB};font-size:16px;font-weight:600;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:0 ${S[20]}px;cursor:pointer;}
         .kb-mobile-group-list{padding:${S[16]}px 0 ${S[24]}px;display:grid;gap:${S[12]}px;}
         .kb-mobile-menu-item{position:relative;display:block;text-decoration:none;padding:${S[12]}px ${S[16]}px;border:1px solid ${C.borderL};border-left:3px solid ${C.blue};border-radius:${R.control}px;background:#fff;}
-        .kb-mobile-menu-item span{display:block;font-size:16px;font-weight:800;color:${C.navy};line-height:1.2;}
-        .kb-mobile-menu-item small{display:block;font-size:12.5px;font-weight:700;color:${C.muted};margin-top:5px;line-height:1.3;}
+        .kb-mobile-menu-item span{display:block;font-size:16px;font-weight:600;color:${C.navy};line-height:1.2;}
+        .kb-mobile-menu-item small{display:block;font-size:12.5px;font-weight:500;color:${C.muted};margin-top:5px;line-height:1.3;}
+        .kb-hero-title{margin:0;font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;letter-spacing:-.025em;}
+        .kb-hero-card-title{font-size:clamp(22px,2.3vw,30px);font-weight:600;line-height:1.18;text-align:center;margin-bottom:${S[24]}px;}
+        .kb-hero-rate-term{font-size:12.5px;font-weight:700;line-height:1.2;text-transform:uppercase;letter-spacing:.18px;margin-bottom:10px;}
+        .kb-hero-rate-value{font-size:clamp(42px,4.3vw,56px);font-weight:800;line-height:1.08;letter-spacing:-.035em;max-width:100%;overflow-wrap:normal;white-space:nowrap;}
+        .kb-hero-rate-value.is-pending{font-size:clamp(22px,2.2vw,30px);line-height:1.1;letter-spacing:-.015em;overflow-wrap:anywhere;white-space:normal;}
+        .kb-hero-rate-cell + .kb-hero-rate-cell{border-left:1px solid ${C.border};}
+        @media(max-width:1180px){
+          .kb-hero-title{font-size:clamp(32px,4.2vw,46px);max-width:680px;margin-left:auto;margin-right:auto;}
+          .kb-hero-rate-value{font-size:clamp(38px,4vw,52px);}
+          .kb-hero-rate-value.is-pending{font-size:clamp(20px,2vw,26px);}
+        }
         @media(max-width:920px){
+          .kb-hero-title{font-size:clamp(32px,6vw,44px);}
           .kb-hero-grid{grid-template-columns:1fr!important;gap:40px!important}
+          .kb-hero-rate-card{min-height:auto!important;padding:30px 28px!important}
+          .kb-hero-image,.kb-hero-image img{min-height:320px!important}
           .kb-2col{grid-template-columns:1fr!important}
           .kb-4col{grid-template-columns:1fr 1fr!important}
           .kb-foot{grid-template-columns:1fr 1fr!important}
@@ -400,6 +425,12 @@ export default function Layout() {
           .kb-nav-left{gap:18px}
         }
         @media(max-width:680px){
+          .kb-hero-title{font-size:clamp(29px,8.4vw,38px);line-height:1.12;letter-spacing:-.02em;}
+          .kb-hero-card-title{font-size:24px;margin-bottom:${S[20]}px;}
+          .kb-hero-rate-card{padding:26px 20px!important}
+          .kb-hero-rate-term{font-size:12px;margin-bottom:8px;}
+          .kb-hero-rate-value{font-size:clamp(42px,13vw,54px);}
+          .kb-hero-rate-value.is-pending{font-size:clamp(24px,7vw,32px);}
           .kb-3col{grid-template-columns:1fr!important}
           .kb-4col{grid-template-columns:1fr!important}
           .kb-mini-3col{grid-template-columns:1fr!important}
@@ -407,14 +438,21 @@ export default function Layout() {
           .kb-top-promo-inner{flex-direction:column;gap:9px;padding-top:9px;padding-bottom:10px}
           .kb-top-promo-text{font-size:13.5px;text-align:center}
           .kb-top-promo-cta{padding:7px 16px}
-          .kb-logo span{font-size:22px}
+          .kb-logo-mark{width:31px;height:31px}
+          .kb-logo-word span{font-size:22px}
           .kb-primary-nav-cta{padding:10px 13px;font-size:13.5px}
           .kb-mobile-menu-button{padding:10px 12px;font-size:13.5px}
+          .kb-hero-rate-grid{grid-template-columns:1fr!important}
+          .kb-hero-rate-cell + .kb-hero-rate-cell{border-left:none!important;border-top:1px solid ${C.border};}
+          .kb-hero-image,.kb-hero-image img{min-height:280px!important}
         }
         @media(max-width:430px){
+          .kb-hero-title{font-size:clamp(27px,8.7vw,34px);}
+          .kb-hero-rate-card{padding:24px 18px!important}
+          .kb-hero-rate-value{font-size:clamp(40px,12vw,50px);}
           .kb-nav-inner{padding-left:16px!important;padding-right:16px!important;gap:10px}
           .kb-mobile-actions{gap:7px}
-          .kb-primary-nav-cta{padding:9px 11px}
+          .kb-mobile-actions .kb-primary-nav-cta{display:none!important}
           .kb-mobile-menu-button{padding:9px 10px}
         }
       `}</style>

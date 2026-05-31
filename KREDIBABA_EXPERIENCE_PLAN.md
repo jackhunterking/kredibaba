@@ -14,6 +14,7 @@
 - **Homepage Flow:** rate-first hero, trust row, intent-based journey cards, persona section, tools preview, Learn preview, and final compliance CTA.
 - **Rates:** maintain approved hero rates through `HERO_RATES`; if a second approved rate is not available, show `Güncelleniyor` instead of inventing a number.
 - **Tone:** formal/institutional Turkish, but plain and understandable; first mention terms as `mortgage (konut kredisi)`, `broker (mortgage aracısı)`, `lender (kredi veren kurum)`.
+- **Public Framing:** avoid side-by-side marketplace language; describe the experience as seeing, understanding, reviewing, and finding a suitable path.
 
 ## Lean Journey Rules
 
@@ -27,12 +28,14 @@
 
 ## Homepage Rate Hero
 
-- Headline: `Kanada’da mortgage oranlarını Türkçe karşılaştırın.`
-- Subtext: `Ev almak, yenilemek veya ödemelerinizi düzenlemek için seçenekleri sade şekilde görün.`
-- Show two hero rate cards from `HERO_RATES`: approved fixed-rate product plus approved variable product; if unavailable, show `Güncelleniyor`.
-- Primary CTA: `Ücretsiz Hesap Aç`.
-- Secondary action: `Açıklama`, opening a short disclosure modal.
-- Disclosure modal must say rates are examples only, not guaranteed, approval depends on file/lender conditions, Kredibaba operates through `RMA Mortgage`, and borrower fees are disclosed before commitment.
+- Headline: `Kanada’da Bugünün En Düşük Mortgage Oranları`
+- Do not show a hero subline; keep the visible copy to headline, two compact rates, CTA, and disclosure link.
+- Use a Perch-like structure: headline above, rate card with rates/CTA/disclosure on the left, professional home image on the right.
+- Show two compact rate tiles from `HERO_RATES` with only `term` and `rate`; if a second approved rate is unavailable, show `Güncelleniyor`.
+- Keep hero typography restrained: headline maxes out below oversized marketing-display scale, rate values are capped, and long status labels like `Güncelleniyor` must never overlap or clip at tablet widths.
+- Primary CTA inside the rate card: `Oranları Gör`.
+- Secondary disclosure action inside the rate card: subtle text link `Açıklama`, opening a short disclosure modal.
+- Keep product type, updated date, qualification notes, and legal conditions out of the visible hero; disclosure modal must say rates are examples only, not guaranteed, approval depends on file/lender conditions, Kredibaba operates through `RMA Mortgage`, and borrower fees are disclosed before commitment.
 
 ## Journey And Persona Rules
 
@@ -53,7 +56,7 @@
   - `Uygunluk hesaplayıcı`
   - `Kapanış masrafı`
   - `Tapu devir vergisi`
-  - `Ödeme karşılaştırması`
+  - `Ödeme farkı hesaplayıcı`
 
 ## Mega Menu Structure
 
@@ -62,10 +65,11 @@
 - **Mobile Navigation:** logo, `Ücretsiz Hesap Aç`, and `Menü ☰`; open state becomes `Menü ×`.
 - **Mobile Drawer:** grouped rows for `Çözümler`, `Araçlar`, `Öğren`, and `Hakkımızda`; expanded lists use short Turkish labels, one-line descriptions, and Kredibaba blue accent bars.
 - **Solutions Grouping:** `Kime yardım ediyoruz?` covers audience types; `Ne konuda yardım ediyoruz?` covers mortgage journey tasks.
-- **Solution Intents:** use `Ev almak`, `Ev kredimi yenilemek`, `Tadilat finansmanı`, `Borç ödemelerini rahatlatmak`, `Ev değerinden yararlanmak`, and `Mortgage seçeneklerini karşılaştırmak`.
+- **Solution Intents:** use `Ev almak`, `Ev kredimi yenilemek`, `Tadilat finansmanı`, `Borç ödemelerini rahatlatmak`, `Ev değerinden yararlanmak`, and `Mortgage seçeneklerini incelemek`.
 - **Tools Grouping:** calculators and decision tools stay in one clear grid, with page anchors such as `/araclar#mortgage-hesaplayici` and `/araclar#on-onay`.
 - **Pre-Approval Placement:** never list `Ön onay` under `Çözümler`; it belongs under `Araçlar`.
 - **Dropdown Spacing:** desktop mega menus need at least `S[64]` bottom padding; mobile drawers need equal top rhythm plus extra bottom clearance after expanded lists so final rows never touch the viewport edge.
+- **No Marketplace Copy:** route labels, cards, modal text, glossary entries, CTAs, and compliance copy should use `gör`, `incele`, `bul`, and `netleştir` language.
 
 ## Brand Guardrails
 
@@ -88,7 +92,7 @@
 
 - Display RMA Mortgage authorized brokerage identity and FSRA licence details prominently before launch.
 - Follow FSRA public advertising/disclosure guidance: no misleading claims, no guaranteed approval/rates, clear brokerage role, clear plain-language disclosures.
-- “Best rate” feeling should use compliant language: `en iyi oranları karşılaştırın`, `size uygun seçenekleri bulun`, `bugünün en düşük oranı`; avoid absolute guarantees.
+- “Best rate” feeling should use compliant language: `bugünün oranlarını görün`, `size uygun yolu bulun`, `bugünün en düşük oranı`; avoid approval or rate guarantees.
 - Include lender-paid compensation/fee disclosure in simple Turkish, and note any borrower fees are disclosed before commitment.
 - References: [FSRA advertising requirements](https://www.fsrao.ca/industry/mortgage-brokering/compliance-and-other-resources/mortgage-industry-public-relations-and-advertising-requirements), [FSRA disclosure requirements](https://www.fsrao.ca/industry/mortgage-brokering/compliance-and-other-resources/mortgage-brokerage-disclosure-requirements).
 

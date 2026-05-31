@@ -3,7 +3,7 @@ import {
   ArrowRight, Banknote, Building2, CreditCard, Hammer, Home as HomeIcon,
   KeyRound, RefreshCw, Search, Unlock,
 } from "lucide-react";
-import { C, FD, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel } from "../theme.jsx";
+import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel } from "../theme.jsx";
 
 const WHO = [
   {
@@ -43,7 +43,7 @@ const WHAT = [
     id:'ev-almak',
     icon:<HomeIcon size={20}/>,
     title:'Ev almak',
-    text:'Bütçe, peşinat ve mortgage seçeneklerini karşılaştırın',
+    text:'Bütçe, peşinat ve mortgage yolunuzu netleştirin',
   },
   {
     id:'ev-kredimi-yenilemek',
@@ -70,10 +70,10 @@ const WHAT = [
     text:'HELOC / ikinci mortgage seçeneklerini değerlendirin',
   },
   {
-    id:'mortgage-seceneklerini-karsilastirmak',
+    id:'mortgage-seceneklerini-incelemek',
     icon:<Search size={20}/>,
-    title:'Mortgage seçeneklerini karşılaştırmak',
-    text:'Size uygun oran ve ürünleri yan yana görün',
+    title:'Mortgage seçeneklerini incelemek',
+    text:'Size uygun oran ve ürünleri sade şekilde inceleyin',
   },
 ];
 
@@ -90,7 +90,7 @@ export default function Solutions() {
       <section id="kime-yardim" style={{...wrap,paddingTop:S[56],paddingBottom:S[40]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>
           <SectionLabel>Kime yardımcı oluyoruz?</SectionLabel>
-          <h2 style={{fontFamily:FD,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:500,lineHeight:1.2}}>
+          <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.2}}>
             Size en yakın kartı seçin.
           </h2>
         </div>
@@ -100,8 +100,8 @@ export default function Solutions() {
               <div style={{width:48,height:48,borderRadius:R.icon,background:C.blueFaint,color:C.blue,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:16}}>
                 {item.icon}
               </div>
-              <h3 style={{fontFamily:FD,fontSize:21,color:C.navy,fontWeight:600,marginBottom:8}}>{item.title}</h3>
-              <p style={{fontSize:13.5,color:C.muted,fontWeight:700,lineHeight:1.45}}>{item.text}</p>
+              <h3 style={{fontFamily:FB,fontSize:21,color:C.navy,fontWeight:600,marginBottom:8}}>{item.title}</h3>
+              <p style={{fontSize:13.5,color:C.muted,fontWeight:500,lineHeight:1.45}}>{item.text}</p>
             </div>
           ))}
         </div>
@@ -110,7 +110,7 @@ export default function Solutions() {
       <section id="ne-yardim" style={{...wrap,paddingTop:S[40],paddingBottom:S[64]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>
           <SectionLabel>Ne konuda yardımcı oluyoruz?</SectionLabel>
-          <h2 style={{fontFamily:FD,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:500,lineHeight:1.2}}>
+          <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.2}}>
             Yapılacak işi seçin.
           </h2>
         </div>
@@ -121,8 +121,8 @@ export default function Solutions() {
                 {item.icon}
               </div>
               <div>
-                <h3 style={{fontSize:17,color:C.navy,fontWeight:800,fontFamily:FB,marginBottom:7}}>{item.title}</h3>
-                <p style={{fontSize:13.5,color:C.muted,fontWeight:700,lineHeight:1.45}}>{item.text}</p>
+                <h3 style={{fontSize:17,color:C.navy,fontWeight:600,fontFamily:FB,marginBottom:7}}>{item.title}</h3>
+                <p style={{fontSize:13.5,color:C.muted,fontWeight:500,lineHeight:1.45}}>{item.text}</p>
               </div>
             </div>
           ))}
@@ -132,7 +132,7 @@ export default function Solutions() {
                      padding:'36px 34px',color:'#fff',marginTop:42}}>
           <div className="kb-2col" style={{display:'grid',gridTemplateColumns:'1fr auto',gap:26,alignItems:'center'}}>
             <div>
-              <h2 style={{fontFamily:FD,fontSize:'clamp(24px,4vw,32px)',fontWeight:500,marginBottom:12}}>
+              <h2 style={{fontFamily:FB,fontSize:'clamp(24px,4vw,32px)',fontWeight:700,marginBottom:12}}>
                 Hangi yoldan başlayalım?
               </h2>
               <p style={{fontSize:15.5,color:'rgba(255,255,255,0.76)',lineHeight:1.55,maxWidth:560}}>Kısa formu doldurun; sıradaki adımı gösterelim.</p>

@@ -54,8 +54,69 @@ export const SHADOW = {
   card: '0 8px 28px rgba(10,37,64,0.06)',
   elevated: '0 24px 50px rgba(10,37,64,0.12)',
 };
-export const FD = "'Fraunces', Georgia, serif";
-export const FB = "'Inter', system-ui, sans-serif";
+export const FB = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+export const type = {
+  hero: {
+    fontFamily: FB,
+    fontSize: 'clamp(38px,6vw,58px)',
+    fontWeight: 700,
+    lineHeight: 1.1,
+    letterSpacing: 0,
+  },
+  pageTitle: {
+    fontFamily: FB,
+    fontSize: 'clamp(32px,5vw,46px)',
+    fontWeight: 700,
+    lineHeight: 1.18,
+    letterSpacing: 0,
+  },
+  sectionTitle: {
+    fontFamily: FB,
+    fontSize: 'clamp(28px,4vw,38px)',
+    fontWeight: 700,
+    lineHeight: 1.2,
+    letterSpacing: 0,
+  },
+  cardTitle: {
+    fontFamily: FB,
+    fontSize: 21,
+    fontWeight: 600,
+    lineHeight: 1.25,
+    letterSpacing: 0,
+  },
+  body: {
+    fontFamily: FB,
+    fontSize: 15,
+    fontWeight: 400,
+    lineHeight: 1.6,
+  },
+  caption: {
+    fontFamily: FB,
+    fontSize: 13,
+    fontWeight: 500,
+    lineHeight: 1.5,
+  },
+  label: {
+    fontFamily: FB,
+    fontSize: 12.5,
+    fontWeight: 600,
+    lineHeight: 1.35,
+    letterSpacing: '0.3px',
+    textTransform: 'uppercase',
+  },
+  rate: {
+    fontFamily: FB,
+    fontWeight: 700,
+    lineHeight: 1.05,
+    letterSpacing: 0,
+  },
+  legal: {
+    fontFamily: FB,
+    fontSize: 12,
+    fontWeight: 400,
+    lineHeight: 1.7,
+  },
+};
 
 export const WA  = '14161234567';        // ← Replace with real number
 export const TEL = '+14161234567';
@@ -117,8 +178,7 @@ export const ghostBtn   = (extra={}) => ({ ...btn(extra), background:'#fff', col
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function SectionLabel({ children }) {
   return (
-    <div style={{fontSize:12.5,fontWeight:600,letterSpacing:'1.4px',textTransform:'uppercase',
-                 color:C.blue,fontFamily:FB,marginBottom:14}}>
+    <div style={{...type.label,color:C.blue,marginBottom:14}}>
       {children}
     </div>
   );
@@ -131,7 +191,7 @@ export function Avatar({ initials, size = 72, ring = C.blue }) {
       background:`linear-gradient(135deg,${C.navy} 0%,${C.navyM} 100%)`,
       border:`2px solid ${ring}40`, color:'#fff',
       display:'flex', alignItems:'center', justifyContent:'center',
-      fontFamily:FD, fontWeight:600, fontSize:size*0.34, letterSpacing:'0.5px',
+      fontFamily:FB, fontWeight:600, fontSize:size*0.34, letterSpacing:0,
     }}>
       {initials}
     </div>
@@ -142,7 +202,7 @@ export function TrustRow({compact}) {
   const items=[
     {icon:<ShieldCheck size={15}/>, text:'FSRA Lisanslı Mortgage Aracılığı'},
     {icon:<Globe size={15}/>,       text:'Türkçe & İngilizce Destek'},
-    {icon:<Award size={15}/>,       text:'Birden Fazla Lender Karşılaştırması'},
+    {icon:<Award size={15}/>,       text:'Birden Fazla Lender Seçeneği'},
     {icon:<Star size={15}/>,        text:'Şeffaf Oran ve Süreç Takibi'},
   ];
   return (
@@ -164,9 +224,8 @@ export function PageHero({ label, title, sub }) {
                      borderBottom:`1px solid ${C.border}`}}>
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[48],textAlign:'center',maxWidth:760}}>
         {label && <SectionLabel>{label}</SectionLabel>}
-        <h1 style={{fontFamily:FD,fontSize:'clamp(32px,5vw,46px)',fontWeight:500,color:C.navy,
-                    lineHeight:1.12,letterSpacing:'-0.5px',marginBottom:16}}>{title}</h1>
-        {sub && <p style={{fontSize:17.5,color:C.body,lineHeight:1.6,maxWidth:600,margin:'0 auto'}}>{sub}</p>}
+        <h1 style={{...type.pageTitle,color:C.navy,marginBottom:16}}>{title}</h1>
+        {sub && <p style={{...type.body,fontSize:17,color:C.body,maxWidth:600,margin:'0 auto'}}>{sub}</p>}
       </div>
     </section>
   );
