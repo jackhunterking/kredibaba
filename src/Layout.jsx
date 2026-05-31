@@ -12,9 +12,12 @@ function Logo() {
   return (
     <Link to="/" className="kb-logo" aria-label={t.nav.logoAria}>
       <img className="kb-logo-mark" src={kredibabaMark} alt="" aria-hidden="true" />
-      <span className="kb-logo-word">
-        <span>Kredi</span>
-        <span>baba</span>
+      <span className="kb-logo-stack">
+        <span className="kb-logo-word">
+          <span>Kredi</span>
+          <span>baba</span>
+        </span>
+        <span className="kb-logo-byline">{t.nav.byline}</span>
       </span>
     </Link>
   );
@@ -209,9 +212,12 @@ function Footer() {
           <div>
             <Link to="/" className="kb-footer-logo">
               <img className="kb-footer-logo-mark" src={kredibabaMark} alt="" aria-hidden="true" />
-              <span style={{display:'inline-flex',alignItems:'baseline',gap:1}}>
-                <span style={{fontFamily:FB,fontSize:22,fontWeight:600,color:'#fff'}}>Kredi</span>
-                <span style={{fontFamily:FB,fontSize:22,fontWeight:600,color:C.blueLight}}>baba</span>
+              <span style={{display:'inline-flex',flexDirection:'column',gap:2}}>
+                <span style={{display:'inline-flex',alignItems:'baseline',gap:1}}>
+                  <span style={{fontFamily:FB,fontSize:22,fontWeight:600,color:'#fff'}}>Kredi</span>
+                  <span style={{fontFamily:FB,fontSize:22,fontWeight:600,color:C.blueLight}}>baba</span>
+                </span>
+                <span style={{fontFamily:FB,fontSize:11,fontWeight:600,letterSpacing:'.04em',lineHeight:1,color:'rgba(255,255,255,0.6)'}}>{t.nav.byline}</span>
               </span>
             </Link>
             <p style={{fontSize:13.5,lineHeight:1.7,maxWidth:310,fontFamily:FB}}>
@@ -248,6 +254,17 @@ function Footer() {
                      borderTop:'1px solid rgba(255,255,255,0.08)',paddingTop:14}}>
             {interp(t.footer.legal2, vars)}
           </p>
+          <div style={{borderTop:'1px solid rgba(255,255,255,0.08)',paddingTop:14,display:'flex',flexWrap:'wrap',gap:'8px 20px'}}>
+            {[
+              {label:'Privacy Policy', to:'/gizlilik'},
+              {label:'Terms of Use', to:'/kullanim-sartlari'},
+              {label:'Advertising Disclosure', to:'/reklam-aciklamasi'},
+            ].map(l=>(
+              <Link key={l.to} to={l.to} style={{fontSize:11.5,color:'rgba(255,255,255,0.4)',fontFamily:FB,textDecoration:'none'}}>
+                {l.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
@@ -298,10 +315,12 @@ export default function Layout() {
         .kb-nav-left{display:flex;align-items:center;gap:34px;min-width:0;}
         .kb-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
         .kb-logo-mark{width:34px;height:34px;object-fit:contain;display:block;}
+        .kb-logo-stack{display:inline-flex;flex-direction:column;gap:2px;}
         .kb-logo-word{display:inline-flex;align-items:baseline;gap:1px;}
         .kb-logo-word span{font-family:${FB};font-size:24px;font-weight:700;line-height:1;}
         .kb-logo-word span:first-child{color:${C.navy};}
         .kb-logo-word span:last-child{color:${C.blue};}
+        .kb-logo-byline{font-family:${FB};font-size:11px;font-weight:600;letter-spacing:.04em;color:${C.muted};line-height:1;}
         .kb-footer-logo{display:flex;align-items:center;gap:8px;margin-bottom:14px;text-decoration:none;}
         .kb-footer-logo-mark{width:32px;height:32px;object-fit:contain;display:block;filter:brightness(0) saturate(100%) invert(77%) sepia(31%) saturate(693%) hue-rotate(180deg) brightness(97%) contrast(92%);}
         .kb-desktop-nav{display:flex;align-items:center;gap:8px;}

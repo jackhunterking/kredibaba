@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import {
   C, FB, R, S, SectionLabel, SHADOW,
-  TrustRow, ghostBtn, IMG, primaryBtn, wrap,
+  ghostBtn, IMG, primaryBtn, wrap,
   AdvisorChip, AdvisorStrip, Testimonials, PersonaPhotoCard, PhotoAvatar, PEOPLE,
 } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
@@ -331,9 +331,6 @@ export default function Home() {
   return (
     <>
       <Hero onCTA={openForm}/>
-      <div style={{...wrap,paddingTop:S[24],paddingBottom:S[24]}}>
-        <TrustRow compact/>
-      </div>
       <JourneySection/>
       <WhoWeHelp onCTA={openForm}/>
       <Testimonials/>
