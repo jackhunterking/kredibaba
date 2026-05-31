@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ShieldCheck, Globe, Award, Star, Linkedin } from "lucide-react";
 import { useLang } from "./i18n/LanguageContext.jsx";
 
@@ -183,6 +184,9 @@ export function initialsFrom(name = '') {
 }
 
 export function PersonCard({ name, role, photo, linkedin, credential, photoSize = 88 }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const showPhoto = photo && !imageFailed;
+
   return (
     <div style={{
       background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card,
@@ -190,11 +194,12 @@ export function PersonCard({ name, role, photo, linkedin, credential, photoSize 
       display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center',
       height:'100%',
     }}>
-      {photo ? (
+      {showPhoto ? (
         <img
           src={photo}
           alt={name}
           loading="lazy"
+          onError={() => setImageFailed(true)}
           style={{
             width:photoSize, height:photoSize, borderRadius:R.circle,
             objectFit:'cover', flexShrink:0, marginBottom:18,

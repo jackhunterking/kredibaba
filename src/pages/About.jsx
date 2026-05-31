@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { ArrowRight, Eye, Heart, MessageCircle, ShieldCheck, Users } from "lucide-react";
 import {
-  C, FB, R, S, WA, wrap, primaryBtn, Avatar, PageHero, SectionLabel, BROKERAGE, LICENSE,
+  C, FB, R, S, WA, wrap, primaryBtn, PersonCard, PageHero, SectionLabel, BROKERAGE, LICENSE,
 } from "../theme.jsx";
 import { useLang, interp } from "../i18n/LanguageContext.jsx";
 
@@ -38,13 +38,7 @@ function Team() {
       </div>
       <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18}}>
         {leaders.map((p,i)=>(
-          <div key={i} style={{background:C.surface,border:`1px solid ${C.border}`,borderRadius:R.card,padding:'24px 22px',display:'flex',alignItems:'center',gap:16}}>
-            <Avatar initials={p.initials} size={58}/>
-            <div>
-              <h3 style={{fontFamily:FB,fontSize:21,color:C.navy,fontWeight:600,marginBottom:3}}>{p.name}</h3>
-              <p style={{fontSize:13,color:C.blue,fontWeight:700,fontFamily:FB}}>{p.role}</p>
-            </div>
-          </div>
+          <PersonCard key={i} {...p} photoSize={96}/>
         ))}
       </div>
     </section>
