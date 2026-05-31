@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { ShieldCheck, Globe, Award, Star, Linkedin, MessageCircle, ArrowRight, Info } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { ShieldCheck, Globe, Award, Star, Linkedin, MessageCircle, ArrowRight } from "lucide-react";
 import { useLang } from "./i18n/LanguageContext.jsx";
 import jackPhoto from "./assets/people/jack.jpg";
 import taraPhoto from "./assets/people/tara.jpg";
@@ -128,7 +129,7 @@ export const TEL = '+14161234567';
 export const CAL = 'https://calendly.com/kredibaba/danisma';
 export const LICENSE = 'FSRA #XXXXX';
 export const BROKERAGE = 'RMA Mortgage';
-// Localizable rate data now lives in the i18n dictionaries (t.rates.heroRates / t.rates.lowestRate).
+// Localizable rate data now lives in the i18n dictionaries (t.rates.tabs / t.rates.lowestRate).
 
 // Contextual stock imagery (Unsplash — replace with branded photography when ready)
 export const IMG = {
@@ -203,6 +204,10 @@ export function initialsFrom(name = '') {
 export function PersonCard({ name, role, photo, photoPos = 'center', linkedin, credential, photoSize = 88 }) {
   const [imageFailed, setImageFailed] = useState(false);
   const showPhoto = photo && !imageFailed;
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [photo]);
 
   return (
     <div style={{
@@ -298,6 +303,11 @@ export function PageHero({ label, title, sub }) {
 // Circular real-photo avatar with focal framing and graceful initials fallback.
 export function PhotoAvatar({ src, pos = 'center', alt = '', size = 64, ring = C.blue, initials = '', frame = false }) {
   const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
+
   if (!src || failed) {
     return (
       <span style={frame ? { display:'inline-flex', border:'3px solid #fff', borderRadius:R.circle, boxShadow:`0 0 0 1px ${C.border}` } : undefined}>
@@ -400,28 +410,13 @@ function TestimonialCard({ item }) {
   );
 }
 
-// Social-proof row. Renders a visible placeholder tag until real, consented stories exist (FSRA-safe).
+// Social-proof row with a lean presentation that keeps focus on the cards.
 export function Testimonials() {
   const { t } = useLang();
   const ts = t.home.testimonials;
   return (
     <section style={{background:C.surface, borderTop:`1px solid ${C.border}`, borderBottom:`1px solid ${C.border}`}}>
       <div style={{...wrap, paddingTop:S[56], paddingBottom:S[56]}}>
-        <div style={{textAlign:'center', maxWidth:640, margin:'0 auto 14px'}}>
-          <SectionLabel>{ts.label}</SectionLabel>
-          <h2 style={{fontFamily:FB, fontSize:'clamp(28px,4vw,38px)', color:C.navy, fontWeight:700, lineHeight:1.16}}>{ts.title}</h2>
-        </div>
-        {ts.placeholderTag && (
-          <div style={{display:'flex', justifyContent:'center', marginBottom:30}}>
-            <span style={{
-              display:'inline-flex', alignItems:'center', gap:7,
-              background:C.amberFaint, color:C.amber, border:`1px solid ${C.amber}33`,
-              borderRadius:R.chip, padding:'6px 12px', fontSize:12.5, fontWeight:600, fontFamily:FB,
-            }}>
-              <Info size={14}/> {ts.placeholderTag}
-            </span>
-          </div>
-        )}
         <div className="kb-3col" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16}}>
           {ts.items.map((item, i) => <TestimonialCard key={i} item={item}/>)}
         </div>
@@ -431,16 +426,18 @@ export function Testimonials() {
 }
 
 // Persona card with a lifestyle photo header + the persona icon demoted to a small badge.
-// Renders as a clickable <button> when `onClick` is given, otherwise a static <div> (with an id anchor).
-export function PersonaPhotoCard({ id, image, icon, title, text, onClick, imgAlt = '' }) {
-  const interactive = typeof onClick === 'function';
-  const Tag = interactive ? 'button' : 'div';
-  return (
-    <Tag id={id} onClick={onClick} style={{
-      background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card, boxShadow:SHADOW.card,
-      padding:0, width:'100%', cursor:interactive ? 'pointer' : 'default', textAlign:'left',
-      fontFamily:FB, overflow:'hidden', display:'flex', flexDirection:'column', height:'100%',
-    }}>
+// Renders as a <Link>, <button>, or static <div> depending on whether navigation/click behavior is provided.
+export function PersonaPhotoCard({ id, image, icon, title, text, onClick, to, imgAlt = '' }) {
+  const interactive = typeof onClick === 'function' || Boolean(to);
+  const baseStyle = {
+    background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card, boxShadow:SHADOW.card,
+    padding:0, width:'100%', cursor:interactive ? 'pointer' : 'default', textAlign:'left',
+    fontFamily:FB, overflow:'hidden', display:'flex', flexDirection:'column', height:'100%',
+    textDecoration:'none',
+  };
+
+  const content = (
+    <>
       <div style={{position:'relative', width:'100%', aspectRatio:'16 / 10', background:C.surface2, flexShrink:0}}>
         <img src={image} alt={imgAlt} loading="lazy" style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block'}}/>
         <span style={{
@@ -453,6 +450,28 @@ export function PersonaPhotoCard({ id, image, icon, title, text, onClick, imgAlt
         <span style={{display:'block', fontFamily:FB, fontSize:20, color:C.navy, fontWeight:600, marginBottom:7, lineHeight:1.18}}>{title}</span>
         <span style={{display:'block', fontSize:13.5, color:C.body, lineHeight:1.5}}>{text}</span>
       </div>
-    </Tag>
+    </>
+  );
+
+  if (to) {
+    return (
+      <Link id={id} to={to} aria-label={title} style={baseStyle}>
+        {content}
+      </Link>
+    );
+  }
+
+  if (typeof onClick === 'function') {
+    return (
+      <button id={id} onClick={onClick} style={baseStyle}>
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <div id={id} style={baseStyle}>
+      {content}
+    </div>
   );
 }

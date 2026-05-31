@@ -1,126 +1,20 @@
-import { useState } from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import {
-  ArrowRight, BookOpen, Calculator, Check, CreditCard, FileCheck,
-  Hammer, Home as HomeIcon, Info, Landmark, Percent, RefreshCw,
-  ShieldCheck, TrendingDown, Unlock, Wallet, X,
+  ArrowRight, BookOpen, Calculator, CreditCard, FileCheck,
+  Hammer, Home as HomeIcon, Landmark, Percent, RefreshCw,
+  ShieldCheck, TrendingDown, Unlock, Wallet,
 } from "lucide-react";
 import {
-  BROKERAGE, C, FB, R, S, SectionLabel, SHADOW,
+  C, FB, R, S, SectionLabel, SHADOW,
   TrustRow, ghostBtn, IMG, primaryBtn, wrap,
   AdvisorChip, AdvisorStrip, Testimonials, PersonaPhotoCard, PhotoAvatar, PEOPLE,
 } from "../theme.jsx";
-import { useLang, interp } from "../i18n/LanguageContext.jsx";
-
-function HeroRateMini({ item }) {
-  const pending = item.pending;
-  return (
-    <div style={{
-      padding:'18px 14px',
-      textAlign:'center',
-      minWidth:0,
-    }}>
-      <span className="kb-hero-rate-term" style={{display:'block',fontFamily:FB,color:C.muted}}>
-        {item.term}
-      </span>
-      <strong
-        className={`kb-hero-rate-value${pending ? ' is-pending' : ''}`}
-        style={{display:'block',fontFamily:FB,color:pending ? C.muted : C.navy}}
-      >
-        {item.rate}
-      </strong>
-    </div>
-  );
-}
-
-function DisclosureModal({ onClose }) {
-  const { t } = useLang();
-  const d = t.home.disclosure;
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={d.aria}
-      onClick={onClose}
-      style={{
-        position:'fixed',
-        inset:0,
-        zIndex:120,
-        background:'rgba(6,25,44,0.52)',
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center',
-        padding:S[24],
-      }}
-    >
-      <div
-        onClick={(event) => event.stopPropagation()}
-        style={{
-          width:'min(620px,100%)',
-          background:'#fff',
-          border:`1px solid ${C.border}`,
-          borderRadius:R.panel,
-          boxShadow:SHADOW.elevated,
-          padding:'28px 28px 26px',
-        }}
-      >
-        <div style={{display:'flex',alignItems:'start',justifyContent:'space-between',gap:20,marginBottom:18}}>
-          <div>
-            <SectionLabel>{d.label}</SectionLabel>
-            <h2 style={{fontFamily:FB,fontSize:30,color:C.navy,fontWeight:600,lineHeight:1.12}}>
-              {d.title}
-            </h2>
-          </div>
-          <button
-            onClick={onClose}
-            aria-label={d.closeAria}
-            style={{
-              width:40,
-              height:40,
-              border:`1px solid ${C.border}`,
-              borderRadius:R.control,
-              background:C.surface,
-              color:C.navy,
-              cursor:'pointer',
-              display:'flex',
-              alignItems:'center',
-              justifyContent:'center',
-              flexShrink:0,
-            }}
-          >
-            <X size={18}/>
-          </button>
-        </div>
-        <div style={{display:'grid',gap:12}}>
-          {d.bullets.map((item) => (
-            <p key={item} style={{
-              display:'flex',
-              alignItems:'flex-start',
-              gap:10,
-              background:C.surface,
-              border:`1px solid ${C.border}`,
-              borderRadius:R.control,
-              padding:'13px 14px',
-              color:C.body,
-              fontSize:14,
-              lineHeight:1.5,
-              margin:0,
-              fontFamily:FB,
-            }}>
-              <Check size={16} color={C.blue} style={{flexShrink:0,marginTop:2}}/>
-              <span>{interp(item, { BROKERAGE })}</span>
-            </p>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+import { useLang } from "../i18n/LanguageContext.jsx";
+import HeroRateSummary from "../components/rates/HeroRateSummary.jsx";
 
 function Hero({ onCTA }) {
   const { t } = useLang();
   const h = t.home.hero;
-  const [showDisclosure, setShowDisclosure] = useState(false);
 
   return (
     <section style={{
@@ -135,64 +29,23 @@ function Hero({ onCTA }) {
         </div>
 
         <div className="kb-hero-grid" style={{display:'grid',gridTemplateColumns:'0.98fr 1.02fr',gap:S[24],alignItems:'stretch'}}>
-          <div className="kb-hero-rate-card" style={{
+          <div className="kb-hero-rate-card kb-hero-rate-card--summary" style={{
             background:'#fff',
             border:`1px solid ${C.border}`,
             borderRadius:R.panel,
             boxShadow:SHADOW.elevated,
-            padding:'30px 28px',
+            padding:'0',
             display:'flex',
             flexDirection:'column',
-            justifyContent:'center',
             minHeight:380,
           }}>
-            <h2 className="kb-hero-card-title" style={{fontFamily:FB,color:C.navy}}>
-              {h.cardTitle}
-            </h2>
-
-            <div className="kb-hero-rate-grid" style={{
-              display:'grid',
-              gridTemplateColumns:'repeat(2,minmax(0,1fr))',
-              gap:0,
-              borderTop:`1px solid ${C.border}`,
-              borderBottom:`1px solid ${C.border}`,
-              marginBottom:S[24],
-            }}>
-              {t.rates.heroRates.map((item) => (
-                <div key={item.label} className="kb-hero-rate-cell">
-                  <HeroRateMini item={item}/>
-                </div>
-              ))}
-            </div>
-
-            <div style={{display:'grid',justifyItems:'center',gap:S[16]}}>
-              <button
-                onClick={onCTA}
-                style={primaryBtn({padding:'14px 26px',fontSize:15.5,width:'min(100%, 260px)',display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8})}
-              >
-                {h.btnRates} <ArrowRight size={17}/>
-              </button>
-              <button
-                onClick={() => setShowDisclosure(true)}
-                style={{
-                  border:'none',
-                  background:'transparent',
-                  color:C.blue,
-                  cursor:'pointer',
-                  fontFamily:FB,
-                  fontSize:13.5,
-                  fontWeight:500,
-                  textDecoration:'underline',
-                  textUnderlineOffset:3,
-                  display:'inline-flex',
-                  alignItems:'center',
-                  gap:7,
-                  padding:0,
-                }}
-              >
-                {h.btnDisclosure} <Info size={14}/>
-              </button>
-            </div>
+            <HeroRateSummary
+              title={t.rates.cardTitle}
+              tabs={t.rates.tabs}
+              ctaLabel={h.btnRates}
+              onCta={onCTA}
+              disclosure={t.rates.disclosure}
+            />
           </div>
 
           <div className="kb-hero-image" style={{position:'relative',borderRadius:R.media,overflow:'hidden',minHeight:380,boxShadow:SHADOW.elevated,background:C.navy}}>
@@ -211,7 +64,6 @@ function Hero({ onCTA }) {
           </div>
         </div>
       </div>
-      {showDisclosure && <DisclosureModal onClose={() => setShowDisclosure(false)}/>}
     </section>
   );
 }
@@ -270,13 +122,15 @@ function JourneySection() {
   return (
     <section style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
       <div style={{textAlign:'center',maxWidth:720,margin:'0 auto 32px'}}>
-        <SectionLabel>{j.label}</SectionLabel>
+        {j.label ? <SectionLabel>{j.label}</SectionLabel> : null}
         <h2 style={{fontFamily:FB,fontSize:'clamp(30px,4.5vw,42px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
           {j.title}
         </h2>
-        <p style={{fontSize:15.5,color:C.body,lineHeight:1.55,marginTop:12}}>
-          {j.sub}
-        </p>
+        {j.sub ? (
+          <p style={{fontSize:15.5,color:C.body,lineHeight:1.55,marginTop:12}}>
+            {j.sub}
+          </p>
+        ) : null}
       </div>
       <div className="kb-4col" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:16}}>
         {journeys.map((journey) => (
@@ -290,18 +144,19 @@ function JourneySection() {
 function WhoWeHelp({ onCTA }) {
   const { t } = useLang();
   const w = t.home.who;
+  const heading = w.label || w.title;
   const icons = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Landmark size={20}/>, <Wallet size={20}/>, <ShieldCheck size={20}/>];
   const images = [IMG.personaFirst, IMG.personaOwner, IMG.personaInvestor, IMG.personaSelf, IMG.personaNewcomer];
-  const items = w.items.map((it, i) => ({ icon: icons[i], image: images[i], title: it.title, text: it.text }));
+  const personaLinks = t.mega.cozumler.groups[0].items.map((item) => item.href);
+  const items = w.items.map((it, i) => ({ icon: icons[i], image: images[i], title: it.title, text: it.text, to: personaLinks[i] }));
 
   return (
     <section style={{background:C.surface,borderTop:`1px solid ${C.border}`,borderBottom:`1px solid ${C.border}`}}>
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'end',gap:24,marginBottom:28,flexWrap:'wrap'}}>
           <div style={{maxWidth:620}}>
-            <SectionLabel>{w.label}</SectionLabel>
             <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
-              {w.title}
+              {heading}
             </h2>
           </div>
           <button onClick={onCTA} style={ghostBtn({padding:'13px 18px',display:'inline-flex',alignItems:'center',gap:8})}>
@@ -317,7 +172,7 @@ function WhoWeHelp({ onCTA }) {
               icon={item.icon}
               title={item.title}
               text={item.text}
-              onClick={onCTA}
+              to={item.to}
             />
           ))}
         </div>

@@ -25,11 +25,11 @@ export default {
           title: "Kime yardım ediyoruz?",
           className: "kb-mega-who",
           items: [
-            { label: "İlk ev alıcıları", href: "/cozumler#ilk-ev" },
-            { label: "Ev sahipleri", href: "/cozumler#ev-sahipleri" },
-            { label: "Ev sahipleri / yatırımcılar", href: "/cozumler#yatirimcilar" },
-            { label: "Şirket sahibi / serbest meslek", href: "/cozumler#serbest-meslek" },
-            { label: "Kanada’ya yeni gelenler", href: "/cozumler#yeni-gelenler" },
+            { label: "İlk ev alıcıları", href: "/cozumler/ilk-ev" },
+            { label: "Ev sahipleri", href: "/cozumler/ev-sahipleri" },
+            { label: "Ev sahipleri / yatırımcılar", href: "/cozumler/yatirimcilar" },
+            { label: "Şirket sahibi / serbest meslek", href: "/cozumler/serbest-meslek" },
+            { label: "Kanada’ya yeni gelenler", href: "/cozumler/yeni-gelenler" },
           ],
         },
         {
@@ -76,10 +76,10 @@ export default {
       {
         h: "Çözümler",
         links: [
-          { t: "İlk ev alıcıları", to: "/cozumler" },
-          { t: "Ev sahipleri", to: "/cozumler" },
-          { t: "Yatırımcılar", to: "/cozumler" },
-          { t: "Yeni gelenler", to: "/cozumler" },
+          { t: "İlk ev alıcıları", to: "/cozumler/ilk-ev" },
+          { t: "Ev sahipleri", to: "/cozumler/ev-sahipleri" },
+          { t: "Yatırımcılar", to: "/cozumler/yatirimcilar" },
+          { t: "Yeni gelenler", to: "/cozumler/yeni-gelenler" },
         ],
       },
       {
@@ -121,7 +121,7 @@ export default {
     hero: {
       title: "TÜRKLERE KANADA’DA MORTGAGE REHBERLİĞİ",
       cardTitle: "Kanada’da günün en düşük mortgage faiz oranı",
-      btnRates: "Oranları Gör",
+      btnRates: "Ön Onay Al",
       btnDisclosure: "Açıklama",
       imgAlt: "Kanada’da modern bir ev",
       advisorName: "Jack Hunter",
@@ -141,9 +141,9 @@ export default {
     },
     journeyCardCta: "Yolculuğu gör",
     journeys: {
-      label: "Yolculuklar",
-      title: "Neden finansman arıyorsunuz?",
-      sub: "Burada amaç kişiyi etiketlemek değil; hangi finansman ihtiyacıyla başladığını netleştirmek.",
+      label: "",
+      title: "Ne için kredi lazım?",
+      sub: "",
       items: [
         { title: "Ev almak istiyorum", sub: "Bütçe, ön onay ve uygun mortgage seçenekleri" },
         { title: "Ev kredimi yenilemek", sub: "Mevcut teklifinizi inceleyin veya daha uygun ödeme arayın" },
@@ -185,9 +185,6 @@ export default {
       ],
     },
     testimonials: {
-      label: "Topluluk",
-      title: "Türk topluluğundan görüşler.",
-      placeholderTag: "Örnek görünüm — gerçek yorumlar yakında",
       items: [
         { name: "Mehmet A.", persona: "İlk ev alıcısı", quote: "Süreci Türkçe anlatmaları işi çok kolaylaştırdı; her adımı net gördüm.", rating: 5 },
         { name: "Ayşe K.", persona: "Kanada’ya yeni gelen", quote: "Kredi geçmişim yokken nereden başlayacağımı sabırla anlattılar.", rating: 5 },
@@ -205,7 +202,7 @@ export default {
       title: "Dosyanız için uygun seçenekleri beraber netleştirelim.",
       sub: "Ücretsiz başlangıç formu onay veya oran garantisi değildir; sadece doğru yolculuğu ve gerekli belgeleri belirlemek için kullanılır.",
       btnAccount: "Ücretsiz Hesap Aç",
-      btnRates: "Oranları incele",
+      btnRates: "Ön Onay Al",
     },
   },
 
@@ -213,11 +210,41 @@ export default {
     label: "Oranlar",
     title: "Bugünün öne çıkan mortgage oranları.",
     sub: "Net koşullar. Sade açıklama. Garanti değil; başlangıç göstergesi.",
-    chip: "Gösterge oranlar",
-    chips3: ["Koşullu oran", "Onay değildir", "Lender belirler"],
-    whoTitle: "Kimler alabilir?",
-    whoItems: ["Güçlü kredi", "Doğrulanabilir gelir", "Uygun peşinat"],
-    whoNote: "Oran garanti değildir; yazılı commitment ile kesinleşir.",
+    cardTitle: "Kanada'daki En Düşük Mortgage Oranları",
+    cardCtaLabel: "Ön Onay Al",
+    disclosure: {
+      aria: "Oran açıklaması",
+      label: "Açıklama",
+      title: "Oranlar nasıl okunmalı?",
+      closeAria: "Açıklamayı kapat",
+      bullets: [
+        "Gösterilen oranlar yalnızca örnektir; kişisel oran garantisi değildir.",
+        "Onay; gelir, kredi geçmişi, mülk, peşinat, lender koşulları ve yazılı commitment ile netleşir.",
+        "Kredibaba, {BROKERAGE} bünyesinde mortgage (konut kredisi) aracılığı deneyimi sunar.",
+        "Borçluya yansıyabilecek ücretler varsa, commitment öncesinde yazılı ve sade şekilde açıklanır.",
+      ],
+    },
+    tabs: {
+      fixed: {
+        label: "Sabit",
+        heroSummaryKey: "3y",
+        items: [
+          { key: "1y", termLabel: "1 YIL", rate: "4.69%" },
+          { key: "2y", termLabel: "2 YIL", rate: "4.00%" },
+          { key: "3y", termLabel: "3 YIL", rate: "3.99%" },
+          { key: "4y", termLabel: "4 YIL", rate: "4.09%" },
+          { key: "5y", termLabel: "5 YIL", rate: "4.14%" },
+        ],
+      },
+      variable: {
+        label: "Değişken",
+        heroSummaryKey: "5y",
+        items: [
+          { key: "3y", termLabel: "3 YIL", rate: "3.65%", detail: "PRIME - 0.80%" },
+          { key: "5y", termLabel: "5 YIL", rate: "3.50%", detail: "PRIME - 0.95%" },
+        ],
+      },
+    },
     cta: {
       title: "Sizin oranınız ne olabilir?",
       sub: "2 dakikalık başlangıç formu.",
@@ -225,34 +252,12 @@ export default {
       btnCalc: "Hesapla",
     },
     lowestRate: {
-      rate: "3.89%",
-      term: "5 yıl sabit",
-      product: "Sigortalı mortgage",
+      rate: "3.99%",
+      term: "3 yıl sabit",
+      product: "En düşük sabit oran",
       updated: "30 Mayıs 2026",
       note: "Yalnızca güçlü kredi, uygun gelir ve lender koşullarını sağlayan dosyalar için örnek gösterge orandır.",
     },
-    heroRates: [
-      {
-        label: "Sabit oran",
-        term: "5 yıl sabit",
-        rate: "3.89%",
-        product: "Sigortalı mortgage",
-        updated: "30 Mayıs 2026",
-        note: "Yalnızca güçlü kredi, uygun gelir ve lender koşullarını sağlayan dosyalar için örnek gösterge orandır.",
-        qualification: "Güçlü kredi, doğrulanabilir gelir, uygun mülk ve lender koşulları gerekir.",
-        pending: false,
-      },
-      {
-        label: "Değişken oran",
-        term: "5 yıl değişken",
-        rate: "Güncelleniyor",
-        product: "Değişken mortgage",
-        updated: "30 Mayıs 2026",
-        note: "Onaylı değişken oran verisi geldiğinde yayınlanır; örnek oran uydurulmaz.",
-        qualification: "Prime oranı, lender indirimi ve dosya koşulları kişiye göre değişebilir.",
-        pending: true,
-      },
-    ],
   },
 
   tools: {
@@ -383,9 +388,9 @@ export default {
   solutions: {
     label: "Çözümler",
     title: "Durumunuzu seçin. Sonraki adımı görün.",
-    sub: "Az metin, net yol: kime yardımcı oluyoruz ve hangi konuda başlıyoruz?",
-    whoLabel: "Kime yardımcı oluyoruz?",
-    whoHeading: "Size en yakın kartı seçin.",
+    sub: "",
+    whoLabel: "",
+    whoHeading: "",
     whatLabel: "Ne konuda yardımcı oluyoruz?",
     whatHeading: "Yapılacak işi seçin.",
     ctaTitle: "Hangi yoldan başlayalım?",
@@ -406,6 +411,124 @@ export default {
       { id: "ev-degerinden-yararlanmak", title: "Ev değerinden yararlanmak", text: "HELOC / ikinci mortgage seçeneklerini değerlendirin" },
       { id: "mortgage-seceneklerini-incelemek", title: "Mortgage seçeneklerini incelemek", text: "Size uygun oran ve ürünleri sade şekilde inceleyin" },
     ],
+  },
+
+  solutionPages: {
+    "ilk-ev": {
+      navLabel: "İlk ev alıcıları",
+      hero: {
+        title: "İlk evinizi güvenle alın",
+        underlineText: "güvenle",
+        sub: "Bütçenizi daha net görün, süreci daha hızlı başlatın ve ev sahipliğine daha sade bir yoldan ilerleyin.",
+        ctaLabel: "Hemen başla",
+      },
+      cards: [
+        { title: "Alım gücünü artırın", text: "Ev aramaya çıkmadan önce hangi aralıkta rahat teklif verebileceğinizi görün.", imageKey: "personaFirst", iconKey: "buyingPower" },
+        { title: "Aynı gün ön onay", text: "Daha hızlı hareket etmek için online ön onay sürecine erkenden başlayın.", imageKey: "keys", iconKey: "approvals" },
+        { title: "Daha fazlasına uygun olun", text: "Sadece bankanızın ilk teklifine bağlı kalmadan daha geniş mortgage seçeneklerini görün.", imageKey: "hero", iconKey: "qualify" },
+      ],
+      ratePanel: {
+        title: "Kanada'da öne çıkan mortgage oranları",
+        ctaLabel: "Ön Onay Al",
+      },
+      finalCta: {
+        title: "İlk ev yolunuzu birlikte netleştirelim.",
+        sub: "Kısa başlangıç formu bütçe, belge ve sonraki adımınızı görmek içindir; kredi onayı veya oran garantisi değildir.",
+        ctaLabel: "Ücretsiz Hesap Aç",
+      },
+    },
+    "ev-sahipleri": {
+      navLabel: "Ev sahipleri",
+      hero: {
+        title: "Tasarruf etmenin akıllı yolu",
+        underlineText: "akıllı",
+        sub: "Aylık ödemenizi azaltın, yenileme seçeneklerini görün veya ev değerinizden yararlanırken daha temiz bir karşılaştırma süreci izleyin.",
+        ctaLabel: "Hemen başla",
+      },
+      cards: [
+        { title: "Anında mortgage oran görünümü", text: "Yenileme veya refinansman seçeneklerini tek lender görüşmesiyle sınırlı kalmadan karşılaştırın.", imageKey: "keys", iconKey: "quotes" },
+        { title: "Alım gücünü artırın", text: "Mevcut ev sermayenizi kullanarak sonraki adımınızın bütçesini daha net görün.", imageKey: "personaOwner", iconKey: "buyingPower" },
+        { title: "Daha fazlasına uygun olun", text: "Bankanızın ilk teklifinden önce daha geniş mortgage seçeneklerini değerlendirin.", imageKey: "hero", iconKey: "qualify" },
+      ],
+      ratePanel: {
+        title: "Kanada'da öne çıkan mortgage oranları",
+        ctaLabel: "Ön Onay Al",
+      },
+      finalCta: {
+        title: "Ev sahibi seçeneklerinizi sade şekilde gözden geçirelim.",
+        sub: "Başlangıç formu, sizin için yenileme, refinansman veya ev değerinden yararlanma yolunun hangisi olduğunu netleştirmemize yardımcı olur.",
+        ctaLabel: "Ücretsiz Hesap Aç",
+      },
+    },
+    "yatirimcilar": {
+      navLabel: "Ev sahipleri / yatırımcılar",
+      hero: {
+        title: "Sonraki yatırım mülkünüzü daha erken alın",
+        underlineText: "daha erken",
+        sub: "Nakit akışınızı koruyun, finansman seçeneklerinizi net görün ve sonraki gayrimenkul adımınızı daha planlı atın.",
+        ctaLabel: "Hemen başla",
+      },
+      cards: [
+        { title: "Alım gücünü artırın", text: "Sermaye, gelir ve mülk stratejinizin sıradaki alım için ne kadar alan açtığını görün.", imageKey: "personaInvestor", iconKey: "buyingPower" },
+        { title: "İleri görüşlü içgörüler", text: "Portföy kararlarını daha net mortgage karşılaştırmaları ve zamanlama ile destekleyin.", imageKey: "interior", iconKey: "insights" },
+        { title: "1:1 destek", text: "Finansman yapısı, nakit akışı ve lender uyumu için danışmanla doğrudan strateji kurun.", imageKey: "personaSelf", iconKey: "support" },
+      ],
+      ratePanel: {
+        title: "Kanada'da öne çıkan mortgage oranları",
+        ctaLabel: "Ön Onay Al",
+      },
+      finalCta: {
+        title: "Sonraki yatırım adımınızı birlikte yapılandıralım.",
+        sub: "Kısa form; kira geliriniz, portföyünüz ve hedef finansman yapınız için doğru sonraki adımı belirlememize yardımcı olur.",
+        ctaLabel: "Ücretsiz Hesap Aç",
+      },
+    },
+    "serbest-meslek": {
+      navLabel: "Şirket sahibi / serbest meslek",
+      hero: {
+        title: "Mortgage için seçenekleriniz var",
+        underlineText: "seçenekleriniz",
+        sub: "Kontrat, komisyon veya serbest gelirle çalışıyor olsanız da, gelirinize uygun mortgage yolunu daha sade şekilde kurabiliriz.",
+        ctaLabel: "Hemen başla",
+      },
+      cards: [
+        { title: "Daha fazlasına uygun olun", text: "Maaş bordrosuna dayalı dar banka bakışının ötesine geçip daha uygun lender seçeneklerini görün.", imageKey: "hero", iconKey: "qualify" },
+        { title: "Tasarrufunuzu artırın", text: "Faiz maliyetini ve ödeme verimini iyileştirebilecek yapıları karşılaştırın.", imageKey: "keys", iconKey: "savings" },
+        { title: "1:1 destek", text: "Şirket, komisyon veya kontrat gelirinizi lender'a daha temiz anlatacak belge akışını birlikte hazırlayın.", imageKey: "personaSelf", iconKey: "support" },
+      ],
+      ratePanel: {
+        title: "Kanada'da öne çıkan mortgage oranları",
+        ctaLabel: "Ön Onay Al",
+      },
+      finalCta: {
+        title: "Gelir hikayenizi daha kolay anlatılır hale getirelim.",
+        sub: "Başlangıç formu; gelir yapınızı ve belge akışınızı anlayıp sizin için en doğru sonraki adımı belirlememize yardımcı olur.",
+        ctaLabel: "Ücretsiz Hesap Aç",
+      },
+    },
+    "yeni-gelenler": {
+      navLabel: "Kanada’ya yeni gelenler",
+      hero: {
+        title: "Yeni evinize daha hızlı yerleşin",
+        underlineText: "daha hızlı",
+        sub: "Kanada'da ev sahipliğine daha sade bir yol görün, lender'ın ne beklediğini anlayın ve daha net bir rehberlikle süreci hızlandırın.",
+        ctaLabel: "Hemen başla",
+      },
+      cards: [
+        { title: "Alım gücünü artırın", text: "Geliriniz, peşinatınız ve newcomer profilinizle hangi aralığın mümkün olduğunu daha net görün.", imageKey: "personaNewcomer", iconKey: "buyingPower" },
+        { title: "Aynı gün ön onay", text: "Yeni Kanada dosyalarına uygun, yönlendirmeli bir ön onay başlangıcıyla süreci hızlandırın.", imageKey: "keys", iconKey: "approvals" },
+        { title: "Daha fazlasına uygun olun", text: "Sadece en bilinen banka rotasına bağlı kalmadan farklı lender seçeneklerini değerlendirin.", imageKey: "hero", iconKey: "qualify" },
+      ],
+      ratePanel: {
+        title: "Kanada'da öne çıkan mortgage oranları",
+        ctaLabel: "Ön Onay Al",
+      },
+      finalCta: {
+        title: "Yeni gelen mortgage yolunuzu sadeleştirelim.",
+        sub: "Kısa form; peşinat, gelir kanıtı ve Kanada kredi profilinize göre doğru sonraki adımı belirlememize yardımcı olur.",
+        ctaLabel: "Ücretsiz Hesap Aç",
+      },
+    },
   },
 
   form: {

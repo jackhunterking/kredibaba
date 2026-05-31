@@ -25,11 +25,11 @@ export default {
           title: "Who do we help?",
           className: "kb-mega-who",
           items: [
-            { label: "First-time buyers", href: "/cozumler#ilk-ev" },
-            { label: "Homeowners", href: "/cozumler#ev-sahipleri" },
-            { label: "Homeowners / investors", href: "/cozumler#yatirimcilar" },
-            { label: "Business owners / self-employed", href: "/cozumler#serbest-meslek" },
-            { label: "Newcomers to Canada", href: "/cozumler#yeni-gelenler" },
+            { label: "First-time buyers", href: "/cozumler/ilk-ev" },
+            { label: "Homeowners", href: "/cozumler/ev-sahipleri" },
+            { label: "Homeowners / investors", href: "/cozumler/yatirimcilar" },
+            { label: "Business owners / self-employed", href: "/cozumler/serbest-meslek" },
+            { label: "Newcomers to Canada", href: "/cozumler/yeni-gelenler" },
           ],
         },
         {
@@ -76,10 +76,10 @@ export default {
       {
         h: "Solutions",
         links: [
-          { t: "First-time buyers", to: "/cozumler" },
-          { t: "Homeowners", to: "/cozumler" },
-          { t: "Investors", to: "/cozumler" },
-          { t: "Newcomers", to: "/cozumler" },
+          { t: "First-time buyers", to: "/cozumler/ilk-ev" },
+          { t: "Homeowners", to: "/cozumler/ev-sahipleri" },
+          { t: "Investors", to: "/cozumler/yatirimcilar" },
+          { t: "Newcomers", to: "/cozumler/yeni-gelenler" },
         ],
       },
       {
@@ -121,7 +121,7 @@ export default {
     hero: {
       title: "Mortgage guidance for Turks in Canada",
       cardTitle: "Canada's lowest mortgage rate of the day",
-      btnRates: "See Rates",
+      btnRates: "Get Qualified Now",
       btnDisclosure: "Disclosure",
       imgAlt: "A modern home in Canada",
       advisorName: "Jack Hunter",
@@ -185,9 +185,6 @@ export default {
       ],
     },
     testimonials: {
-      label: "Community",
-      title: "Voices from the Turkish community.",
-      placeholderTag: "Sample layout — real reviews coming soon",
       items: [
         { name: "Mehmet A.", persona: "First-time buyer", quote: "Explaining the process in Turkish made it so much easier; I saw every step clearly.", rating: 5 },
         { name: "Ayşe K.", persona: "Newcomer to Canada", quote: "With no credit history, they patiently showed me where to start.", rating: 5 },
@@ -205,7 +202,7 @@ export default {
       title: "Let's clarify the right options for your file together.",
       sub: "The free starting form is not an approval or rate guarantee; it is only used to identify the right journey and required documents.",
       btnAccount: "Open Free Account",
-      btnRates: "Explore rates",
+      btnRates: "Get Qualified Now",
     },
   },
 
@@ -213,11 +210,41 @@ export default {
     label: "Rates",
     title: "Today's featured mortgage rates.",
     sub: "Clear conditions. Plain explanation. Not a guarantee; a starting indicator.",
-    chip: "Indicative rates",
-    chips3: ["Conditional rate", "Not an approval", "Lender decides"],
-    whoTitle: "Who can get them?",
-    whoItems: ["Strong credit", "Verifiable income", "Suitable down payment"],
-    whoNote: "The rate is not guaranteed; it is confirmed with a written commitment.",
+    cardTitle: "Today's Lowest Mortgage Rates in Canada",
+    cardCtaLabel: "Get Qualified Now",
+    disclosure: {
+      aria: "Rate disclosure",
+      label: "Disclosure",
+      title: "How should rates be read?",
+      closeAria: "Close disclosure",
+      bullets: [
+        "The rates shown are examples only; they are not a personal rate guarantee.",
+        "Approval is confirmed with income, credit history, property, down payment, lender conditions, and a written commitment.",
+        "Kredibaba offers a mortgage brokering experience through {BROKERAGE}.",
+        "Any fees that may apply to the borrower are disclosed in writing and plainly before the commitment.",
+      ],
+    },
+    tabs: {
+      fixed: {
+        label: "Fixed",
+        heroSummaryKey: "3y",
+        items: [
+          { key: "1y", termLabel: "1 YEAR", rate: "4.69%" },
+          { key: "2y", termLabel: "2 YEAR", rate: "4.00%" },
+          { key: "3y", termLabel: "3 YEAR", rate: "3.99%" },
+          { key: "4y", termLabel: "4 YEAR", rate: "4.09%" },
+          { key: "5y", termLabel: "5 YEAR", rate: "4.14%" },
+        ],
+      },
+      variable: {
+        label: "Variable",
+        heroSummaryKey: "5y",
+        items: [
+          { key: "3y", termLabel: "3 YEAR", rate: "3.65%", detail: "PRIME - 0.80%" },
+          { key: "5y", termLabel: "5 YEAR", rate: "3.50%", detail: "PRIME - 0.95%" },
+        ],
+      },
+    },
     cta: {
       title: "What might your rate be?",
       sub: "A 2-minute starting form.",
@@ -225,34 +252,12 @@ export default {
       btnCalc: "Calculate",
     },
     lowestRate: {
-      rate: "3.89%",
-      term: "5-year fixed",
-      product: "Insured mortgage",
+      rate: "3.99%",
+      term: "3-year fixed",
+      product: "Lowest fixed rate",
       updated: "May 30, 2026",
       note: "A sample indicative rate only for files with strong credit, suitable income, and that meet lender conditions.",
     },
-    heroRates: [
-      {
-        label: "Fixed rate",
-        term: "5-year fixed",
-        rate: "3.89%",
-        product: "Insured mortgage",
-        updated: "May 30, 2026",
-        note: "A sample indicative rate only for files with strong credit, suitable income, and that meet lender conditions.",
-        qualification: "Requires strong credit, verifiable income, an eligible property, and lender conditions.",
-        pending: false,
-      },
-      {
-        label: "Variable rate",
-        term: "5-year variable",
-        rate: "Updating",
-        product: "Variable mortgage",
-        updated: "May 30, 2026",
-        note: "Published when approved variable-rate data is available; sample rates are not made up.",
-        qualification: "Prime rate, lender discount, and file conditions may vary by person.",
-        pending: true,
-      },
-    ],
   },
 
   tools: {
@@ -406,6 +411,124 @@ export default {
       { id: "ev-degerinden-yararlanmak", title: "Using your home equity", text: "Consider HELOC / second mortgage options" },
       { id: "mortgage-seceneklerini-incelemek", title: "Exploring mortgage options", text: "Review rates and products that fit you, simply" },
     ],
+  },
+
+  solutionPages: {
+    "ilk-ev": {
+      navLabel: "First-time buyers",
+      hero: {
+        title: "Buy your first home with confidence",
+        underlineText: "confidence",
+        sub: "See what you can afford, move faster with a cleaner process, and start your path to homeownership with more clarity.",
+        ctaLabel: "Get started",
+      },
+      cards: [
+        { title: "Maximize purchasing power", text: "See the budget range you can take into a property search with more confidence.", imageKey: "personaFirst", iconKey: "buyingPower" },
+        { title: "Same-day pre-approvals", text: "Start with a faster online pre-approval flow so you can act sooner.", imageKey: "keys", iconKey: "approvals" },
+        { title: "Qualify for more", text: "See mortgage options beyond what your main bank may show you first.", imageKey: "hero", iconKey: "qualify" },
+      ],
+      ratePanel: {
+        title: "Featured mortgage rates in Canada",
+        ctaLabel: "Get Qualified Now",
+      },
+      finalCta: {
+        title: "Let's map out your first-home path together.",
+        sub: "The short starting form helps us understand budget, documents, and next steps. It is not a credit approval or rate guarantee.",
+        ctaLabel: "Open Free Account",
+      },
+    },
+    "ev-sahipleri": {
+      navLabel: "Homeowners",
+      hero: {
+        title: "The smart way to save money",
+        underlineText: "save money",
+        sub: "Reduce monthly payments, review renewal options, or use home equity with a simpler path and clearer lender comparisons.",
+        ctaLabel: "Get started",
+      },
+      cards: [
+        { title: "Instant mortgage rate quotes", text: "Review renewal and refinance options without relying on one lender conversation alone.", imageKey: "keys", iconKey: "quotes" },
+        { title: "Maximize purchasing power", text: "Use your current equity position to understand what your next move can support.", imageKey: "personaOwner", iconKey: "buyingPower" },
+        { title: "Qualify for more", text: "Compare broader mortgage options before settling for your bank's first offer.", imageKey: "hero", iconKey: "qualify" },
+      ],
+      ratePanel: {
+        title: "Featured mortgage rates in Canada",
+        ctaLabel: "Get Qualified Now",
+      },
+      finalCta: {
+        title: "Let's review your homeowner options clearly.",
+        sub: "We use the starting form to identify whether renewal, refinance, or equity access is the best next step for your file.",
+        ctaLabel: "Open Free Account",
+      },
+    },
+    "yatirimcilar": {
+      navLabel: "Homeowners / investors",
+      hero: {
+        title: "Buy your next rental property sooner",
+        underlineText: "sooner",
+        sub: "Maximize cash flow, understand your financing options, and plan your next real-estate move with a cleaner advisory path.",
+        ctaLabel: "Get started",
+      },
+      cards: [
+        { title: "Maximize purchasing power", text: "See how far your equity, income, and property strategy can take your next acquisition.", imageKey: "personaInvestor", iconKey: "buyingPower" },
+        { title: "Forward-thinking insights", text: "Bring more structure to portfolio decisions with clearer mortgage comparisons and timing.", imageKey: "interior", iconKey: "insights" },
+        { title: "1:1 support", text: "Work directly with an advisor to think through financing structure, cash flow, and lender fit.", imageKey: "personaSelf", iconKey: "support" },
+      ],
+      ratePanel: {
+        title: "Featured mortgage rates in Canada",
+        ctaLabel: "Get Qualified Now",
+      },
+      finalCta: {
+        title: "Let's structure the next investment step together.",
+        sub: "The short form helps us understand your rental income, portfolio, and financing goal before we recommend the next path.",
+        ctaLabel: "Open Free Account",
+      },
+    },
+    "serbest-meslek": {
+      navLabel: "Business owners / self-employed",
+      hero: {
+        title: "You've got options for your mortgage",
+        underlineText: "options",
+        sub: "Whether you're on contract, commission, or freelance income, we can help organize the right mortgage path around how you actually earn.",
+        ctaLabel: "Get started",
+      },
+      cards: [
+        { title: "Qualify for more", text: "Look beyond a narrow bank view and see lender options that better fit non-salaried income.", imageKey: "hero", iconKey: "qualify" },
+        { title: "Maximize your savings", text: "Compare structures that may lower interest cost and improve payment efficiency.", imageKey: "keys", iconKey: "savings" },
+        { title: "1:1 support", text: "Get help packaging company, commission, or contract income into a cleaner lender-ready story.", imageKey: "personaSelf", iconKey: "support" },
+      ],
+      ratePanel: {
+        title: "Featured mortgage rates in Canada",
+        ctaLabel: "Get Qualified Now",
+      },
+      finalCta: {
+        title: "Let's make your income story easier to present.",
+        sub: "The starting form helps us understand your income structure and document flow before we show the best next step.",
+        ctaLabel: "Open Free Account",
+      },
+    },
+    "yeni-gelenler": {
+      navLabel: "Newcomers to Canada",
+      hero: {
+        title: "Settle in to your new home faster",
+        underlineText: "faster",
+        sub: "See a simpler path to Canadian homeownership, understand what lenders look for, and move sooner with clearer guidance.",
+        ctaLabel: "Get started",
+      },
+      cards: [
+        { title: "Maximize purchasing power", text: "Get a clearer view of what your income, down payment, and newcomer profile can support.", imageKey: "personaNewcomer", iconKey: "buyingPower" },
+        { title: "Same-day pre-approvals", text: "Start faster with a guided pre-approval path adapted to a newer Canadian file.", imageKey: "keys", iconKey: "approvals" },
+        { title: "Qualify for more", text: "Explore lender options beyond the most familiar bank-first route.", imageKey: "hero", iconKey: "qualify" },
+      ],
+      ratePanel: {
+        title: "Featured mortgage rates in Canada",
+        ctaLabel: "Get Qualified Now",
+      },
+      finalCta: {
+        title: "Let's simplify your newcomer mortgage path.",
+        sub: "We use the starting form to identify the right next step for your down payment, income proof, and Canadian credit profile.",
+        ctaLabel: "Open Free Account",
+      },
+    },
   },
 
   form: {

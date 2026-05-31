@@ -14,7 +14,8 @@ export default function Solutions() {
   const { openForm } = useOutletContext();
   const { t } = useLang();
   const s = t.solutions;
-  const WHO = s.who.map((it, i) => ({ ...it, icon: WHO_ICONS[i], image: WHO_IMAGES[i] }));
+  const personaLinks = t.mega.cozumler.groups[0].items.map((item) => item.href);
+  const WHO = s.who.map((it, i) => ({ ...it, icon: WHO_ICONS[i], image: WHO_IMAGES[i], to: personaLinks[i] }));
   const WHAT = s.what.map((it, i) => ({ ...it, icon: WHAT_ICONS[i] }));
 
   return (
@@ -27,10 +28,12 @@ export default function Solutions() {
 
       <section id="kime-yardim" style={{...wrap,paddingTop:S[56],paddingBottom:S[40]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>
-          <SectionLabel>{s.whoLabel}</SectionLabel>
-          <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.2}}>
-            {s.whoHeading}
-          </h2>
+          {s.whoLabel ? <SectionLabel>{s.whoLabel}</SectionLabel> : null}
+          {s.whoHeading ? (
+            <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.2}}>
+              {s.whoHeading}
+            </h2>
+          ) : null}
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20}}>
           {WHO.map((item,i)=>(
@@ -42,6 +45,7 @@ export default function Solutions() {
               icon={item.icon}
               title={item.title}
               text={item.text}
+              to={item.to}
             />
           ))}
         </div>

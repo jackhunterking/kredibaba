@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Solutions from "./pages/Solutions.jsx";
+import SolutionDetail from "./pages/SolutionDetail.jsx";
 import Rates from "./pages/Rates.jsx";
 import Tools from "./pages/Tools.jsx";
 import Learn from "./pages/Learn.jsx";
@@ -13,6 +14,11 @@ export default function App() {
       <Route path="/" element={<Layout/>}>
         <Route index element={<Home/>}/>
         <Route path="cozumler" element={<Solutions/>}/>
+        <Route path="cozumler/ilk-ev" element={<SolutionDetail slug="ilk-ev"/>}/>
+        <Route path="cozumler/ev-sahipleri" element={<SolutionDetail slug="ev-sahipleri"/>}/>
+        <Route path="cozumler/yatirimcilar" element={<SolutionDetail slug="yatirimcilar"/>}/>
+        <Route path="cozumler/serbest-meslek" element={<SolutionDetail slug="serbest-meslek"/>}/>
+        <Route path="cozumler/yeni-gelenler" element={<SolutionDetail slug="yeni-gelenler"/>}/>
         <Route path="oranlar" element={<Rates/>}/>
         <Route path="araclar" element={<Tools/>}/>
         <Route path="ogren" element={<Learn/>}/>
