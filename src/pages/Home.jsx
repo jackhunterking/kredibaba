@@ -6,12 +6,13 @@ import {
   ShieldCheck, TrendingDown, Unlock, Wallet, X,
 } from "lucide-react";
 import {
-  BROKERAGE, C, FB, HERO_RATES, R, S, SectionLabel, SHADOW,
+  BROKERAGE, C, FB, R, S, SectionLabel, SHADOW,
   TrustRow, ghostBtn, IMG, primaryBtn, wrap,
 } from "../theme.jsx";
+import { useLang, interp } from "../i18n/LanguageContext.jsx";
 
 function HeroRateMini({ item }) {
-  const pending = item.rate === 'Güncelleniyor';
+  const pending = item.pending;
   return (
     <div style={{
       padding:'18px 14px',
@@ -32,11 +33,13 @@ function HeroRateMini({ item }) {
 }
 
 function DisclosureModal({ onClose }) {
+  const { t } = useLang();
+  const d = t.home.disclosure;
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Oran açıklaması"
+      aria-label={d.aria}
       onClick={onClose}
       style={{
         position:'fixed',
@@ -62,14 +65,14 @@ function DisclosureModal({ onClose }) {
       >
         <div style={{display:'flex',alignItems:'start',justifyContent:'space-between',gap:20,marginBottom:18}}>
           <div>
-            <SectionLabel>Açıklama</SectionLabel>
+            <SectionLabel>{d.label}</SectionLabel>
             <h2 style={{fontFamily:FB,fontSize:30,color:C.navy,fontWeight:600,lineHeight:1.12}}>
-              Oranlar nasıl okunmalı?
+              {d.title}
             </h2>
           </div>
           <button
             onClick={onClose}
-            aria-label="Açıklamayı kapat"
+            aria-label={d.closeAria}
             style={{
               width:40,
               height:40,
@@ -88,12 +91,7 @@ function DisclosureModal({ onClose }) {
           </button>
         </div>
         <div style={{display:'grid',gap:12}}>
-          {[
-            'Gösterilen oranlar yalnızca örnektir; kişisel oran garantisi değildir.',
-            'Onay; gelir, kredi geçmişi, mülk, peşinat, lender koşulları ve yazılı commitment ile netleşir.',
-            `Kredibaba, ${BROKERAGE} bünyesinde mortgage (konut kredisi) aracılığı deneyimi sunar.`,
-            'Borçluya yansıyabilecek ücretler varsa, commitment öncesinde yazılı ve sade şekilde açıklanır.',
-          ].map((item) => (
+          {d.bullets.map((item) => (
             <p key={item} style={{
               display:'flex',
               alignItems:'flex-start',
@@ -109,7 +107,7 @@ function DisclosureModal({ onClose }) {
               fontFamily:FB,
             }}>
               <Check size={16} color={C.blue} style={{flexShrink:0,marginTop:2}}/>
-              <span>{item}</span>
+              <span>{interp(item, { BROKERAGE })}</span>
             </p>
           ))}
         </div>
@@ -119,6 +117,8 @@ function DisclosureModal({ onClose }) {
 }
 
 function Hero({ onCTA }) {
+  const { t } = useLang();
+  const h = t.home.hero;
   const [showDisclosure, setShowDisclosure] = useState(false);
 
   return (
@@ -129,7 +129,7 @@ function Hero({ onCTA }) {
       <div style={{...wrap,paddingTop:S[48],paddingBottom:S[48]}}>
         <div style={{textAlign:'center',maxWidth:780,margin:`0 auto ${S[32]}px`}}>
           <h1 className="kb-hero-title" style={{fontFamily:FB,color:C.navy}}>
-            Kanada’da Bugünün En Düşük Mortgage Oranları
+            {h.title}
           </h1>
         </div>
 
@@ -146,7 +146,7 @@ function Hero({ onCTA }) {
             minHeight:380,
           }}>
             <h2 className="kb-hero-card-title" style={{fontFamily:FB,color:C.navy}}>
-              Bugünün oranları
+              {h.cardTitle}
             </h2>
 
             <div className="kb-hero-rate-grid" style={{
@@ -157,7 +157,7 @@ function Hero({ onCTA }) {
               borderBottom:`1px solid ${C.border}`,
               marginBottom:S[24],
             }}>
-              {HERO_RATES.map((item) => (
+              {t.rates.heroRates.map((item) => (
                 <div key={item.label} className="kb-hero-rate-cell">
                   <HeroRateMini item={item}/>
                 </div>
@@ -169,7 +169,7 @@ function Hero({ onCTA }) {
                 onClick={onCTA}
                 style={primaryBtn({padding:'14px 26px',fontSize:15.5,width:'min(100%, 260px)',display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8})}
               >
-                Oranları Gör <ArrowRight size={17}/>
+                {h.btnRates} <ArrowRight size={17}/>
               </button>
               <button
                 onClick={() => setShowDisclosure(true)}
@@ -189,7 +189,7 @@ function Hero({ onCTA }) {
                   padding:0,
                 }}
               >
-                Açıklama <Info size={14}/>
+                {h.btnDisclosure} <Info size={14}/>
               </button>
             </div>
           </div>
@@ -197,7 +197,7 @@ function Hero({ onCTA }) {
           <div className="kb-hero-image" style={{position:'relative',borderRadius:R.media,overflow:'hidden',minHeight:380,boxShadow:SHADOW.elevated,background:C.navy}}>
             <img
               src={IMG.hero}
-              alt="Kanada’da modern bir ev"
+              alt={h.imgAlt}
               loading="eager"
               style={{width:'100%',height:'100%',minHeight:380,objectFit:'cover',display:'block'}}
             />
@@ -214,7 +214,7 @@ function Hero({ onCTA }) {
   );
 }
 
-function JourneyCard({ icon, title, sub, to }) {
+function JourneyCard({ icon, title, sub, to, cta }) {
   return (
     <Link to={to} style={{textDecoration:'none'}}>
       <div style={{
@@ -251,7 +251,7 @@ function JourneyCard({ icon, title, sub, to }) {
           </p>
         </div>
         <span style={{display:'inline-flex',alignItems:'center',gap:7,color:C.blue,fontSize:13.5,fontWeight:600,fontFamily:FB}}>
-          Yolculuğu gör <ArrowRight size={15}/>
+          {cta} <ArrowRight size={15}/>
         </span>
       </div>
     </Link>
@@ -259,47 +259,26 @@ function JourneyCard({ icon, title, sub, to }) {
 }
 
 function JourneySection() {
-  const journeys = [
-    {
-      icon:<HomeIcon size={22}/>,
-      title:'Ev almak istiyorum',
-      sub:'Bütçe, ön onay ve uygun mortgage seçenekleri',
-      to:'/cozumler#ev-almak',
-    },
-    {
-      icon:<RefreshCw size={22}/>,
-      title:'Ev kredimi yenilemek',
-      sub:'Mevcut teklifinizi inceleyin veya daha uygun ödeme arayın',
-      to:'/cozumler#ev-kredimi-yenilemek',
-    },
-    {
-      icon:<Hammer size={22}/>,
-      title:'Tadilat için finansman arıyorum',
-      sub:'Ev değerinden yararlanarak tadilat bütçesi planlayın',
-      to:'/cozumler#tadilat-finansmani',
-    },
-    {
-      icon:<CreditCard size={22}/>,
-      title:'Borç ödemelerimi rahatlatmak istiyorum',
-      sub:'Yüksek faizli ödemeleri daha yönetilebilir hale getirme',
-      to:'/cozumler#borc-odemelerini-rahatlatmak',
-    },
-  ];
+  const { t } = useLang();
+  const j = t.home.journeys;
+  const icons = [<HomeIcon size={22}/>, <RefreshCw size={22}/>, <Hammer size={22}/>, <CreditCard size={22}/>];
+  const tos = ['/cozumler#ev-almak', '/cozumler#ev-kredimi-yenilemek', '/cozumler#tadilat-finansmani', '/cozumler#borc-odemelerini-rahatlatmak'];
+  const journeys = j.items.map((it, i) => ({ icon: icons[i], title: it.title, sub: it.sub, to: tos[i] }));
 
   return (
     <section style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
       <div style={{textAlign:'center',maxWidth:720,margin:'0 auto 32px'}}>
-        <SectionLabel>Yolculuklar</SectionLabel>
+        <SectionLabel>{j.label}</SectionLabel>
         <h2 style={{fontFamily:FB,fontSize:'clamp(30px,4.5vw,42px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
-          Neden finansman arıyorsunuz?
+          {j.title}
         </h2>
         <p style={{fontSize:15.5,color:C.body,lineHeight:1.55,marginTop:12}}>
-          Burada amaç kişiyi etiketlemek değil; hangi finansman ihtiyacıyla başladığını netleştirmek.
+          {j.sub}
         </p>
       </div>
       <div className="kb-4col" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:16}}>
         {journeys.map((journey) => (
-          <JourneyCard key={journey.title} {...journey}/>
+          <JourneyCard key={journey.title} {...journey} cta={t.home.journeyCardCta}/>
         ))}
       </div>
     </section>
@@ -307,26 +286,23 @@ function JourneySection() {
 }
 
 function WhoWeHelp({ onCTA }) {
-  const items = [
-    {icon:<HomeIcon size={21}/>, title:'İlk ev alıcıları', text:'İlk kez alım yaparken bütçe, masraf ve adımları sade görürsünüz.'},
-    {icon:<RefreshCw size={21}/>, title:'Ev sahipleri', text:'Yenileme, ödeme düzenleme veya ev değerinden yararlanma seçenekleri.'},
-    {icon:<Landmark size={21}/>, title:'Ev sahipleri / yatırımcılar', text:'Kira geliri, ek mülk ve portföy planlamasında doğru belge akışı.'},
-    {icon:<Wallet size={21}/>, title:'Şirket sahibi / serbest meslek', text:'Maaş bordrosu dışındaki gelirleri anlaşılır şekilde hazırlama.'},
-    {icon:<ShieldCheck size={21}/>, title:'Kanada’ya yeni gelenler', text:'Kredi geçmişi, peşinat ve lender beklentilerini Türkçe öğrenme.'},
-  ];
+  const { t } = useLang();
+  const w = t.home.who;
+  const icons = [<HomeIcon size={21}/>, <RefreshCw size={21}/>, <Landmark size={21}/>, <Wallet size={21}/>, <ShieldCheck size={21}/>];
+  const items = w.items.map((it, i) => ({ icon: icons[i], title: it.title, text: it.text }));
 
   return (
     <section style={{background:C.surface,borderTop:`1px solid ${C.border}`,borderBottom:`1px solid ${C.border}`}}>
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'end',gap:24,marginBottom:28,flexWrap:'wrap'}}>
           <div style={{maxWidth:620}}>
-            <SectionLabel>Kime yardım ediyoruz?</SectionLabel>
+            <SectionLabel>{w.label}</SectionLabel>
             <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
-              Durumunuz farklı olabilir; yol yine sade olmalı.
+              {w.title}
             </h2>
           </div>
           <button onClick={onCTA} style={ghostBtn({padding:'13px 18px',display:'inline-flex',alignItems:'center',gap:8})}>
-            Bana uygun yolu göster <ArrowRight size={16}/>
+            {w.button} <ArrowRight size={16}/>
           </button>
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
@@ -369,27 +345,26 @@ function WhoWeHelp({ onCTA }) {
 }
 
 function QuickTools() {
-  const tools = [
-    {icon:<FileCheck size={21}/>, title:'Ön onay', sub:'Yaklaşık alım gücünü görün', to:'/araclar#on-onay'},
-    {icon:<Calculator size={21}/>, title:'Mortgage hesaplayıcı', sub:'Aylık ödeme tahmini', to:'/araclar#mortgage-hesaplayici'},
-    {icon:<Percent size={21}/>, title:'Uygunluk hesaplayıcı', sub:'Maksimum alım gücü', to:'/araclar#uygunluk-hesaplayici'},
-    {icon:<Landmark size={21}/>, title:'Kapanış masrafı', sub:'Toplam kapanış gideri', to:'/araclar#kapanis-masrafi'},
-  ];
+  const { t } = useLang();
+  const q = t.home.quickTools;
+  const icons = [<FileCheck size={21}/>, <Calculator size={21}/>, <Percent size={21}/>, <Landmark size={21}/>];
+  const tos = ['/araclar#on-onay', '/araclar#mortgage-hesaplayici', '/araclar#uygunluk-hesaplayici', '/araclar#kapanis-masrafi'];
+  const tools = q.items.map((it, i) => ({ icon: icons[i], title: it.title, sub: it.sub, to: tos[i] }));
 
   return (
     <section style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
       <div className="kb-2col" style={{display:'grid',gridTemplateColumns:'0.78fr 1.22fr',gap:28,alignItems:'center'}}>
         <div>
-          <SectionLabel>Araçlar</SectionLabel>
+          <SectionLabel>{q.label}</SectionLabel>
           <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16,marginBottom:12}}>
-            Karar vermeden önce rakamları görün.
+            {q.title}
           </h2>
           <p style={{fontSize:15.5,color:C.body,lineHeight:1.55,marginBottom:20}}>
-            Ön onay tek başına çözüm değil; ev alma, yenileme veya ödeme düzenleme yolculuğunun destek adımıdır.
+            {q.sub}
           </p>
           <Link to="/araclar" style={{textDecoration:'none'}}>
             <button style={primaryBtn({padding:'13px 22px',display:'inline-flex',alignItems:'center',gap:8})}>
-              Araçları aç <ArrowRight size={16}/>
+              {q.button} <ArrowRight size={16}/>
             </button>
           </Link>
         </div>
@@ -427,19 +402,18 @@ function QuickTools() {
 }
 
 function LearnPreview() {
-  const learn = [
-    {icon:<BookOpen size={20}/>, title:'Ön onay nedir?', text:'Sürece başlamadan yaklaşık alım gücünü görmek.', to:'/ogren'},
-    {icon:<RefreshCw size={20}/>, title:'Yenileme mi refinansman mı?', text:'Süresi biten mortgage ile yeniden düzenleme arasındaki fark.', to:'/ogren'},
-    {icon:<Unlock size={20}/>, title:'Borç ödemelerini rahatlatmak', text:'Farklı ödemeleri daha yönetilebilir hale getirme seçenekleri.', to:'/ogren'},
-  ];
+  const { t } = useLang();
+  const lp = t.home.learnPreview;
+  const icons = [<BookOpen size={20}/>, <RefreshCw size={20}/>, <Unlock size={20}/>];
+  const learn = lp.items.map((it, i) => ({ icon: icons[i], title: it.title, text: it.text, to: '/ogren' }));
 
   return (
     <section style={{background:C.surface}}>
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 30px'}}>
-          <SectionLabel>Öğren</SectionLabel>
+          <SectionLabel>{lp.label}</SectionLabel>
           <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
-            Finans dili sadeleşsin.
+            {lp.title}
           </h2>
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
@@ -475,18 +449,20 @@ function LearnPreview() {
 }
 
 function FinalCTA({ onCTA }) {
+  const { t } = useLang();
+  const f = t.home.finalCta;
   return (
     <section style={{background:C.navy}}>
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[56],textAlign:'center'}}>
         <h2 style={{fontFamily:FB,fontSize:'clamp(30px,4vw,42px)',color:'#fff',fontWeight:700,lineHeight:1.12,marginBottom:14}}>
-          Dosyanız için uygun seçenekleri beraber netleştirelim.
+          {f.title}
         </h2>
         <p style={{fontSize:14.5,color:'rgba(255,255,255,0.72)',lineHeight:1.55,maxWidth:720,margin:'0 auto 24px'}}>
-          Ücretsiz başlangıç formu onay veya oran garantisi değildir; sadece doğru yolculuğu ve gerekli belgeleri belirlemek için kullanılır.
+          {f.sub}
         </p>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
           <button onClick={onCTA} style={primaryBtn({padding:'15px 28px',fontSize:16,display:'inline-flex',alignItems:'center',gap:8})}>
-            Ücretsiz Hesap Aç <ArrowRight size={18}/>
+            {f.btnAccount} <ArrowRight size={18}/>
           </button>
           <Link to="/oranlar" style={{textDecoration:'none'}}>
             <button style={{
@@ -498,7 +474,7 @@ function FinalCTA({ onCTA }) {
               alignItems:'center',
               gap:8,
             }}>
-              Oranları incele <TrendingDown size={17}/>
+              {f.btnRates} <TrendingDown size={17}/>
             </button>
           </Link>
         </div>

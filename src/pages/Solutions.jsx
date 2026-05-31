@@ -4,94 +4,31 @@ import {
   KeyRound, RefreshCw, Search, Unlock,
 } from "lucide-react";
 import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel } from "../theme.jsx";
+import { useLang } from "../i18n/LanguageContext.jsx";
 
-const WHO = [
-  {
-    id:'ilk-ev',
-    icon:<HomeIcon size={22}/>,
-    title:'İlk ev alıcıları',
-    text:'Bütçe · ön onay · teklif',
-  },
-  {
-    id:'ev-sahipleri',
-    icon:<RefreshCw size={22}/>,
-    title:'Ev sahipleri',
-    text:'Yenileme · refinansman',
-  },
-  {
-    id:'yatirimcilar',
-    icon:<Building2 size={22}/>,
-    title:'Ev sahipleri / yatırımcılar',
-    text:'Kira geliri · portföy',
-  },
-  {
-    id:'serbest-meslek',
-    icon:<Banknote size={22}/>,
-    title:'Şirket sahibi / serbest meslek',
-    text:'Gelir belgesi · şirket',
-  },
-  {
-    id:'yeni-gelenler',
-    icon:<KeyRound size={22}/>,
-    title:'Kanada’ya yeni gelenler',
-    text:'Yeni kredi · yeni iş',
-  },
-];
-
-const WHAT = [
-  {
-    id:'ev-almak',
-    icon:<HomeIcon size={20}/>,
-    title:'Ev almak',
-    text:'Bütçe, peşinat ve mortgage yolunuzu netleştirin',
-  },
-  {
-    id:'ev-kredimi-yenilemek',
-    icon:<RefreshCw size={20}/>,
-    title:'Ev kredimi yenilemek',
-    text:'Yenileme ve refinansman seçeneklerini sade şekilde görün',
-  },
-  {
-    id:'tadilat-finansmani',
-    icon:<Hammer size={20}/>,
-    title:'Tadilat finansmanı',
-    text:'Ev değerinden yararlanarak tadilat bütçesi planlayın',
-  },
-  {
-    id:'borc-odemelerini-rahatlatmak',
-    icon:<CreditCard size={20}/>,
-    title:'Borç ödemelerini rahatlatmak',
-    text:'Borç birleştirme seçenekleriyle ödemeleri daha yönetilebilir hale getirin',
-  },
-  {
-    id:'ev-degerinden-yararlanmak',
-    icon:<Unlock size={20}/>,
-    title:'Ev değerinden yararlanmak',
-    text:'HELOC / ikinci mortgage seçeneklerini değerlendirin',
-  },
-  {
-    id:'mortgage-seceneklerini-incelemek',
-    icon:<Search size={20}/>,
-    title:'Mortgage seçeneklerini incelemek',
-    text:'Size uygun oran ve ürünleri sade şekilde inceleyin',
-  },
-];
+const WHO_ICONS = [<HomeIcon size={22}/>, <RefreshCw size={22}/>, <Building2 size={22}/>, <Banknote size={22}/>, <KeyRound size={22}/>];
+const WHAT_ICONS = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Hammer size={20}/>, <CreditCard size={20}/>, <Unlock size={20}/>, <Search size={20}/>];
 
 export default function Solutions() {
   const { openForm } = useOutletContext();
+  const { t } = useLang();
+  const s = t.solutions;
+  const WHO = s.who.map((it, i) => ({ ...it, icon: WHO_ICONS[i] }));
+  const WHAT = s.what.map((it, i) => ({ ...it, icon: WHAT_ICONS[i] }));
+
   return (
     <>
       <PageHero
-        label="Çözümler"
-        title="Durumunuzu seçin. Sonraki adımı görün."
-        sub="Az metin, net yol: kime yardımcı oluyoruz ve hangi konuda başlıyoruz?"
+        label={s.label}
+        title={s.title}
+        sub={s.sub}
       />
 
       <section id="kime-yardim" style={{...wrap,paddingTop:S[56],paddingBottom:S[40]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>
-          <SectionLabel>Kime yardımcı oluyoruz?</SectionLabel>
+          <SectionLabel>{s.whoLabel}</SectionLabel>
           <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.2}}>
-            Size en yakın kartı seçin.
+            {s.whoHeading}
           </h2>
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20}}>
@@ -109,9 +46,9 @@ export default function Solutions() {
 
       <section id="ne-yardim" style={{...wrap,paddingTop:S[40],paddingBottom:S[64]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>
-          <SectionLabel>Ne konuda yardımcı oluyoruz?</SectionLabel>
+          <SectionLabel>{s.whatLabel}</SectionLabel>
           <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.2}}>
-            Yapılacak işi seçin.
+            {s.whatHeading}
           </h2>
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18}}>
@@ -133,12 +70,12 @@ export default function Solutions() {
           <div className="kb-2col" style={{display:'grid',gridTemplateColumns:'1fr auto',gap:26,alignItems:'center'}}>
             <div>
               <h2 style={{fontFamily:FB,fontSize:'clamp(24px,4vw,32px)',fontWeight:700,marginBottom:12}}>
-                Hangi yoldan başlayalım?
+                {s.ctaTitle}
               </h2>
-              <p style={{fontSize:15.5,color:'rgba(255,255,255,0.76)',lineHeight:1.55,maxWidth:560}}>Kısa formu doldurun; sıradaki adımı gösterelim.</p>
+              <p style={{fontSize:15.5,color:'rgba(255,255,255,0.76)',lineHeight:1.55,maxWidth:560}}>{s.ctaSub}</p>
             </div>
             <button onClick={openForm} style={primaryBtn({padding:'15px 28px',fontSize:16,display:'inline-flex',alignItems:'center',gap:8,whiteSpace:'nowrap'})}>
-              Ücretsiz Hesap Aç <ArrowRight size={18}/>
+              {s.ctaButton} <ArrowRight size={18}/>
             </button>
           </div>
         </div>

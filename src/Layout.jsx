@@ -2,73 +2,15 @@ import { useState, useEffect } from "react";
 import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronUp, Menu, Phone, Search, ShieldCheck, X } from "lucide-react";
 import { C, FB, R, S, SHADOW, TEL, LICENSE, BROKERAGE, wrap } from "./theme.jsx";
+import { useLang, interp } from "./i18n/LanguageContext.jsx";
+import LanguageToggle from "./components/LanguageToggle.jsx";
 import FormModal from "./FormModal.jsx";
 import kredibabaMark from "./assets/kredibaba-mark.svg";
 
-const NAV = [
-  { key:'cozumler', to:'/cozumler',   label:'Çözümler', mega:true },
-  { key:'araclar',  to:'/araclar',    label:'Araçlar', mega:true },
-  { key:'ogren',    to:'/ogren',      label:'Öğren' },
-  { key:'hakkimizda', to:'/hakkimizda', label:'Hakkımızda' },
-];
-
-const MEGA_MENUS = {
-  cozumler: {
-    label: 'Çözümler',
-    groups: [
-      {
-        title: 'Kime yardım ediyoruz?',
-        className: 'kb-mega-who',
-        items: [
-          { label:'İlk ev alıcıları', href:'/cozumler#ilk-ev' },
-          { label:'Ev sahipleri', href:'/cozumler#ev-sahipleri' },
-          { label:'Ev sahipleri / yatırımcılar', href:'/cozumler#yatirimcilar' },
-          { label:'Şirket sahibi / serbest meslek', href:'/cozumler#serbest-meslek' },
-          { label:'Kanada’ya yeni gelenler', href:'/cozumler#yeni-gelenler' },
-        ],
-      },
-      {
-        title: 'Ne konuda yardım ediyoruz?',
-        className: 'kb-mega-what',
-        items: [
-          { label:'Ev almak', desc:'Bütçe ve mortgage seçenekleri', href:'/cozumler#ev-almak' },
-          { label:'Ev kredimi yenilemek', desc:'Yenileme ve refinansman seçenekleri', href:'/cozumler#ev-kredimi-yenilemek' },
-          { label:'Tadilat finansmanı', desc:'Ev değerinden yararlanarak planlayın', href:'/cozumler#tadilat-finansmani' },
-          { label:'Borç ödemelerini rahatlatmak', desc:'Borç birleştirme seçenekleri', href:'/cozumler#borc-odemelerini-rahatlatmak' },
-          { label:'Ev değerinden yararlanmak', desc:'HELOC / ikinci mortgage', href:'/cozumler#ev-degerinden-yararlanmak' },
-          { label:'Mortgage seçeneklerini incelemek', desc:'Size uygun oran ve ürünleri görün', href:'/cozumler#mortgage-seceneklerini-incelemek' },
-        ],
-      },
-    ],
-  },
-  araclar: {
-    label: 'Araçlar',
-    groups: [
-      {
-        title: 'Araçlar',
-        className: 'kb-mega-tools',
-        items: [
-          { label:'Mortgage yol bulucu', desc:'Kişisel başlangıç önerisi', href:'/araclar#mortgage-yol-bulucu' },
-          { label:'Ön onay', desc:'Yaklaşık alım gücünü görün', href:'/araclar#on-onay' },
-          { label:'İlk ev alıcı hesaplayıcı', desc:'Program uygunluğunu görün', href:'/araclar#ilk-ev-alici-hesaplayici' },
-          { label:'Mortgage hesaplayıcı', desc:'Aylık ödeme tahmini', href:'/araclar#mortgage-hesaplayici' },
-          { label:'Mortgage yenileme hesaplayıcı', desc:'Yenileme bütçesi', href:'/araclar#mortgage-yenileme-hesaplayici' },
-          { label:'Uygunluk hesaplayıcı', desc:'Maksimum alım gücü', href:'/araclar#uygunluk-hesaplayici' },
-          { label:'Tapu devir vergisi', desc:'Vergi maliyeti', href:'/araclar#tapu-devir-vergisi' },
-          { label:'Kapanış masrafı', desc:'Toplam kapanış gideri', href:'/araclar#kapanis-masrafi' },
-          { label:'Ödeme farkı hesaplayıcı', desc:'Mevcut ve yeni ödeme farkı', href:'/araclar#odeme-farki' },
-          { label:'Kiralamak mı almak mı?', desc:'Seçenekleri görün', href:'/araclar#kiralamak-mi-almak-mi' },
-          { label:'Tadilat hesaplayıcı', desc:'Ev sermayesi limiti', href:'/araclar#tadilat-hesaplayici' },
-          { label:'Mortgage ceza hesaplayıcı', desc:'Bozma maliyeti', href:'/araclar#mortgage-ceza-hesaplayici' },
-        ],
-      },
-    ],
-  },
-};
-
 function Logo() {
+  const { t } = useLang();
   return (
-    <Link to="/" className="kb-logo" aria-label="Kredibaba ana sayfa">
+    <Link to="/" className="kb-logo" aria-label={t.nav.logoAria}>
       <img className="kb-logo-mark" src={kredibabaMark} alt="" aria-hidden="true" />
       <span className="kb-logo-word">
         <span>Kredi</span>
@@ -79,20 +21,22 @@ function Logo() {
 }
 
 function TopBar({ onCTA }) {
+  const { t } = useLang();
   return (
     <div className="kb-top-promo">
       <div style={{...wrap}} className="kb-top-promo-inner">
         <span className="kb-top-promo-text">
-          <Search size={15}/> Ücretsiz mortgage hesaplaması
+          <Search size={15}/> {t.topPromo.text}
         </span>
-        <button onClick={onCTA} className="kb-top-promo-cta">Hemen başla</button>
+        <button onClick={onCTA} className="kb-top-promo-cta">{t.topPromo.cta}</button>
       </div>
     </div>
   );
 }
 
 function MegaPanel({ menuKey, onClose }) {
-  const menu = MEGA_MENUS[menuKey];
+  const { t } = useLang();
+  const menu = menuKey ? t.mega[menuKey] : null;
   if (!menu) return null;
 
   return (
@@ -140,35 +84,37 @@ function MobileGroup({ title, items, open, onToggle, onClose }) {
 }
 
 function MobileDrawer({ open, currentGroup, setCurrentGroup, onClose }) {
+  const { t } = useLang();
   if (!open) return null;
-  const solutionItems = MEGA_MENUS.cozumler.groups.flatMap((group) => group.items);
-  const toolItems = MEGA_MENUS.araclar.groups[0].items;
+  const solutionItems = t.mega.cozumler.groups.flatMap((group) => group.items);
+  const toolItems = t.mega.araclar.groups[0].items;
 
   return (
     <div className="kb-mobile-drawer">
       <div className="kb-mobile-drawer-inner">
         <MobileGroup
-          title="Çözümler"
+          title={t.nav.solutions}
           items={solutionItems}
           open={currentGroup === 'cozumler'}
           onToggle={() => setCurrentGroup(currentGroup === 'cozumler' ? '' : 'cozumler')}
           onClose={onClose}
         />
         <MobileGroup
-          title="Araçlar"
+          title={t.nav.tools}
           items={toolItems}
           open={currentGroup === 'araclar'}
           onToggle={() => setCurrentGroup(currentGroup === 'araclar' ? '' : 'araclar')}
           onClose={onClose}
         />
-        <NavLink to="/ogren" className="kb-mobile-simple-link" onClick={onClose}>Öğren</NavLink>
-        <NavLink to="/hakkimizda" className="kb-mobile-simple-link" onClick={onClose}>Hakkımızda</NavLink>
+        <NavLink to="/ogren" className="kb-mobile-simple-link" onClick={onClose}>{t.nav.learn}</NavLink>
+        <NavLink to="/hakkimizda" className="kb-mobile-simple-link" onClick={onClose}>{t.nav.about}</NavLink>
       </div>
     </div>
   );
 }
 
 function Navbar({onCTA}) {
+  const { t } = useLang();
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileGroup, setMobileGroup] = useState('cozumler');
@@ -177,6 +123,13 @@ function Navbar({onCTA}) {
     setActiveMenu(null);
     setMobileOpen(false);
   };
+
+  const NAV = [
+    { key:'cozumler', to:'/cozumler', label:t.nav.solutions, mega:true },
+    { key:'araclar',  to:'/araclar',  label:t.nav.tools, mega:true },
+    { key:'ogren',    to:'/ogren',    label:t.nav.learn },
+    { key:'hakkimizda', to:'/hakkimizda', label:t.nav.about },
+  ];
 
   useEffect(() => {
     setActiveMenu(null);
@@ -216,19 +169,21 @@ function Navbar({onCTA}) {
           </div>
         </div>
         <div className="kb-desktop-actions">
+          <LanguageToggle />
           <button onClick={onCTA} className="kb-primary-nav-cta">
-            Ücretsiz Hesap Aç
+            {t.nav.cta}
           </button>
         </div>
         <div className="kb-mobile-actions">
-          <button onClick={onCTA} className="kb-primary-nav-cta">Ücretsiz Hesap Aç</button>
+          <LanguageToggle />
+          <button onClick={onCTA} className="kb-primary-nav-cta">{t.nav.cta}</button>
           <button
             className="kb-mobile-menu-button"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+            aria-label={mobileOpen ? t.nav.menuClose : t.nav.menuOpen}
           >
-            Menü {mobileOpen ? <X size={17}/> : <Menu size={17}/>}
+            {t.nav.menu} {mobileOpen ? <X size={17}/> : <Menu size={17}/>}
           </button>
         </div>
       </div>
@@ -244,26 +199,9 @@ function Navbar({onCTA}) {
 }
 
 function Footer() {
-  const cols=[
-    {h:'Çözümler', links:[
-      {t:'İlk ev alıcıları', to:'/cozumler'},
-      {t:'Ev sahipleri',     to:'/cozumler'},
-      {t:'Yatırımcılar',     to:'/cozumler'},
-      {t:'Yeni gelenler',    to:'/cozumler'},
-    ]},
-    {h:'Yardımcı Araçlar', links:[
-      {t:'Mortgage hesaplayıcı', to:'/araclar'},
-      {t:'Uygunluk hesaplama',   to:'/araclar'},
-      {t:'Bugünün en düşük oranı',to:'/oranlar'},
-      {t:'Kapanış masrafları',   to:'/araclar'},
-    ]},
-    {h:'Öğren', links:[
-      {t:'Mortgage sözlüğü',     to:'/ogren'},
-      {t:'Ev alma rehberi',      to:'/ogren'},
-      {t:'Yenileme ve ceza',     to:'/ogren'},
-      {t:'Sık sorulan sorular',  to:'/ogren'},
-    ]},
-  ];
+  const { t } = useLang();
+  const cols = t.footer.cols;
+  const vars = { BROKERAGE, LICENSE, YEAR: new Date().getFullYear() };
   return (
     <footer style={{background:C.navyD,color:'rgba(255,255,255,0.7)'}}>
       <div style={{...wrap,paddingTop:56,paddingBottom:36}}>
@@ -277,8 +215,7 @@ function Footer() {
               </span>
             </Link>
             <p style={{fontSize:13.5,lineHeight:1.7,maxWidth:310,fontFamily:FB}}>
-              Kanada’daki Türk topluluğu için mortgage (konut kredisi) sürecini sadeleştiren,
-              {` ${BROKERAGE}`} bünyesinde sunulan Türkçe mortgage deneyimi.
+              {interp(t.footer.brand, vars)}
             </p>
             <div style={{marginTop:18,display:'flex',alignItems:'center',gap:8,fontSize:13,color:'rgba(255,255,255,0.6)'}}>
               <Phone size={14}/> {TEL}
@@ -300,19 +237,16 @@ function Footer() {
           <div style={{display:'flex',gap:10,alignItems:'flex-start'}}>
             <ShieldCheck size={16} color={C.blueLight} style={{flexShrink:0,marginTop:2}}/>
             <p style={{fontSize:12,lineHeight:1.7,color:'rgba(255,255,255,0.62)',margin:0,fontFamily:FB}}>
-              <strong style={{color:'rgba(255,255,255,0.85)'}}>Yasal açıklama:</strong>{' '}
-              Kredibaba, Ontario’da faaliyet gösteren {BROKERAGE} lisanslı mortgage brokerage bünyesinde sunulan
-              bir hizmet markasıdır. FSRA lisansı, mortgage aracılığı hizmetinin Ontario düzenlemelerine tabi olduğunu gösterir. Lisans No: {LICENSE}.
+              <strong style={{color:'rgba(255,255,255,0.85)'}}>{t.footer.disclaimerLabel}</strong>{' '}
+              {interp(t.footer.disclaimer, vars)}
             </p>
           </div>
           <p style={{fontSize:11.5,lineHeight:1.8,color:'rgba(255,255,255,0.5)',margin:0,fontFamily:FB}}>
-            Bu site yalnızca bilgilendirme amaçlıdır; kredi onayı, oran garantisi veya lender taahhüdü oluşturmaz.
-            Nihai oran ve onay; gelir, kredi geçmişi, mülk, peşinat, lender koşulları ve yazılı commitment aşamasında kesinleşir.
-            Mortgage brokerage ücretleri veya lender tarafından ödenen komisyonlar, geçerli olduğunda yazılı olarak açıklanır.
+            {interp(t.footer.legal1, vars)}
           </p>
           <p style={{fontSize:11,lineHeight:1.7,color:'rgba(255,255,255,0.38)',margin:0,fontFamily:FB,
                      borderTop:'1px solid rgba(255,255,255,0.08)',paddingTop:14}}>
-            © {new Date().getFullYear()} Kredibaba. Tüm hakları saklıdır. Yayına alınmadan önce RMA Mortgage / Principal Broker uyum onayı gereklidir.
+            {interp(t.footer.legal2, vars)}
           </p>
         </div>
       </div>
@@ -377,6 +311,11 @@ export default function Layout() {
         .kb-nav-button.is-active svg{transform:rotate(180deg);}
         .kb-desktop-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
         .kb-primary-nav-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:14.5px;font-weight:600;padding:11px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
+        .kb-lang-toggle{display:inline-flex;align-items:center;gap:4px;padding:3px;background:${C.surface};border:1px solid ${C.border};border-radius:${R.control}px;flex-shrink:0;}
+        .kb-lang-flag{display:inline-flex;align-items:center;justify-content:center;width:30px;height:22px;padding:0;border:none;border-radius:5px;background:transparent;cursor:pointer;opacity:.45;filter:grayscale(55%);transition:opacity .15s,filter .15s,box-shadow .15s;}
+        .kb-lang-flag img{width:24px;height:16px;object-fit:cover;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(10,37,64,.10);}
+        .kb-lang-flag:hover{opacity:.85;filter:grayscale(0);}
+        .kb-lang-flag.is-active{opacity:1;filter:grayscale(0);box-shadow:0 0 0 2px ${C.blue};}
         .kb-mega-panel{position:absolute;left:0;right:0;top:100%;z-index:45;background:${C.bg};border-bottom:1px solid ${C.border};box-shadow:${SHADOW.elevated};}
         .kb-mega-inner{display:grid;grid-template-columns:.82fr 1.7fr;gap:${S[56]}px;padding:${S[48]}px ${S[24]}px ${S[64]}px;}
         .kb-mega-title{display:inline-block;font-family:${FB};font-size:28px;line-height:1.1;color:${C.navy};font-weight:700;margin-bottom:30px;background:none;}

@@ -1,4 +1,5 @@
-import { ShieldCheck, Globe, Award, Star } from "lucide-react";
+import { ShieldCheck, Globe, Award, Star, Linkedin } from "lucide-react";
+import { useLang } from "./i18n/LanguageContext.jsx";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // DESIGN TOKENS — institutional / bank style (light, navy + blue)
@@ -123,33 +124,7 @@ export const TEL = '+14161234567';
 export const CAL = 'https://calendly.com/kredibaba/danisma';
 export const LICENSE = 'FSRA #XXXXX';
 export const BROKERAGE = 'RMA Mortgage';
-export const LOWEST_RATE = {
-  rate: '3.89%',
-  term: '5 yıl sabit',
-  product: 'Sigortalı mortgage',
-  updated: '30 Mayıs 2026',
-  note: 'Yalnızca güçlü kredi, uygun gelir ve lender koşullarını sağlayan dosyalar için örnek gösterge orandır.',
-};
-export const HERO_RATES = [
-  {
-    label: 'Sabit oran',
-    term: LOWEST_RATE.term,
-    rate: LOWEST_RATE.rate,
-    product: LOWEST_RATE.product,
-    updated: LOWEST_RATE.updated,
-    note: LOWEST_RATE.note,
-    qualification: 'Güçlü kredi, doğrulanabilir gelir, uygun mülk ve lender koşulları gerekir.',
-  },
-  {
-    label: 'Değişken oran',
-    term: '5 yıl değişken',
-    rate: 'Güncelleniyor',
-    product: 'Değişken mortgage',
-    updated: LOWEST_RATE.updated,
-    note: 'Onaylı değişken oran verisi geldiğinde yayınlanır; örnek oran uydurulmaz.',
-    qualification: 'Prime oranı, lender indirimi ve dosya koşulları kişiye göre değişebilir.',
-  },
-];
+// Localizable rate data now lives in the i18n dictionaries (t.rates.heroRates / t.rates.lowestRate).
 
 // Contextual stock imagery (Unsplash — replace with branded photography when ready)
 export const IMG = {
@@ -198,13 +173,76 @@ export function Avatar({ initials, size = 72, ring = C.blue }) {
   );
 }
 
+export function initialsFrom(name = '') {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() || '')
+    .join('');
+}
+
+export function PersonCard({ name, role, photo, linkedin, credential, photoSize = 88 }) {
+  return (
+    <div style={{
+      background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card,
+      boxShadow:SHADOW.card, padding:'30px 24px 24px',
+      display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center',
+      height:'100%',
+    }}>
+      {photo ? (
+        <img
+          src={photo}
+          alt={name}
+          loading="lazy"
+          style={{
+            width:photoSize, height:photoSize, borderRadius:R.circle,
+            objectFit:'cover', flexShrink:0, marginBottom:18,
+            border:`2px solid ${C.blue}40`, background:C.surface,
+          }}
+        />
+      ) : (
+        <div style={{marginBottom:18}}>
+          <Avatar initials={initialsFrom(name)} size={photoSize}/>
+        </div>
+      )}
+
+      <h3 style={{...type.cardTitle, color:C.navy, marginBottom:4}}>{name}</h3>
+      {role && (
+        <p style={{fontSize:13, color:C.blue, fontWeight:700, fontFamily:FB, marginBottom:credential ? 8 : 16}}>
+          {role}
+        </p>
+      )}
+      {credential && (
+        <p style={{fontSize:13, color:C.muted, lineHeight:1.5, fontFamily:FB, margin:'0 0 16px', maxWidth:240}}>
+          {credential}
+        </p>
+      )}
+
+      <a
+        href={linkedin || '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${name} — LinkedIn profili`}
+        style={{
+          marginTop:'auto',
+          display:'inline-flex', alignItems:'center', gap:8,
+          padding:'9px 16px', borderRadius:R.control,
+          border:`1px solid ${C.border}`, background:C.surface,
+          color:C.navy, fontFamily:FB, fontWeight:600, fontSize:13.5,
+          textDecoration:'none',
+        }}
+      >
+        <Linkedin size={16} color={C.blue}/> LinkedIn
+      </a>
+    </div>
+  );
+}
+
 export function TrustRow({compact}) {
-  const items=[
-    {icon:<ShieldCheck size={15}/>, text:'FSRA Lisanslı Mortgage Aracılığı'},
-    {icon:<Globe size={15}/>,       text:'Türkçe & İngilizce Destek'},
-    {icon:<Award size={15}/>,       text:'Birden Fazla Lender Seçeneği'},
-    {icon:<Star size={15}/>,        text:'Şeffaf Oran ve Süreç Takibi'},
-  ];
+  const { t } = useLang();
+  const icons = [<ShieldCheck size={15}/>, <Globe size={15}/>, <Award size={15}/>, <Star size={15}/>];
+  const items = t.common.trust.map((text, i) => ({ icon: icons[i], text }));
   return (
     <div style={{display:'flex',flexWrap:'wrap',gap:compact?'10px 18px':'12px 28px',
                  justifyContent:compact?'flex-start':'center'}}>
