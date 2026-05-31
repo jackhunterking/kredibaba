@@ -8,6 +8,7 @@ import {
 import {
   BROKERAGE, C, FB, R, S, SectionLabel, SHADOW,
   TrustRow, ghostBtn, IMG, primaryBtn, wrap,
+  AdvisorChip, AdvisorStrip, Testimonials, PersonaPhotoCard, PhotoAvatar, PEOPLE,
 } from "../theme.jsx";
 import { useLang, interp } from "../i18n/LanguageContext.jsx";
 
@@ -204,8 +205,9 @@ function Hero({ onCTA }) {
             <div style={{
               position:'absolute',
               inset:0,
-              background:'linear-gradient(180deg,rgba(6,25,44,0.02) 0%,rgba(6,25,44,0.16) 100%)',
+              background:'linear-gradient(180deg,rgba(6,25,44,0.02) 0%,rgba(6,25,44,0.28) 100%)',
             }}/>
+            <AdvisorChip name={h.advisorName} line={h.advisorLine}/>
           </div>
         </div>
       </div>
@@ -288,8 +290,9 @@ function JourneySection() {
 function WhoWeHelp({ onCTA }) {
   const { t } = useLang();
   const w = t.home.who;
-  const icons = [<HomeIcon size={21}/>, <RefreshCw size={21}/>, <Landmark size={21}/>, <Wallet size={21}/>, <ShieldCheck size={21}/>];
-  const items = w.items.map((it, i) => ({ icon: icons[i], title: it.title, text: it.text }));
+  const icons = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Landmark size={20}/>, <Wallet size={20}/>, <ShieldCheck size={20}/>];
+  const images = [IMG.personaFirst, IMG.personaOwner, IMG.personaInvestor, IMG.personaSelf, IMG.personaNewcomer];
+  const items = w.items.map((it, i) => ({ icon: icons[i], image: images[i], title: it.title, text: it.text }));
 
   return (
     <section style={{background:C.surface,borderTop:`1px solid ${C.border}`,borderBottom:`1px solid ${C.border}`}}>
@@ -307,36 +310,15 @@ function WhoWeHelp({ onCTA }) {
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
           {items.map((item) => (
-            <button key={item.title} onClick={onCTA} style={{
-              background:'#fff',
-              border:`1px solid ${C.border}`,
-              borderRadius:R.card,
-              padding:'22px 20px',
-              cursor:'pointer',
-              textAlign:'left',
-              fontFamily:FB,
-              boxShadow:SHADOW.card,
-            }}>
-              <span style={{
-                width:44,
-                height:44,
-                borderRadius:R.icon,
-                background:C.blueFaint,
-                color:C.blue,
-                display:'flex',
-                alignItems:'center',
-                justifyContent:'center',
-                marginBottom:16,
-              }}>
-                {item.icon}
-              </span>
-              <span style={{display:'block',fontFamily:FB,fontSize:21,color:C.navy,fontWeight:600,marginBottom:7,lineHeight:1.16}}>
-                {item.title}
-              </span>
-              <span style={{display:'block',fontSize:13.5,color:C.body,lineHeight:1.45}}>
-                {item.text}
-              </span>
-            </button>
+            <PersonaPhotoCard
+              key={item.title}
+              image={item.image}
+              imgAlt={item.title}
+              icon={item.icon}
+              title={item.title}
+              text={item.text}
+              onClick={onCTA}
+            />
           ))}
         </div>
       </div>
@@ -454,6 +436,12 @@ function FinalCTA({ onCTA }) {
   return (
     <section style={{background:C.navy}}>
       <div style={{...wrap,paddingTop:S[56],paddingBottom:S[56],textAlign:'center'}}>
+        <div style={{display:'flex',justifyContent:'center',marginBottom:20}}>
+          <PhotoAvatar src={PEOPLE.jack.src} pos={PEOPLE.jack.pos} alt={PEOPLE.jack.alt} size={64} initials={PEOPLE.jack.initials} frame/>
+          <span style={{marginLeft:-16,display:'inline-flex'}}>
+            <PhotoAvatar src={PEOPLE.tara.src} pos={PEOPLE.tara.pos} alt={PEOPLE.tara.alt} size={64} initials={PEOPLE.tara.initials} frame/>
+          </span>
+        </div>
         <h2 style={{fontFamily:FB,fontSize:'clamp(30px,4vw,42px)',color:'#fff',fontWeight:700,lineHeight:1.12,marginBottom:14}}>
           {f.title}
         </h2>
@@ -493,8 +481,10 @@ export default function Home() {
       </div>
       <JourneySection/>
       <WhoWeHelp onCTA={openForm}/>
+      <Testimonials/>
       <QuickTools/>
       <LearnPreview/>
+      <AdvisorStrip onCTA={openForm}/>
       <FinalCTA onCTA={openForm}/>
     </>
   );

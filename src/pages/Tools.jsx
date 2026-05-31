@@ -4,7 +4,7 @@ import {
   ArrowRight, Calculator, CreditCard, FileCheck, Home as HomeIcon,
   Landmark, Percent, PiggyBank, RefreshCw, Wallet,
 } from "lucide-react";
-import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel } from "../theme.jsx";
+import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel, AdvisorStrip } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
 const fmt = (n) => '$' + Math.round(n).toLocaleString('en-CA');
@@ -131,6 +131,8 @@ export default function Tools() {
           ))}
         </div>
       </section>
+
+      <AdvisorStrip onCTA={openForm}/>
     </>
   );
 }

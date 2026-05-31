@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { ArrowRight, Eye, Heart, MessageCircle, ShieldCheck, Users } from "lucide-react";
 import {
-  C, FB, R, S, WA, wrap, primaryBtn, PersonCard, PageHero, SectionLabel, BROKERAGE, LICENSE,
+  C, FB, R, S, WA, wrap, primaryBtn, PersonCard, PageHero, SectionLabel, BROKERAGE, LICENSE, PEOPLE,
 } from "../theme.jsx";
 import { useLang, interp } from "../i18n/LanguageContext.jsx";
 
@@ -37,9 +37,10 @@ function Team() {
         </h2>
       </div>
       <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18}}>
-        {leaders.map((p,i)=>(
-          <PersonCard key={i} {...p} photoSize={96}/>
-        ))}
+        {leaders.map((p,i)=>{
+          const person = p.photoKey ? PEOPLE[p.photoKey] : null;
+          return <PersonCard key={i} {...p} photo={person?.src} photoPos={person?.pos} photoSize={96}/>;
+        })}
       </div>
     </section>
   );

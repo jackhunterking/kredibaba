@@ -3,17 +3,18 @@ import {
   ArrowRight, Banknote, Building2, CreditCard, Hammer, Home as HomeIcon,
   KeyRound, RefreshCw, Search, Unlock,
 } from "lucide-react";
-import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel } from "../theme.jsx";
+import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel, IMG, AdvisorStrip, PersonaPhotoCard } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
-const WHO_ICONS = [<HomeIcon size={22}/>, <RefreshCw size={22}/>, <Building2 size={22}/>, <Banknote size={22}/>, <KeyRound size={22}/>];
+const WHO_ICONS = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Building2 size={20}/>, <Banknote size={20}/>, <KeyRound size={20}/>];
+const WHO_IMAGES = [IMG.personaFirst, IMG.personaOwner, IMG.personaInvestor, IMG.personaSelf, IMG.personaNewcomer];
 const WHAT_ICONS = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Hammer size={20}/>, <CreditCard size={20}/>, <Unlock size={20}/>, <Search size={20}/>];
 
 export default function Solutions() {
   const { openForm } = useOutletContext();
   const { t } = useLang();
   const s = t.solutions;
-  const WHO = s.who.map((it, i) => ({ ...it, icon: WHO_ICONS[i] }));
+  const WHO = s.who.map((it, i) => ({ ...it, icon: WHO_ICONS[i], image: WHO_IMAGES[i] }));
   const WHAT = s.what.map((it, i) => ({ ...it, icon: WHAT_ICONS[i] }));
 
   return (
@@ -33,16 +34,20 @@ export default function Solutions() {
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20}}>
           {WHO.map((item,i)=>(
-            <div id={item.id} key={i} style={{background:'#fff',border:`1px solid ${C.border}`,borderRadius:R.card,padding:'26px 24px',boxShadow:SHADOW.card}}>
-              <div style={{width:48,height:48,borderRadius:R.icon,background:C.blueFaint,color:C.blue,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:16}}>
-                {item.icon}
-              </div>
-              <h3 style={{fontFamily:FB,fontSize:21,color:C.navy,fontWeight:600,marginBottom:8}}>{item.title}</h3>
-              <p style={{fontSize:13.5,color:C.muted,fontWeight:500,lineHeight:1.45}}>{item.text}</p>
-            </div>
+            <PersonaPhotoCard
+              key={i}
+              id={item.id}
+              image={item.image}
+              imgAlt={item.title}
+              icon={item.icon}
+              title={item.title}
+              text={item.text}
+            />
           ))}
         </div>
       </section>
+
+      <AdvisorStrip onCTA={openForm}/>
 
       <section id="ne-yardim" style={{...wrap,paddingTop:S[40],paddingBottom:S[64]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>

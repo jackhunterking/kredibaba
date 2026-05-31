@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { ShieldCheck, Globe, Award, Star, Linkedin } from "lucide-react";
+import { ShieldCheck, Globe, Award, Star, Linkedin, MessageCircle, ArrowRight, Info } from "lucide-react";
 import { useLang } from "./i18n/LanguageContext.jsx";
+import jackPhoto from "./assets/people/jack.jpg";
+import taraPhoto from "./assets/people/tara.jpg";
+import asifPhoto from "./assets/people/asif.jpg";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // DESIGN TOKENS — institutional / bank style (light, navy + blue)
@@ -134,6 +137,20 @@ export const IMG = {
   interior: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1100&q=80',
   keys:     'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1100&q=80',
   family:   'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1100&q=80',
+  // Persona lifestyle imagery — situations, not specific people (swap for branded photography later)
+  personaFirst:    'https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=640&q=80', // young family + first home
+  personaOwner:    'https://images.unsplash.com/photo-1543269664-56d93c1b41a6?auto=format&fit=crop&w=640&q=80',     // reviewing options at home
+  personaInvestor: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?auto=format&fit=crop&w=640&q=80',  // property / portfolio
+  personaSelf:     'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=640&q=80',  // self-employed / working
+  personaNewcomer: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=640&q=80',  // community / newcomers
+};
+
+// Real photography of the people behind Kredibaba (anchors trust across the site).
+// Each entry carries a focal `pos` so circular/cover crops frame the face correctly.
+export const PEOPLE = {
+  jack: { src: jackPhoto, alt: 'Jack Hunter', pos: 'center 20%', initials: 'JH' },
+  tara: { src: taraPhoto, alt: 'Tara Hunter', pos: 'center 14%', initials: 'TH' },
+  asif: { src: asifPhoto, alt: 'Asif Karimov', pos: 'center 18%', initials: 'AK' },
 };
 
 export const wrap = { maxWidth: 1120, margin: '0 auto', padding: '0 24px' };
@@ -183,7 +200,7 @@ export function initialsFrom(name = '') {
     .join('');
 }
 
-export function PersonCard({ name, role, photo, linkedin, credential, photoSize = 88 }) {
+export function PersonCard({ name, role, photo, photoPos = 'center', linkedin, credential, photoSize = 88 }) {
   const [imageFailed, setImageFailed] = useState(false);
   const showPhoto = photo && !imageFailed;
 
@@ -202,7 +219,7 @@ export function PersonCard({ name, role, photo, linkedin, credential, photoSize 
           onError={() => setImageFailed(true)}
           style={{
             width:photoSize, height:photoSize, borderRadius:R.circle,
-            objectFit:'cover', flexShrink:0, marginBottom:18,
+            objectFit:'cover', objectPosition:photoPos, flexShrink:0, marginBottom:18,
             border:`2px solid ${C.blue}40`, background:C.surface,
           }}
         />
@@ -271,5 +288,171 @@ export function PageHero({ label, title, sub }) {
         {sub && <p style={{...type.body,fontSize:17,color:C.body,maxWidth:600,margin:'0 auto'}}>{sub}</p>}
       </div>
     </section>
+  );
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// HUMAN PRESENCE — real faces + social proof to build trust
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Circular real-photo avatar with focal framing and graceful initials fallback.
+export function PhotoAvatar({ src, pos = 'center', alt = '', size = 64, ring = C.blue, initials = '', frame = false }) {
+  const [failed, setFailed] = useState(false);
+  if (!src || failed) {
+    return (
+      <span style={frame ? { display:'inline-flex', border:'3px solid #fff', borderRadius:R.circle, boxShadow:`0 0 0 1px ${C.border}` } : undefined}>
+        <Avatar initials={initials} size={size} ring={ring}/>
+      </span>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      style={{
+        width:size, height:size, borderRadius:R.circle, objectFit:'cover', objectPosition:pos,
+        flexShrink:0, display:'block', background:C.surface,
+        border:frame ? '3px solid #fff' : `2px solid ${ring}40`,
+        boxShadow:frame ? `0 0 0 1px ${C.border}` : 'none',
+      }}
+    />
+  );
+}
+
+// Small "this is your advisor" chip, designed to overlay a hero/feature image.
+export function AdvisorChip({ name, line }) {
+  return (
+    <div style={{
+      position:'absolute', left:16, bottom:16, right:16, maxWidth:300,
+      display:'flex', alignItems:'center', gap:12,
+      background:'rgba(255,255,255,0.94)', backdropFilter:'blur(6px)',
+      border:`1px solid ${C.border}`, borderRadius:R.card, padding:'10px 14px', boxShadow:SHADOW.card,
+    }}>
+      <PhotoAvatar src={PEOPLE.jack.src} pos={PEOPLE.jack.pos} alt={name} size={46} initials={PEOPLE.jack.initials} frame/>
+      <div style={{minWidth:0}}>
+        <div style={{fontFamily:FB, fontSize:13.5, color:C.navy, fontWeight:700, lineHeight:1.2}}>{name}</div>
+        <div style={{fontFamily:FB, fontSize:12.5, color:C.body, lineHeight:1.3, marginTop:2}}>{line}</div>
+      </div>
+    </div>
+  );
+}
+
+// Recurring "talk to a real person" band — real Jack & Tara portraits + direct actions.
+export function AdvisorStrip({ onCTA }) {
+  const { t } = useLang();
+  const a = t.home.advisor;
+  return (
+    <section style={{...wrap, paddingTop:S[16], paddingBottom:S[56]}}>
+      <div style={{
+        background:C.surface, border:`1px solid ${C.border}`, borderRadius:R.panel, boxShadow:SHADOW.card,
+        padding:'26px 28px', display:'flex', gap:S[24], alignItems:'center', justifyContent:'space-between', flexWrap:'wrap',
+      }}>
+        <div style={{display:'flex', alignItems:'center', gap:18, flex:'1 1 340px', minWidth:0}}>
+          <div style={{display:'flex', alignItems:'center', flexShrink:0}}>
+            <PhotoAvatar src={PEOPLE.jack.src} pos={PEOPLE.jack.pos} alt={PEOPLE.jack.alt} size={72} initials={PEOPLE.jack.initials} frame/>
+            <span style={{marginLeft:-16, display:'inline-flex'}}>
+              <PhotoAvatar src={PEOPLE.tara.src} pos={PEOPLE.tara.pos} alt={PEOPLE.tara.alt} size={72} initials={PEOPLE.tara.initials} frame/>
+            </span>
+          </div>
+          <div style={{minWidth:0}}>
+            <div style={{...type.label, color:C.blue, marginBottom:6}}>{a.label}</div>
+            <h3 style={{fontFamily:FB, fontSize:23, color:C.navy, fontWeight:700, lineHeight:1.2, marginBottom:6}}>{a.title}</h3>
+            <p style={{fontSize:14.5, color:C.body, lineHeight:1.5, margin:0, maxWidth:460}}>{a.body}</p>
+          </div>
+        </div>
+        <div style={{display:'flex', gap:10, flexWrap:'wrap', flex:'0 0 auto'}}>
+          <button onClick={onCTA} style={primaryBtn({padding:'13px 20px', display:'inline-flex', alignItems:'center', gap:8})}>
+            {a.btnAccount} <ArrowRight size={16}/>
+          </button>
+          <a href={`https://wa.me/${WA}`} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+            <button style={ghostBtn({padding:'13px 18px', display:'inline-flex', alignItems:'center', gap:8})}>
+              <MessageCircle size={16} color={C.wa}/> {a.btnTalk}
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialCard({ item }) {
+  return (
+    <div style={{
+      background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card, boxShadow:SHADOW.card,
+      padding:'24px 22px', height:'100%', display:'flex', flexDirection:'column',
+    }}>
+      <div style={{display:'flex', gap:3, marginBottom:14}}>
+        {Array.from({length:item.rating || 5}).map((_, i) => (
+          <Star key={i} size={15} color={C.star} fill={C.star}/>
+        ))}
+      </div>
+      <p style={{fontSize:15, color:C.body, lineHeight:1.6, margin:'0 0 18px', flex:1}}>“{item.quote}”</p>
+      <div style={{display:'flex', alignItems:'center', gap:12}}>
+        <Avatar initials={initialsFrom(item.name)} size={44}/>
+        <div>
+          <div style={{fontFamily:FB, fontSize:14.5, color:C.navy, fontWeight:700, lineHeight:1.2}}>{item.name}</div>
+          <div style={{fontFamily:FB, fontSize:12.5, color:C.muted, marginTop:2}}>{item.persona}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Social-proof row. Renders a visible placeholder tag until real, consented stories exist (FSRA-safe).
+export function Testimonials() {
+  const { t } = useLang();
+  const ts = t.home.testimonials;
+  return (
+    <section style={{background:C.surface, borderTop:`1px solid ${C.border}`, borderBottom:`1px solid ${C.border}`}}>
+      <div style={{...wrap, paddingTop:S[56], paddingBottom:S[56]}}>
+        <div style={{textAlign:'center', maxWidth:640, margin:'0 auto 14px'}}>
+          <SectionLabel>{ts.label}</SectionLabel>
+          <h2 style={{fontFamily:FB, fontSize:'clamp(28px,4vw,38px)', color:C.navy, fontWeight:700, lineHeight:1.16}}>{ts.title}</h2>
+        </div>
+        {ts.placeholderTag && (
+          <div style={{display:'flex', justifyContent:'center', marginBottom:30}}>
+            <span style={{
+              display:'inline-flex', alignItems:'center', gap:7,
+              background:C.amberFaint, color:C.amber, border:`1px solid ${C.amber}33`,
+              borderRadius:R.chip, padding:'6px 12px', fontSize:12.5, fontWeight:600, fontFamily:FB,
+            }}>
+              <Info size={14}/> {ts.placeholderTag}
+            </span>
+          </div>
+        )}
+        <div className="kb-3col" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16}}>
+          {ts.items.map((item, i) => <TestimonialCard key={i} item={item}/>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Persona card with a lifestyle photo header + the persona icon demoted to a small badge.
+// Renders as a clickable <button> when `onClick` is given, otherwise a static <div> (with an id anchor).
+export function PersonaPhotoCard({ id, image, icon, title, text, onClick, imgAlt = '' }) {
+  const interactive = typeof onClick === 'function';
+  const Tag = interactive ? 'button' : 'div';
+  return (
+    <Tag id={id} onClick={onClick} style={{
+      background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card, boxShadow:SHADOW.card,
+      padding:0, width:'100%', cursor:interactive ? 'pointer' : 'default', textAlign:'left',
+      fontFamily:FB, overflow:'hidden', display:'flex', flexDirection:'column', height:'100%',
+    }}>
+      <div style={{position:'relative', width:'100%', aspectRatio:'16 / 10', background:C.surface2, flexShrink:0}}>
+        <img src={image} alt={imgAlt} loading="lazy" style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block'}}/>
+        <span style={{
+          position:'absolute', left:14, bottom:-20, width:44, height:44, borderRadius:R.icon,
+          background:'#fff', border:`1px solid ${C.border}`, boxShadow:SHADOW.card, color:C.blue,
+          display:'flex', alignItems:'center', justifyContent:'center',
+        }}>{icon}</span>
+      </div>
+      <div style={{padding:'28px 20px 22px'}}>
+        <span style={{display:'block', fontFamily:FB, fontSize:20, color:C.navy, fontWeight:600, marginBottom:7, lineHeight:1.18}}>{title}</span>
+        <span style={{display:'block', fontSize:13.5, color:C.body, lineHeight:1.5}}>{text}</span>
+      </div>
+    </Tag>
   );
 }

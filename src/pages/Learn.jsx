@@ -1,6 +1,6 @@
 import { Link, useOutletContext } from "react-router-dom";
 import { ArrowRight, BookOpen, Check, HelpCircle, Info, RefreshCw } from "lucide-react";
-import { C, FB, R, S, wrap, primaryBtn, PageHero, SectionLabel } from "../theme.jsx";
+import { C, FB, R, S, wrap, primaryBtn, PageHero, SectionLabel, AdvisorStrip } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
 const GUIDE_ICONS = [<BookOpen size={21}/>, <RefreshCw size={21}/>, <Info size={21}/>];
@@ -85,6 +85,8 @@ export default function Learn() {
           </div>
         </div>
       </section>
+
+      <AdvisorStrip onCTA={openForm}/>
 
       <section style={{background:C.blueFaint,borderTop:`1px solid ${C.border}`}}>
         <div style={{...wrap,paddingTop:S[24],paddingBottom:S[24]}}>

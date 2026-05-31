@@ -353,7 +353,7 @@ export default function Layout() {
           .kb-hero-title{font-size:clamp(32px,6vw,44px);}
           .kb-hero-grid{grid-template-columns:1fr!important;gap:40px!important}
           .kb-hero-rate-card{min-height:auto!important;padding:30px 28px!important}
-          .kb-hero-image,.kb-hero-image img{min-height:320px!important}
+          .kb-hero-image,.kb-hero-image>img{min-height:320px!important}
           .kb-2col{grid-template-columns:1fr!important}
           .kb-4col{grid-template-columns:1fr 1fr!important}
           .kb-foot{grid-template-columns:1fr 1fr!important}
@@ -383,7 +383,7 @@ export default function Layout() {
           .kb-mobile-menu-button{padding:10px 12px;font-size:13.5px}
           .kb-hero-rate-grid{grid-template-columns:1fr!important}
           .kb-hero-rate-cell + .kb-hero-rate-cell{border-left:none!important;border-top:1px solid ${C.border};}
-          .kb-hero-image,.kb-hero-image img{min-height:280px!important}
+          .kb-hero-image,.kb-hero-image>img{min-height:280px!important}
         }
         @media(max-width:430px){
           .kb-hero-title{font-size:clamp(27px,8.7vw,34px);}
