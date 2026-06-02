@@ -3,7 +3,7 @@ import {
   ArrowRight, Banknote, Building2, Home as HomeIcon,
   KeyRound, PiggyBank, RefreshCw,
 } from "lucide-react";
-import { C, FB, R, S, SHADOW, wrap, whatsAppBtn, WhatsAppIconBadge, PageHero, SectionLabel, IMG, AdvisorStrip, PersonaPhotoCard } from "../theme.jsx";
+import { C, FB, R, S, SHADOW, wrap, whatsAppBtn, WhatsAppIconBadge, SectionLabel, IMG, AdvisorStrip, PersonaPhotoCard } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
 const WHO_ICONS = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Building2 size={20}/>, <Banknote size={20}/>, <KeyRound size={20}/>];
@@ -21,13 +21,7 @@ export default function Solutions() {
 
   return (
     <>
-      <PageHero
-        label={s.label}
-        title={s.title}
-        sub={s.sub}
-      />
-
-      <section id="kime-yardim" style={{...wrap,paddingTop:S[56],paddingBottom:S[40]}}>
+      <section id="kime-yardim" style={{...wrap,paddingTop:S[64],paddingBottom:S[40]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>
           {s.whoLabel ? <SectionLabel>{s.whoLabel}</SectionLabel> : null}
           {s.whoHeading ? (

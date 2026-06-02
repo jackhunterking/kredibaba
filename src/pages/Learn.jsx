@@ -1,6 +1,6 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { ArrowRight, BookOpen, Check, HelpCircle, Info, RefreshCw } from "lucide-react";
-import { C, FB, R, S, wrap, whatsAppBtn, WhatsAppIconBadge, PageHero, SectionLabel, AdvisorStrip } from "../theme.jsx";
+import { C, FB, R, S, wrap, whatsAppBtn, WhatsAppIconBadge, PageHero, SectionLabel, AdvisorStrip, SoftCheckExplainer, EquifaxLogo } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
 const GUIDE_ICONS = [<BookOpen size={21}/>, <RefreshCw size={21}/>, <Info size={21}/>];
@@ -19,7 +19,7 @@ export default function Learn() {
         sub={l.sub}
       />
 
-      <section style={{...wrap,paddingTop:S[56],paddingBottom:S[32]}}>
+      <section id="sozluk" style={{...wrap,paddingTop:S[56],paddingBottom:S[32]}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'end',gap:22,marginBottom:24,flexWrap:'wrap'}}>
           <div>
             <SectionLabel>{l.glossaryLabel}</SectionLabel>
@@ -27,11 +27,6 @@ export default function Learn() {
               {l.glossaryTitle}
             </h2>
           </div>
-          <Link to="/araclar" style={{textDecoration:'none'}}>
-            <button style={{background:'#fff',border:`1px solid ${C.border}`,borderRadius:R.control,padding:'12px 18px',fontFamily:FB,fontWeight:600,color:C.navy,cursor:'pointer',display:'inline-flex',alignItems:'center',gap:8}}>
-              {l.glossaryButton} <ArrowRight size={16}/>
-            </button>
-          </Link>
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14}}>
           {l.glossary.map((item,i)=>(
@@ -43,7 +38,7 @@ export default function Learn() {
         </div>
       </section>
 
-      <section style={{...wrap,paddingTop:S[40],paddingBottom:S[32]}}>
+      <section id="rehber" style={{...wrap,paddingTop:S[40],paddingBottom:S[32]}}>
         <div style={{textAlign:'center',maxWidth:560,margin:'0 auto 28px'}}>
           <SectionLabel>{l.guidesLabel}</SectionLabel>
           <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
@@ -63,7 +58,22 @@ export default function Learn() {
         </div>
       </section>
 
-      <section style={{...wrap,paddingTop:S[40],paddingBottom:S[64]}}>
+      <section id="kredi-sorgusu" style={{background:C.surface, borderTop:`1px solid ${C.border}`, borderBottom:`1px solid ${C.border}`}}>
+        <div style={{...wrap,paddingTop:S[48],paddingBottom:S[48]}}>
+          <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:18,flexWrap:'wrap'}}>
+            <EquifaxLogo height={15}/>
+            <div>
+              <SectionLabel>{t.softCheck.learnSectionLabel}</SectionLabel>
+              <h2 style={{fontFamily:FB,fontSize:'clamp(24px,3.4vw,32px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
+                {t.softCheck.learnSectionTitle}
+              </h2>
+            </div>
+          </div>
+          <SoftCheckExplainer/>
+        </div>
+      </section>
+
+      <section id="sss" style={{...wrap,paddingTop:S[40],paddingBottom:S[64]}}>
         <div className="kb-2col" style={{display:'grid',gridTemplateColumns:'0.72fr 1.28fr',gap:28,alignItems:'start'}}>
           <div>
             <SectionLabel>{l.faqLabel}</SectionLabel>

@@ -10,12 +10,11 @@ export default {
     menuOpen: "Menüyü aç",
     menuClose: "Menüyü kapat",
     logoAria: "Kredibaba ana sayfa",
-    byline: "Hunter Group'dan",
+    byline: "A Hunter Group Company",
   },
 
   topPromo: {
-    text: "Ücretsiz mortgage hesaplaması",
-    cta: "WhatsApp’tan yazın",
+    text: "Türkçe Mortgage Hizmeti",
   },
 
   mega: {
@@ -28,7 +27,7 @@ export default {
           items: [
             { label: "İlk ev alıcıları", href: "/cozumler/ilk-ev" },
             { label: "Ev sahipleri", href: "/cozumler/ev-sahipleri" },
-            { label: "Ev sahipleri / yatırımcılar", href: "/cozumler/yatirimcilar" },
+            { label: "Yatırımcılar", href: "/cozumler/yatirimcilar" },
             { label: "Şirket sahibi / serbest meslek", href: "/cozumler/serbest-meslek" },
             { label: "Kanada’ya yeni gelenler", href: "/cozumler/yeni-gelenler" },
           ],
@@ -81,21 +80,11 @@ export default {
         ],
       },
       {
-        h: "Yardımcı Araçlar",
-        links: [
-          { t: "Mortgage hesaplayıcı", to: "/araclar" },
-          { t: "Uygunluk hesaplama", to: "/araclar" },
-          { t: "Bugünün en düşük oranı", to: "/oranlar" },
-          { t: "Kapanış masrafları", to: "/araclar" },
-        ],
-      },
-      {
         h: "Öğren",
         links: [
-          { t: "Mortgage sözlüğü", to: "/ogren" },
-          { t: "Ev alma rehberi", to: "/ogren" },
-          { t: "Yenileme ve ceza", to: "/ogren" },
-          { t: "Sık sorulan sorular", to: "/ogren" },
+          { t: "Mortgage sözlüğü", to: "/ogren#sozluk" },
+          { t: "Ev alma rehberi", to: "/ogren#rehber" },
+          { t: "Sık sorulan sorular", to: "/ogren#sss" },
         ],
       },
     ],
@@ -103,7 +92,7 @@ export default {
     disclaimerLabel: "Yasal açıklama:",
     disclaimer: "Kredibaba, Ontario’da faaliyet gösteren {BROKERAGE} lisanslı mortgage brokerage bünyesinde sunulan bir hizmet markasıdır. FSRA lisansı, mortgage aracılığı hizmetinin Ontario düzenlemelerine tabi olduğunu gösterir. Lisans No: {LICENSE}.",
     legal1: "Bu site yalnızca bilgilendirme amaçlıdır; kredi onayı, oran garantisi veya lender taahhüdü oluşturmaz. Nihai oran ve onay; gelir, kredi geçmişi, mülk, peşinat, lender koşulları ve yazılı commitment aşamasında kesinleşir. Mortgage brokerage ücretleri veya lender tarafından ödenen komisyonlar, geçerli olduğunda yazılı olarak açıklanır.",
-    legal2: "© {YEAR} Kredibaba. Tüm hakları saklıdır. Yayına alınmadan önce RMA Mortgage / Principal Broker uyum onayı gereklidir.",
+    legal2: "© {YEAR} Kredibaba. Tüm hakları saklıdır.",
   },
 
   common: {
@@ -122,8 +111,8 @@ export default {
       btnRates: "WhatsApp’tan yazın",
       btnDisclosure: "Açıklama",
       imgAlt: "Kanada’da modern bir ev",
-      advisorName: "Jack Hunter",
-      advisorLine: "Mortgage aracınız — Türkçe yardımcı olurum.",
+      advisorName: "Jack, Tara & Asif",
+      advisorLine: "Size yardımcı olmak için buradayız — Türkçe konuşabilirsiniz.",
     },
     disclosure: {
       aria: "Oran açıklaması",
@@ -137,15 +126,14 @@ export default {
         "Borçluya yansıyabilecek ücretler varsa, commitment öncesinde yazılı ve sade şekilde açıklanır.",
       ],
     },
-    journeyCardCta: "Hemen Başla",
     journeys: {
-      label: "Yolculuklar",
-      title: "Hangi mortgage yolculuğuna başlıyorsunuz?",
-      sub: "Her dosya üç net seçenekten biriyle başlar; sonra doğru adımları dosyanıza göre düzenleriz.",
+      label: "",
+      title: "Size nasıl yardımcı olabiliriz?",
+      sub: "",
       items: [
-        { title: "Yeni Mortgage", sub: "Ön onay alın, bütçenizi görün ve ev alımına hazırlanın" },
-        { title: "Yenile / Taşı", sub: "Yenileme teklifinizi ve taşıma seçeneklerini karar vermeden karşılaştırın" },
-        { title: "Refinansman", sub: "Refinansman, borç birleştirme, tadilat, HELOC veya ikinci mortgage için ev sermayesinden yararlanın" },
+        { title: "Yeni Mortgage", sub: "Ön onay alın, bütçenizi görün, daha iyi oran bulun" },
+        { title: "Yenile / Taşı", sub: "Sadece kendi bankanızın teklifine bakmayın, karşılaştırın" },
+        { title: "Refinansman", sub: "Ev değerinizden para çekin: refinansman, HELOC (ev kredisi) veya ikinci mortgage" },
       ],
     },
     who: {
@@ -155,7 +143,7 @@ export default {
       items: [
         { title: "İlk ev alıcıları", text: "İlk kez alım yaparken bütçe, masraf ve adımları sade görürsünüz." },
         { title: "Ev sahipleri", text: "Yenileme, ödeme düzenleme veya ev değerinden yararlanma seçenekleri." },
-        { title: "Ev sahipleri / yatırımcılar", text: "Kira geliri, ek mülk ve portföy planlamasında doğru belge akışı." },
+        { title: "Yatırımcılar", text: "Kira geliri, ek mülk ve portföy planlamasında doğru belge akışı." },
         { title: "Şirket sahibi / serbest meslek", text: "Maaş bordrosu dışındaki gelirleri anlaşılır şekilde hazırlama." },
         { title: "Kanada’ya yeni gelenler", text: "Kredi geçmişi, peşinat ve lender beklentilerini Türkçe öğrenme." },
       ],
@@ -353,28 +341,28 @@ export default {
       {
         initials: "JH",
         name: "Jack Hunter",
-        role: "Kurucu",
+        role: "Kurucu Ortak",
         photoKey: "jack",
         linkedin: "https://www.linkedin.com/in/jack-h-hunter/",
       },
       {
         initials: "TH",
         name: "Tara Hunter",
-        role: "Gayrimenkul ve Operasyon",
+        role: "Kurucu Ortak",
         photoKey: "tara",
         linkedin: "https://www.linkedin.com/in/tara-hunter-960941200/?skipRedirect=true",
       },
       {
         initials: "AK",
         name: "Asif Karimov",
-        role: "Danışma Kurulu",
+        role: "Danışman",
         credential: "CPA, MBA",
         photoKey: "asif",
         linkedin: "https://www.linkedin.com/in/asif-karimov/",
       },
     ],
     brokerageTitle: "Yasal yapı",
-    brokerageText: "Kredibaba, {BROKERAGE} bünyesinde sunulur. FSRA lisans bilgisi: {LICENSE}. Yayın öncesi Principal Broker uyum onayı gereklidir.",
+    brokerageText: "Kredibaba, {BROKERAGE} bünyesinde sunulur. FSRA lisans bilgisi: {LICENSE}.",
     cta: {
       title: "Türkçe başlayalım.",
       btnAccount: "WhatsApp’tan yazın",
@@ -403,7 +391,7 @@ export default {
     who: [
       { id: "ilk-ev", title: "İlk ev alıcıları", text: "Bütçe · ön onay · teklif" },
       { id: "ev-sahipleri", title: "Ev sahipleri", text: "Yenileme · refinansman" },
-      { id: "yatirimcilar", title: "Ev sahipleri / yatırımcılar", text: "Kira geliri · portföy" },
+      { id: "yatirimcilar", title: "Yatırımcılar", text: "Kira geliri · portföy" },
       { id: "serbest-meslek", title: "Şirket sahibi / serbest meslek", text: "Gelir belgesi · şirket" },
       { id: "yeni-gelenler", title: "Kanada’ya yeni gelenler", text: "Yeni kredi · yeni iş" },
     ],
@@ -462,7 +450,7 @@ export default {
       },
     },
     "yatirimcilar": {
-      navLabel: "Ev sahipleri / yatırımcılar",
+      navLabel: "Yatırımcılar",
       hero: {
         title: "Sonraki yatırım mülkünüzü daha erken alın",
         underlineText: "daha erken",
@@ -559,9 +547,9 @@ export default {
         q: "Mortgage konusunda ne yapmak istiyorsunuz?",
         sub: "Başlangıç noktanızı seçin.",
         opts: [
-          { v: "buy", e: "🏠", label: "Yeni Mortgage", sub: "Ön onay ve ev alım bütçesi" },
-          { v: "renew", e: "🔄", label: "Yenile / Taşı", sub: "Yenileme veya taşıma seçenekleri" },
-          { v: "refinance", e: "💰", label: "Refinansman", sub: "Ev sermayesi, HELOC, borç, tadilat veya ikinci mortgage" },
+          { v: "buy", e: "🏠", label: "Yeni Mortgage", sub: "Ön onay alın, bütçenizi görün, daha iyi oran bulun" },
+          { v: "renew", e: "🔄", label: "Yenile / Taşı", sub: "Sadece kendi bankanızın teklifine bakmayın, karşılaştırın" },
+          { v: "refinance", e: "💰", label: "Refinansman", sub: "Ev değerinizden para çekin: refinansman, HELOC (ev kredisi) veya ikinci mortgage" },
         ],
       },
       {
@@ -730,9 +718,9 @@ export default {
       continue: "Devam Et",
       whatToday: "Bugün ne yapmak istiyorsunuz?",
       actions: {
-        buy: { title: "Yeni Mortgage", desc: "Ön onay alın, bütçenizi görün ve doğru mortgage seçenekleriyle ev alımına hazırlanın.", button: "Yeni Mortgage Başlat" },
-        renew: { title: "Yenile / Taşı", desc: "Son kararınızı vermeden yenileme teklifinizi, oranınızı, ödemenizi ve taşıma seçeneklerini karşılaştırın.", button: "Yenile / Taşı Başlat" },
-        refinance: { title: "Refinansman", desc: "Refinansman, borç birleştirme, tadilat finansmanı, HELOC veya ikinci mortgage ile ev sermayenizden yararlanın.", button: "Refinansman Başlat" },
+        buy: { title: "Yeni Mortgage", desc: "Ön onay alın, bütçenizi görün, daha iyi oran bulun.", button: "Yeni Mortgage Başlat" },
+        renew: { title: "Yenile / Taşı", desc: "Sadece kendi bankanızın teklifine bakmayın, karşılaştırın.", button: "Yenile / Taşı Başlat" },
+        refinance: { title: "Refinansman", desc: "Ev değerinizden para çekin: refinansman, HELOC (ev kredisi) veya ikinci mortgage.", button: "Refinansman Başlat" },
       },
       help: {
         greeting: "Merhaba {name},",
@@ -1100,5 +1088,78 @@ export default {
         "Kapanışa kadar her önemli adımda sizi güncel tutalım.",
       ],
     },
+  },
+  softCheck: {
+    badge: {
+      headline: "Kredi skorunuz korunuyor.",
+      sub: "Ön onay ve oran karşılaştırmasında Equifax yumuşak kredi sorgusu kullanıyoruz — skorunuza sıfır etki.",
+      chip: "0 puan etki",
+      learnMore: "Nasıl çalışır?",
+    },
+    stats: [
+      { value: "0", label: "puan etki — yumuşak sorgu skorunuzu düşürmez" },
+      { value: "14–45", label: "gün içindeki sorgular tek sorgu sayılır" },
+      { value: "%100", label: "sert sorgu öncesi açık onayınız alınır" },
+    ],
+    compare: {
+      soft: {
+        name: "Yumuşak Sorgu",
+        tag: "Skora etkisi yok",
+        points: [
+          "Kredi skorunuzu hiç etkilemez",
+          "Ön onay ve oran karşılaştırmada kullanılır",
+          "Onay gerekmez — rahatça keşfedin",
+        ],
+      },
+      hard: {
+        name: "Sert Sorgu",
+        tag: "Küçük, geçici",
+        points: [
+          "Resmi başvuruda birkaç puanlık geçici etki",
+          "Yalnızca resmi mortgage başvurusunda",
+          "Her zaman açık onayınızı önce alırız",
+        ],
+      },
+    },
+    modal: {
+      title: "Kredi Skorunuz Güvende",
+      intro: "Kredibaba ile mortgage seçeneklerini keşfetmek tasasızdır. Ön onay ve oran karşılaştırmaları Equifax yumuşak sorgusu kullanır — skorunuza sıfır etki.",
+      compareTitle: "Yumuşak vs. Sert Sorgu",
+      faqTitle: "Sık Sorulan Sorular",
+      close: "Anladım",
+    },
+    faq: [
+      {
+        q: "Kredi kontrolü nedir?",
+        a: "Kredi kontrolü, bir kuruluşun finansal güvenilirliğinizi değerlendirmek için kredi geçmişinizi incelemesidir. Borçlanma alışkanlıklarınızı, mevcut borçlarınızı ve kredileri ne kadar sorumlu yönettiğinizi gösterir. İki türü vardır: yumuşak ve sert sorgu.",
+      },
+      {
+        q: "Yumuşak kredi sorgusu nedir? Skoru etkiler mi?",
+        a: "Yumuşak sorgu (soft pull), kredi raporunuzun bir anlık görüntüsünü alır ve skorunuzu hiç etkilemez. Ön onay ve oran karşılaştırmalarında kullanılır. Kredibaba yalnızca Equifax yumuşak sorgusunu kullanır — skorunuza dokunulmaz.",
+      },
+      {
+        q: "Sert kredi sorgusu nedir?",
+        a: "Sert sorgu (hard pull), kredi raporunuzun daha ayrıntılı bir incelemesidir. Resmi mortgage başvurusunda yapılır ve skorunuzda küçük, geçici bir düşüşe neden olabilir — genellikle yalnızca birkaç puan.",
+      },
+      {
+        q: "Birden fazla mortgage seçeneği karşılaştırmak skoru düşürür mü?",
+        a: "Hayır — en azından anlamlı ölçüde değil. Equifax, 14–45 günlük pencere içinde yapılan mortgage sorgularını tek bir sorgu olarak gruplar. Bu nedenle birden fazla seçeneği rahatça karşılaştırabilirsiniz.",
+      },
+      {
+        q: "Sert sorgu ne zaman yapılır?",
+        a: "Yalnızca resmi mortgage başvurusuna geçmeye karar verirseniz — ve biz her zaman önce açık onayınızı alırız. Yumuşak sorgunun tamamlanamadığı nadir durumlarda sert sorgu gerekebilir.",
+      },
+      {
+        q: "Kredi skorumu görebilir miyim?",
+        a: "Şu an için Kredibaba üzerinden göremezsiniz. Başvurunuzu desteklemek amacıyla kredi raporunuza güvenli biçimde erişiyoruz, ancak skoru size göstermiyoruz. Skorunuzu öğrenmek için Equifax, TransUnion veya güvenilir bir finans kuruluşunu kullanabilirsiniz.",
+      },
+      {
+        q: "Kredi sorgulamasından korkmalı mıyım?",
+        a: "Kesinlikle hayır. Kredi sorgusu, genel kredi skorunuzu etkileyen küçük bir faktördür. Oran araştırması için Equifax, 45 gün içindeki birden fazla mortgage sorgusunu tek sayar. Güvenle keşfedebilirsiniz.",
+      },
+    ],
+    learnSectionLabel: "Kredi Sorgulama Rehberi",
+    learnSectionTitle: "Yumuşak Sorgu vs. Sert Sorgu — Bilmeniz Gereken Her Şey",
+    learnSectionSub: "Kredibaba ile mortgage seçeneklerini keşfetmek kredi skorunuz için tamamen güvenlidir.",
   },
 };

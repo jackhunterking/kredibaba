@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronUp, Menu, Phone, Search, ShieldCheck, X } from "lucide-react";
+import flagTr from "./assets/flag-tr.svg";
 import { C, FB, R, S, SHADOW, TEL, LICENSE, BROKERAGE, WhatsAppIconBadge, buildWhatsAppUrl, wrap } from "./theme.jsx";
 import { useLang, interp } from "./i18n/LanguageContext.jsx";
 import LanguageToggle from "./components/LanguageToggle.jsx";
@@ -28,11 +29,8 @@ function TopBar({ ctaHref }) {
     <div className="kb-top-promo">
       <div style={{...wrap}} className="kb-top-promo-inner">
         <span className="kb-top-promo-text">
-          <Search size={15}/> {t.topPromo.text}
+          <img src={flagTr} alt="" aria-hidden="true" style={{width:24,height:16,borderRadius:3,objectFit:"cover",display:"block",boxShadow:"0 0 0 1px rgba(10,37,64,.15)"}}/> {t.topPromo.text}
         </span>
-        <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="kb-top-promo-cta kb-whatsapp-button">
-          <WhatsAppIconBadge size={22} logoSize={16}/> {t.topPromo.cta}
-        </a>
       </div>
     </div>
   );
@@ -91,7 +89,6 @@ function MobileDrawer({ open, currentGroup, setCurrentGroup, onClose }) {
   const { t } = useLang();
   if (!open) return null;
   const solutionItems = t.mega.cozumler.groups.flatMap((group) => group.items);
-  const toolItems = t.mega.araclar.groups[0].items;
 
   return (
     <div className="kb-mobile-drawer">
@@ -101,13 +98,6 @@ function MobileDrawer({ open, currentGroup, setCurrentGroup, onClose }) {
           items={solutionItems}
           open={currentGroup === 'cozumler'}
           onToggle={() => setCurrentGroup(currentGroup === 'cozumler' ? '' : 'cozumler')}
-          onClose={onClose}
-        />
-        <MobileGroup
-          title={t.nav.tools}
-          items={toolItems}
-          open={currentGroup === 'araclar'}
-          onToggle={() => setCurrentGroup(currentGroup === 'araclar' ? '' : 'araclar')}
           onClose={onClose}
         />
         <NavLink to="/ogren" className="kb-mobile-simple-link" onClick={onClose}>{t.nav.learn}</NavLink>
@@ -130,7 +120,6 @@ function Navbar({ctaHref}) {
 
   const NAV = [
     { key:'cozumler', to:'/cozumler', label:t.nav.solutions, mega:true },
-    { key:'araclar',  to:'/araclar',  label:t.nav.tools, mega:true },
     { key:'ogren',    to:'/ogren',    label:t.nav.learn },
     { key:'hakkimizda', to:'/hakkimizda', label:t.nav.about },
   ];
@@ -211,7 +200,7 @@ function Footer() {
   return (
     <footer style={{background:C.navyD,color:'rgba(255,255,255,0.7)'}}>
       <div style={{...wrap,paddingTop:56,paddingBottom:36}}>
-        <div className="kb-foot" style={{display:'grid',gridTemplateColumns:'1.4fr repeat(3,1fr)',gap:32,marginBottom:44}}>
+        <div className="kb-foot" style={{display:'grid',gridTemplateColumns:'1.4fr repeat(2,1fr)',gap:32,marginBottom:44}}>
           <div>
             <Link to="/" className="kb-footer-logo">
               <img className="kb-footer-logo-mark" src={kredibabaMark} alt="" aria-hidden="true" />
@@ -226,8 +215,10 @@ function Footer() {
             <p style={{fontSize:13.5,lineHeight:1.7,maxWidth:310,fontFamily:FB}}>
               {interp(t.footer.brand, vars)}
             </p>
-            <div style={{marginTop:18,display:'flex',alignItems:'center',gap:8,fontSize:13,color:'rgba(255,255,255,0.6)'}}>
-              <Phone size={14}/> {TEL}
+            <div style={{marginTop:18}}>
+              <a href={buildWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="kb-whatsapp-button" style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 16px',borderRadius:8,background:C.wa,color:'#fff',fontSize:13,fontWeight:600,fontFamily:FB,textDecoration:'none',border:`1.5px solid ${C.wa}`}}>
+                <WhatsAppIconBadge size={16}/> WhatsApp
+              </a>
             </div>
           </div>
           {cols.map((c,i)=>(
@@ -433,7 +424,7 @@ export default function Layout() {
           .kb-4col{grid-template-columns:1fr!important}
           .kb-mini-3col{grid-template-columns:1fr!important}
           .kb-stats{grid-template-columns:1fr 1fr!important;gap:14px!important}
-          .kb-top-promo-inner{flex-direction:column;gap:9px;padding-top:9px;padding-bottom:10px}
+          .kb-top-promo-inner{flex-direction:column;gap:9px;padding-top:14px;padding-bottom:14px}
           .kb-top-promo-text{font-size:13.5px;text-align:center}
           .kb-top-promo-cta{padding:7px 16px}
           .kb-logo-mark{width:31px;height:31px}

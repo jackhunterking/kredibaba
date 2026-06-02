@@ -4,7 +4,6 @@ import Home from "./pages/Home.jsx";
 import Solutions from "./pages/Solutions.jsx";
 import SolutionDetail from "./pages/SolutionDetail.jsx";
 import Rates from "./pages/Rates.jsx";
-import Tools from "./pages/Tools.jsx";
 import Learn from "./pages/Learn.jsx";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
@@ -27,7 +26,6 @@ export default function App() {
         <Route path="cozumler/serbest-meslek" element={<SolutionDetail slug="serbest-meslek"/>}/>
         <Route path="cozumler/yeni-gelenler" element={<SolutionDetail slug="yeni-gelenler"/>}/>
         <Route path="oranlar" element={<Rates/>}/>
-        <Route path="araclar" element={<Tools/>}/>
         <Route path="ogren" element={<Learn/>}/>
         <Route path="hakkimizda" element={<About/>}/>
         <Route path="iletisim" element={<Contact/>}/>

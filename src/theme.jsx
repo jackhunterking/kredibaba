@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ShieldCheck, Globe, Award, Star, Linkedin, ArrowRight } from "lucide-react";
+import { ShieldCheck, Globe, Award, Star, Linkedin, ArrowRight, X, ChevronDown, Check, Minus } from "lucide-react";
 import { useLang } from "./i18n/LanguageContext.jsx";
 import jackPhoto from "./assets/people/jack.jpg";
 import taraPhoto from "./assets/people/tara.jpg";
 import asifPhoto from "./assets/people/asif.jpg";
+import equifaxMark from "./assets/equifax-logo.svg";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // DESIGN TOKENS — institutional / bank style (light, navy + blue)
@@ -133,7 +134,7 @@ export const WA = '16473913311';
 export const TEL = '+1 647-391-3311';
 export const TEL_LINK = '+16473913311';
 export const CAL = 'https://calendly.com/kredibaba/danisma';
-export const LICENSE = 'FSRA #XXXXX';
+export const LICENSE = 'FSCO Licence # 10464';
 export const BROKERAGE = 'RMA Mortgage';
 
 export function buildWhatsAppUrl({ lang = 'tr', source = 'site' } = {}) {
@@ -179,10 +180,10 @@ export const IMG = {
   family:   'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1100&q=80',
   // Persona lifestyle imagery — situations, not specific people (swap for branded photography later)
   personaFirst:    'https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=640&q=80', // young family + first home
-  personaOwner:    'https://images.unsplash.com/photo-1543269664-56d93c1b41a6?auto=format&fit=crop&w=640&q=80',     // reviewing options at home
-  personaInvestor: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?auto=format&fit=crop&w=640&q=80',  // property / portfolio
+  personaOwner:    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=640&q=80',     // homeowner couple at their home
+  personaInvestor: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=640&q=80',  // rental apartment buildings / portfolio
   personaSelf:     'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=640&q=80',  // self-employed / working
-  personaNewcomer: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=640&q=80',  // community / newcomers
+  personaNewcomer: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=640&q=80',  // newcomer traveller arriving in Canada
 };
 
 // Real photography of the people behind Kredibaba (anchors trust across the site).
@@ -397,17 +398,24 @@ export function PhotoAvatar({ src, pos = 'center', alt = '', size = 64, ring = C
 
 // Small "this is your advisor" chip, designed to overlay a hero/feature image.
 export function AdvisorChip({ name, line }) {
+  const team = [PEOPLE.jack, PEOPLE.tara, PEOPLE.asif];
   return (
     <div style={{
-      position:'absolute', left:16, bottom:16, right:16, maxWidth:300,
-      display:'flex', alignItems:'center', gap:12,
+      position:'absolute', left:16, bottom:16, right:16, maxWidth:360,
+      display:'flex', alignItems:'center', gap:14,
       background:'rgba(255,255,255,0.94)', backdropFilter:'blur(6px)',
-      border:`1px solid ${C.border}`, borderRadius:R.card, padding:'10px 14px', boxShadow:SHADOW.card,
+      border:`1px solid ${C.border}`, borderRadius:R.card, padding:'12px 16px', boxShadow:SHADOW.card,
     }}>
-      <PhotoAvatar src={PEOPLE.jack.src} pos={PEOPLE.jack.pos} alt={name} size={46} initials={PEOPLE.jack.initials} frame/>
+      <div style={{display:'flex', alignItems:'center', flexShrink:0}}>
+        {team.map((p, i) => (
+          <span key={p.alt} style={{marginLeft:i === 0 ? 0 : -14, display:'inline-flex'}}>
+            <PhotoAvatar src={p.src} pos={p.pos} alt={p.alt} size={42} initials={p.initials} frame/>
+          </span>
+        ))}
+      </div>
       <div style={{minWidth:0}}>
         <div style={{fontFamily:FB, fontSize:13.5, color:C.navy, fontWeight:700, lineHeight:1.2}}>{name}</div>
-        <div style={{fontFamily:FB, fontSize:12.5, color:C.body, lineHeight:1.3, marginTop:2}}>{line}</div>
+        <div style={{fontFamily:FB, fontSize:12.5, color:C.body, lineHeight:1.35, marginTop:2}}>{line}</div>
       </div>
     </div>
   );
@@ -535,5 +543,321 @@ export function PersonaPhotoCard({ id, image, icon, title, text, onClick, to, im
     <div id={id} style={baseStyle}>
       {content}
     </div>
+  );
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SOFT CREDIT CHECK — Equifax-backed trust badge + educational modal
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const EQ_RED = '#AF0B2D'; // Equifax "Shiraz" brand red
+
+// Official Equifax wordmark (white) on the brand-red plate.
+export function EquifaxLogo({ height = 15 }) {
+  const pad = Math.round(height * 0.62);
+  return (
+    <span style={{
+      display:'inline-flex', alignItems:'center', justifyContent:'center',
+      background:EQ_RED, borderRadius:6, padding:`${Math.round(height*0.5)}px ${pad}px`,
+      flexShrink:0, lineHeight:0,
+    }}>
+      <img src={equifaxMark} alt="Equifax" style={{height, width:'auto', display:'block'}}/>
+    </span>
+  );
+}
+
+// Green "no impact" shield mark used as the primary trust visual.
+function ShieldMark({ size = 44, tone = 'green' }) {
+  const fg = tone === 'green' ? C.green : C.amber;
+  const bg = tone === 'green' ? C.greenFaint : C.amberFaint;
+  return (
+    <span style={{
+      display:'inline-flex', alignItems:'center', justifyContent:'center',
+      width:size, height:size, borderRadius:R.icon, background:bg, color:fg,
+      flexShrink:0, border:`1px solid ${fg}22`,
+    }}>
+      <ShieldCheck size={Math.round(size*0.52)}/>
+    </span>
+  );
+}
+
+// Three big-number reassurance stats — high signal, low text density.
+function SoftCheckStats() {
+  const { t } = useLang();
+  return (
+    <div className="kb-3col" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:12}}>
+      {t.softCheck.stats.map((s, i) => (
+        <div key={i} style={{
+          background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card,
+          padding:'18px 18px', display:'flex', flexDirection:'column', gap:6,
+        }}>
+          <div style={{fontFamily:FB, fontSize:34, fontWeight:800, color:C.green, lineHeight:1}}>{s.value}</div>
+          <div style={{fontSize:13, color:C.body, lineHeight:1.4, fontWeight:500}}>{s.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Side-by-side soft vs hard cards — scannable, icon-led, color-coded.
+function SoftCheckCompare() {
+  const { t } = useLang();
+  const c = t.softCheck.compare;
+  const Card = ({ data, tone }) => {
+    const fg = tone === 'green' ? C.green : C.amber;
+    const bg = tone === 'green' ? C.greenFaint : C.amberFaint;
+    return (
+      <div style={{
+        background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card,
+        overflow:'hidden', display:'flex', flexDirection:'column',
+      }}>
+        <div style={{
+          display:'flex', alignItems:'center', justifyContent:'space-between', gap:10,
+          padding:'13px 16px', background:bg, borderBottom:`1px solid ${fg}22`,
+        }}>
+          <span style={{display:'flex', alignItems:'center', gap:9}}>
+            <ShieldMark size={30} tone={tone}/>
+            <span style={{fontFamily:FB, fontSize:15.5, fontWeight:700, color:C.navy}}>{data.name}</span>
+          </span>
+          <span style={{
+            fontFamily:FB, fontSize:11, fontWeight:700, color:fg, background:'#fff',
+            border:`1px solid ${fg}33`, borderRadius:999, padding:'4px 10px', whiteSpace:'nowrap',
+          }}>{data.tag}</span>
+        </div>
+        <div style={{padding:'14px 16px', display:'grid', gap:10}}>
+          {data.points.map((p, i) => (
+            <div key={i} style={{display:'flex', gap:9, alignItems:'flex-start'}}>
+              <span style={{color:fg, flexShrink:0, marginTop:1, display:'flex'}}>
+                {tone === 'green' ? <Check size={15}/> : <Minus size={15}/>}
+              </span>
+              <span style={{fontSize:13.5, color:C.body, lineHeight:1.45}}>{p}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+  return (
+    <div className="kb-2col" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:14}}>
+      <Card data={c.soft} tone="green"/>
+      <Card data={c.hard} tone="amber"/>
+    </div>
+  );
+}
+
+// Progressive-disclosure FAQ — only questions show until expanded.
+function SoftCheckFaq({ defaultOpen = 0 }) {
+  const { t } = useLang();
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div style={{display:'grid', gap:8}}>
+      {t.softCheck.faq.map((item, i) => {
+        const isOpen = open === i;
+        return (
+          <div key={i} style={{
+            background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.card, overflow:'hidden',
+          }}>
+            <button
+              onClick={() => setOpen(isOpen ? -1 : i)}
+              style={{
+                width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', gap:12,
+                padding:'14px 16px', background:'none', border:'none', cursor:'pointer', textAlign:'left',
+                fontFamily:FB, fontSize:14.5, fontWeight:700, color:C.navy, lineHeight:1.35,
+              }}
+            >
+              {item.q}
+              <ChevronDown size={18} color={C.muted} style={{
+                flexShrink:0, transition:'transform .2s ease', transform:isOpen?'rotate(180deg)':'none',
+              }}/>
+            </button>
+            {isOpen && (
+              <p style={{fontSize:13.5, color:C.body, lineHeight:1.6, margin:0, padding:'0 16px 15px'}}>
+                {item.a}
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Full educational block (stats + comparison + FAQ) — reused on Learn page.
+export function SoftCheckExplainer() {
+  const { t } = useLang();
+  return (
+    <div style={{display:'grid', gap:22}}>
+      <SoftCheckStats/>
+      <div>
+        <div style={{display:'flex', alignItems:'center', gap:10, marginBottom:12}}>
+          <h3 style={{fontFamily:FB, fontSize:17, fontWeight:700, color:C.navy, margin:0}}>{t.softCheck.modal.compareTitle}</h3>
+          <EquifaxLogo height={13}/>
+        </div>
+        <SoftCheckCompare/>
+      </div>
+      <div>
+        <h3 style={{fontFamily:FB, fontSize:17, fontWeight:700, color:C.navy, margin:'0 0 12px'}}>{t.softCheck.modal.faqTitle}</h3>
+        <SoftCheckFaq/>
+      </div>
+    </div>
+  );
+}
+
+export function SoftCheckModal({ onClose }) {
+  const { t } = useLang();
+  const sc = t.softCheck;
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const handler = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', handler);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', handler);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{
+        position:'fixed', inset:0, zIndex:9999,
+        background:'rgba(10,37,64,0.55)', backdropFilter:'blur(3px)',
+        display:'flex', alignItems:'flex-end', justifyContent:'center',
+      }}
+    >
+      <div style={{
+        background:'#fff', width:'100%', maxWidth:640,
+        borderRadius:'20px 20px 0 0', maxHeight:'92dvh', overflowY:'auto',
+        boxShadow:'0 -8px 40px rgba(10,37,64,0.18)',
+      }}>
+        {/* Sticky header */}
+        <div style={{
+          position:'sticky', top:0, zIndex:1, background:'#fff',
+          display:'flex', alignItems:'center', justifyContent:'space-between', gap:12,
+          padding:'18px 22px 14px', borderBottom:`1px solid ${C.border}`,
+        }}>
+          <div style={{display:'flex', alignItems:'center', gap:11}}>
+            <EquifaxLogo height={15}/>
+            <h2 style={{fontFamily:FB, fontSize:18, fontWeight:700, color:C.navy, lineHeight:1.2, margin:0}}>
+              {sc.modal.title}
+            </h2>
+          </div>
+          <button onClick={onClose} style={{
+            background:C.surface, border:`1px solid ${C.border}`, cursor:'pointer', color:C.body,
+            display:'flex', alignItems:'center', justifyContent:'center',
+            width:32, height:32, borderRadius:R.control, flexShrink:0,
+          }}>
+            <X size={18}/>
+          </button>
+        </div>
+
+        <div style={{padding:'18px 22px 26px', display:'grid', gap:20}}>
+          {/* Reassurance callout */}
+          <div style={{
+            display:'flex', gap:13, alignItems:'center',
+            background:C.greenFaint, border:`1px solid ${C.green}22`,
+            borderRadius:R.card, padding:'14px 16px',
+          }}>
+            <ShieldMark size={42} tone="green"/>
+            <p style={{fontSize:14, color:C.navy, lineHeight:1.5, margin:0, fontWeight:500}}>{sc.modal.intro}</p>
+          </div>
+
+          <SoftCheckStats/>
+
+          <div>
+            <h3 style={{fontFamily:FB, fontSize:15.5, fontWeight:700, color:C.navy, margin:'0 0 11px'}}>{sc.modal.compareTitle}</h3>
+            <SoftCheckCompare/>
+          </div>
+
+          <div>
+            <h3 style={{fontFamily:FB, fontSize:15.5, fontWeight:700, color:C.navy, margin:'0 0 11px'}}>{sc.modal.faqTitle}</h3>
+            <SoftCheckFaq/>
+          </div>
+
+          <button
+            onClick={onClose}
+            style={{
+              width:'100%', padding:'14px', borderRadius:R.control,
+              background:C.navy, color:'#fff', border:'none', cursor:'pointer',
+              fontFamily:FB, fontSize:15, fontWeight:700,
+            }}
+          >
+            {sc.modal.close}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// variant: "inline" (compact pill) | "card" (full-width trust banner)
+export function SoftCheckBadge({ variant = 'card' }) {
+  const { t } = useLang();
+  const [open, setOpen] = useState(false);
+  const sc = t.softCheck;
+
+  if (variant === 'inline') {
+    return (
+      <>
+        <button
+          onClick={() => setOpen(true)}
+          style={{
+            display:'inline-flex', alignItems:'center', gap:10, width:'100%',
+            background:'#fff', border:`1px solid ${C.border}`, borderRadius:R.control,
+            padding:'9px 12px', boxShadow:SHADOW.card, cursor:'pointer', textAlign:'left',
+          }}
+        >
+          <EquifaxLogo height={13}/>
+          <span style={{fontSize:13, color:C.navy, fontFamily:FB, fontWeight:600, lineHeight:1.3, flex:1, minWidth:0}}>
+            {sc.badge.sub}
+          </span>
+          <span style={{
+            display:'inline-flex', alignItems:'center', gap:4, color:C.blue,
+            fontFamily:FB, fontSize:12.5, fontWeight:700, flexShrink:0, whiteSpace:'nowrap',
+          }}>
+            {sc.badge.learnMore} <ArrowRight size={13}/>
+          </span>
+        </button>
+        {open && <SoftCheckModal onClose={() => setOpen(false)}/>}
+      </>
+    );
+  }
+
+  // card variant — horizontal banner, content fills the width (low whitespace)
+  return (
+    <>
+      <div className="kb-softcheck-banner" style={{
+        display:'flex', alignItems:'center', gap:16, flexWrap:'wrap',
+        background:`linear-gradient(180deg,#fff,${C.surface})`,
+        border:`1px solid ${C.border}`, borderRadius:R.card,
+        padding:'14px 18px', boxShadow:SHADOW.card,
+      }}>
+        <ShieldMark size={46} tone="green"/>
+        <div style={{flex:'1 1 280px', minWidth:0, display:'flex', flexDirection:'column', gap:3}}>
+          <div style={{display:'flex', alignItems:'center', gap:9, flexWrap:'wrap'}}>
+            <span style={{fontFamily:FB, fontSize:15.5, fontWeight:700, color:C.navy, lineHeight:1.2}}>{sc.badge.headline}</span>
+            <span style={{
+              fontFamily:FB, fontSize:11, fontWeight:700, color:C.green,
+              background:C.greenFaint, border:`1px solid ${C.green}22`, borderRadius:999, padding:'3px 9px',
+            }}>{sc.badge.chip}</span>
+          </div>
+          <span style={{fontSize:13, color:C.body, lineHeight:1.45}}>{sc.badge.sub}</span>
+        </div>
+        <EquifaxLogo height={15}/>
+        <button
+          onClick={() => setOpen(true)}
+          style={{
+            display:'inline-flex', alignItems:'center', gap:7, flexShrink:0,
+            background:C.navy, color:'#fff', border:'none', borderRadius:R.control,
+            padding:'10px 16px', cursor:'pointer', fontFamily:FB, fontSize:13.5, fontWeight:700,
+          }}
+        >
+          {sc.badge.learnMore} <ArrowRight size={15}/>
+        </button>
+      </div>
+      {open && <SoftCheckModal onClose={() => setOpen(false)}/>}
+    </>
   );
 }

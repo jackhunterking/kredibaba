@@ -1,13 +1,14 @@
 import { useOutletContext, Link } from "react-router-dom";
 import {
-  ArrowRight, BookOpen, Calculator, FileCheck,
-  Home as HomeIcon, Landmark, Percent, PiggyBank, RefreshCw,
+  ArrowRight, BookOpen,
+  Home as HomeIcon, Landmark, PiggyBank, RefreshCw,
   ShieldCheck, TrendingDown, Unlock, Wallet,
 } from "lucide-react";
 import {
   C, FB, R, S, SectionLabel, SHADOW,
-  ghostBtn, IMG, primaryBtn, whatsAppBtn, WhatsAppIconBadge, wrap,
+  ghostBtn, IMG, whatsAppBtn, WhatsAppIconBadge, wrap,
   AdvisorChip, AdvisorStrip, Testimonials, PersonaPhotoCard, PhotoAvatar, PEOPLE,
+  SoftCheckBadge,
 } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 import HeroRateSummary from "../components/rates/HeroRateSummary.jsx";
@@ -63,12 +64,16 @@ function Hero({ ctaHref }) {
             <AdvisorChip name={h.advisorName} line={h.advisorLine}/>
           </div>
         </div>
+
+        <div style={{marginTop:S[16]}}>
+          <SoftCheckBadge variant="card"/>
+        </div>
       </div>
     </section>
   );
 }
 
-function JourneyCard({ icon, title, sub, to, cta }) {
+function JourneyCard({ icon, title, sub, to }) {
   return (
     <Link to={to} style={{textDecoration:'none'}}>
       <div style={{
@@ -104,9 +109,6 @@ function JourneyCard({ icon, title, sub, to, cta }) {
             {sub}
           </p>
         </div>
-        <span style={{display:'inline-flex',alignItems:'center',gap:7,color:C.blue,fontSize:13.5,fontWeight:600,fontFamily:FB}}>
-          {cta} <ArrowRight size={15}/>
-        </span>
       </div>
     </Link>
   );
@@ -134,7 +136,7 @@ function JourneySection() {
       </div>
       <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
         {journeys.map((journey) => (
-          <JourneyCard key={journey.title} {...journey} cta={t.home.journeyCardCta}/>
+          <JourneyCard key={journey.title} {...journey}/>
         ))}
       </div>
     </section>
@@ -176,63 +178,6 @@ function WhoWeHelp({ ctaHref }) {
               text={item.text}
               to={item.to}
             />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function QuickTools() {
-  const { t } = useLang();
-  const q = t.home.quickTools;
-  const icons = [<FileCheck size={21}/>, <Calculator size={21}/>, <Percent size={21}/>, <Landmark size={21}/>];
-  const tos = ['/araclar#on-onay', '/araclar#mortgage-hesaplayici', '/araclar#uygunluk-hesaplayici', '/araclar#kapanis-masrafi'];
-  const tools = q.items.map((it, i) => ({ icon: icons[i], title: it.title, sub: it.sub, to: tos[i] }));
-
-  return (
-    <section style={{...wrap,paddingTop:S[56],paddingBottom:S[56]}}>
-      <div className="kb-2col" style={{display:'grid',gridTemplateColumns:'0.78fr 1.22fr',gap:28,alignItems:'center'}}>
-        <div>
-          <SectionLabel>{q.label}</SectionLabel>
-          <h2 style={{fontFamily:FB,fontSize:'clamp(28px,4vw,38px)',color:C.navy,fontWeight:700,lineHeight:1.16,marginBottom:12}}>
-            {q.title}
-          </h2>
-          <p style={{fontSize:15.5,color:C.body,lineHeight:1.55,marginBottom:20}}>
-            {q.sub}
-          </p>
-          <Link to="/araclar" style={{textDecoration:'none'}}>
-            <button style={primaryBtn({padding:'13px 22px',display:'inline-flex',alignItems:'center',gap:8})}>
-              {q.button} <ArrowRight size={16}/>
-            </button>
-          </Link>
-        </div>
-        <div className="kb-4col" style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:16}}>
-          {tools.map((tool) => (
-            <Link key={tool.title} to={tool.to} style={{textDecoration:'none'}}>
-              <div style={{background:C.surface,border:`1px solid ${C.border}`,borderRadius:R.card,padding:'20px',height:'100%'}}>
-                <span style={{
-                  width:44,
-                  height:44,
-                  borderRadius:R.icon,
-                  background:'#fff',
-                  border:`1px solid ${C.border}`,
-                  color:C.blue,
-                  display:'flex',
-                  alignItems:'center',
-                  justifyContent:'center',
-                  marginBottom:16,
-                }}>
-                  {tool.icon}
-                </span>
-                <h3 style={{fontFamily:FB,fontSize:21,color:C.navy,fontWeight:600,marginBottom:5}}>
-                  {tool.title}
-                </h3>
-                <p style={{fontSize:13.5,color:C.muted,fontWeight:600,lineHeight:1.35}}>
-                  {tool.sub}
-                </p>
-              </div>
-            </Link>
           ))}
         </div>
       </div>
@@ -339,7 +284,6 @@ export default function Home() {
       <JourneySection/>
       <WhoWeHelp ctaHref={getWhatsAppHref("home-who-we-help")}/>
       <Testimonials/>
-      <QuickTools/>
       <LearnPreview/>
       <AdvisorStrip ctaHref={getWhatsAppHref("home-advisor")}/>
       <FinalCTA ctaHref={homeCtaHref}/>

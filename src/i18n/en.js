@@ -10,12 +10,11 @@ export default {
     menuOpen: "Open menu",
     menuClose: "Close menu",
     logoAria: "Kredibaba home",
-    byline: "By Hunter Group",
+    byline: "A Hunter Group Company",
   },
 
   topPromo: {
-    text: "Free mortgage estimate",
-    cta: "Message on WhatsApp",
+    text: "Mortgage Assistance in Turkish",
   },
 
   mega: {
@@ -28,7 +27,7 @@ export default {
           items: [
             { label: "First-time buyers", href: "/cozumler/ilk-ev" },
             { label: "Homeowners", href: "/cozumler/ev-sahipleri" },
-            { label: "Homeowners / investors", href: "/cozumler/yatirimcilar" },
+            { label: "Investors", href: "/cozumler/yatirimcilar" },
             { label: "Business owners / self-employed", href: "/cozumler/serbest-meslek" },
             { label: "Newcomers to Canada", href: "/cozumler/yeni-gelenler" },
           ],
@@ -81,21 +80,11 @@ export default {
         ],
       },
       {
-        h: "Helpful Tools",
-        links: [
-          { t: "Mortgage calculator", to: "/araclar" },
-          { t: "Affordability calculator", to: "/araclar" },
-          { t: "Today's lowest rate", to: "/oranlar" },
-          { t: "Closing costs", to: "/araclar" },
-        ],
-      },
-      {
         h: "Learn",
         links: [
-          { t: "Mortgage glossary", to: "/ogren" },
-          { t: "Home buying guide", to: "/ogren" },
-          { t: "Renewal and penalties", to: "/ogren" },
-          { t: "Frequently asked questions", to: "/ogren" },
+          { t: "Mortgage glossary", to: "/ogren#sozluk" },
+          { t: "Home buying guide", to: "/ogren#rehber" },
+          { t: "Frequently asked questions", to: "/ogren#sss" },
         ],
       },
     ],
@@ -103,7 +92,7 @@ export default {
     disclaimerLabel: "Legal disclaimer:",
     disclaimer: "Kredibaba is a service brand offered through {BROKERAGE}, a licensed mortgage brokerage operating in Ontario. The FSRA licence indicates that the mortgage brokerage service is subject to Ontario regulations. Licence No: {LICENSE}.",
     legal1: "This site is for informational purposes only; it does not constitute credit approval, a rate guarantee, or a lender commitment. Final rates and approval are confirmed based on income, credit history, property, down payment, lender conditions, and a written commitment. Mortgage brokerage fees or lender-paid commissions, where applicable, are disclosed in writing.",
-    legal2: "© {YEAR} Kredibaba. All rights reserved. RMA Mortgage / Principal Broker compliance approval is required before publication.",
+    legal2: "© {YEAR} Kredibaba. All rights reserved.",
   },
 
   common: {
@@ -122,8 +111,8 @@ export default {
       btnRates: "Message on WhatsApp",
       btnDisclosure: "Disclosure",
       imgAlt: "A modern home in Canada",
-      advisorName: "Jack Hunter",
-      advisorLine: "Your mortgage advisor — here to help, in Turkish too.",
+      advisorName: "Jack, Tara & Asif",
+      advisorLine: "We're here to help you — talk to a real person, in Turkish too.",
     },
     disclosure: {
       aria: "Rate disclosure",
@@ -137,11 +126,10 @@ export default {
         "Any fees that may apply to the borrower are disclosed in writing and plainly before the commitment.",
       ],
     },
-    journeyCardCta: "Start Now",
     journeys: {
-      label: "Journeys",
-      title: "What mortgage journey are you starting?",
-      sub: "Every path starts from one of three clean options, then we organize the right next steps around your file.",
+      label: "",
+      title: "How can we help you?",
+      sub: "",
       items: [
         { title: "New Mortgage", sub: "Get pre-approved, understand your budget, and prepare for a purchase" },
         { title: "Renew / Switch", sub: "Review your renewal offer and compare switching options before you decide" },
@@ -155,7 +143,7 @@ export default {
       items: [
         { title: "First-time buyers", text: "See the budget, costs, and steps clearly on your first purchase." },
         { title: "Homeowners", text: "Renewal, payment restructuring, or using your home equity." },
-        { title: "Homeowners / investors", text: "The right document flow for rental income, additional properties, and portfolios." },
+        { title: "Investors", text: "The right document flow for rental income, additional properties, and portfolios." },
         { title: "Business owners / self-employed", text: "Preparing income beyond a pay stub in a clear way." },
         { title: "Newcomers to Canada", text: "Learn about credit history, down payment, and lender expectations in Turkish." },
       ],
@@ -353,28 +341,28 @@ export default {
       {
         initials: "JH",
         name: "Jack Hunter",
-        role: "Founder",
+        role: "Co-Founder",
         photoKey: "jack",
         linkedin: "https://www.linkedin.com/in/jack-h-hunter/",
       },
       {
         initials: "TH",
         name: "Tara Hunter",
-        role: "Real Estate & Operations",
+        role: "Co-Founder",
         photoKey: "tara",
         linkedin: "https://www.linkedin.com/in/tara-hunter-960941200/?skipRedirect=true",
       },
       {
         initials: "AK",
         name: "Asif Karimov",
-        role: "Advisory Board",
+        role: "Adviser",
         credential: "CPA, MBA",
         photoKey: "asif",
         linkedin: "https://www.linkedin.com/in/asif-karimov/",
       },
     ],
     brokerageTitle: "Legal structure",
-    brokerageText: "Kredibaba is offered through {BROKERAGE}. FSRA licence info: {LICENSE}. Principal Broker compliance approval is required before publication.",
+    brokerageText: "Kredibaba is offered through {BROKERAGE}. FSRA licence info: {LICENSE}.",
     cta: {
       title: "Let's start in Turkish.",
       btnAccount: "Message on WhatsApp",
@@ -403,7 +391,7 @@ export default {
     who: [
       { id: "ilk-ev", title: "First-time buyers", text: "Budget · pre-approval · offer" },
       { id: "ev-sahipleri", title: "Homeowners", text: "Renewal · refinance" },
-      { id: "yatirimcilar", title: "Homeowners / investors", text: "Rental income · portfolio" },
+      { id: "yatirimcilar", title: "Investors", text: "Rental income · portfolio" },
       { id: "serbest-meslek", title: "Business owners / self-employed", text: "Income documents · company" },
       { id: "yeni-gelenler", title: "Newcomers to Canada", text: "New credit · new job" },
     ],
@@ -462,7 +450,7 @@ export default {
       },
     },
     "yatirimcilar": {
-      navLabel: "Homeowners / investors",
+      navLabel: "Investors",
       hero: {
         title: "Buy your next rental property sooner",
         underlineText: "sooner",
@@ -1100,5 +1088,78 @@ export default {
         "You stay updated through every milestone to closing.",
       ],
     },
+  },
+  softCheck: {
+    badge: {
+      headline: "Your credit score is protected.",
+      sub: "We use Equifax soft credit checks for pre-approvals and rate shopping — zero impact on your score.",
+      chip: "0-point impact",
+      learnMore: "How it works",
+    },
+    stats: [
+      { value: "0", label: "point impact from a soft check" },
+      { value: "14–45", label: "day window counted as one inquiry" },
+      { value: "100%", label: "consent before any hard check" },
+    ],
+    compare: {
+      soft: {
+        name: "Soft Check",
+        tag: "No score impact",
+        points: [
+          "Never affects your credit score",
+          "Used for pre-approval & rate comparison",
+          "No consent needed — explore freely",
+        ],
+      },
+      hard: {
+        name: "Hard Check",
+        tag: "Small, temporary",
+        points: [
+          "A few points, temporary, on official apply",
+          "Only for a formal mortgage application",
+          "We always get your explicit consent first",
+        ],
+      },
+    },
+    modal: {
+      title: "Your Credit Score Is Safe",
+      intro: "Exploring mortgage options with Kredibaba is worry-free. Pre-approvals and rate comparisons use Equifax soft checks — zero impact on your score.",
+      compareTitle: "Soft vs. Hard Check",
+      faqTitle: "Common Questions",
+      close: "Got it",
+    },
+    faq: [
+      {
+        q: "What is a credit check?",
+        a: "A credit check is when a lender reviews your credit history to assess your financial reliability. It shows your borrowing habits, outstanding debts, and how responsibly you manage credit. There are two types: soft and hard.",
+      },
+      {
+        q: "What is a soft credit check?",
+        a: "A soft check (soft pull) gives a snapshot of your credit report without affecting your score. It's used for background reviews, pre-approvals, and rate comparisons. Kredibaba uses Equifax soft checks — your score is never touched.",
+      },
+      {
+        q: "What is a hard credit check?",
+        a: "A hard check is a more in-depth review of your credit report. It happens when you formally apply for a mortgage and can have a small, temporary impact on your score — typically just a few points.",
+      },
+      {
+        q: "Does shopping around for mortgages hurt my credit?",
+        a: "No — not significantly. Equifax groups mortgage-related credit checks done within a 14–45 day window into a single inquiry. So you can compare multiple options without meaningfully impacting your score.",
+      },
+      {
+        q: "When does Kredibaba do a hard check?",
+        a: "Only if you decide to move forward with an official mortgage application — and we always ask for your explicit consent first. In rare cases where a soft check can't be completed, a hard check may be necessary.",
+      },
+      {
+        q: "Will I be able to see my credit score?",
+        a: "Not through Kredibaba at this time. We securely access your credit report to support your application, but we don't display your score. To check your score, use Equifax, TransUnion, or a trusted financial service.",
+      },
+      {
+        q: "Should I be worried about credit checks?",
+        a: "No. Credit checks are just one small factor in your overall credit score. For rate shopping, Equifax treats multiple mortgage checks within 45 days as one. You can explore freely with confidence.",
+      },
+    ],
+    learnSectionLabel: "Credit Checks Explained",
+    learnSectionTitle: "Soft Check vs. Hard Check — Everything You Need to Know",
+    learnSectionSub: "Exploring your mortgage options with Kredibaba is completely safe for your credit score.",
   },
 };

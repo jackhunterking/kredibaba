@@ -1,40 +1,26 @@
 import { useOutletContext } from "react-router-dom";
 import { ArrowRight, Eye, Heart, ShieldCheck, Users } from "lucide-react";
 import {
-  C, FB, R, S, wrap, whatsAppBtn, WhatsAppIconBadge, PersonCard, PageHero, SectionLabel, BROKERAGE, LICENSE, PEOPLE,
+  C, FB, R, S, wrap, whatsAppBtn, WhatsAppIconBadge, PersonCard, BROKERAGE, LICENSE, PEOPLE,
 } from "../theme.jsx";
 import { useLang, interp } from "../i18n/LanguageContext.jsx";
 
-const VALUE_ICONS = [<Eye size={20}/>, <Heart size={20}/>, <Users size={20}/>];
-
-function Values() {
-  const { t } = useLang();
-  const vals = t.about.values.map((v, i) => ({ ...v, icon: VALUE_ICONS[i] }));
-  return (
-    <section style={{...wrap,paddingTop:S[56],paddingBottom:S[32]}}>
-      <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18}}>
-        {vals.map((v,i)=>(
-          <div key={i} style={{background:'#fff',border:`1px solid ${C.border}`,borderRadius:R.card,padding:'24px 22px'}}>
-            <div style={{width:46,height:46,borderRadius:R.icon,background:C.blueFaint,color:C.blue,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:18}}>{v.icon}</div>
-            <h3 style={{fontFamily:FB,fontSize:23,color:C.navy,fontWeight:600,marginBottom:5}}>{v.t}</h3>
-            <p style={{fontSize:13.5,color:C.muted,fontWeight:600}}>{v.d}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+const VALUE_ICONS = [<Eye size={16}/>, <Heart size={16}/>, <Users size={16}/>];
 
 function Team() {
   const { t } = useLang();
   const leaders = t.about.team;
+  const vals = t.about.values.map((v, i) => ({ ...v, icon: VALUE_ICONS[i] }));
   return (
-    <section style={{...wrap,paddingTop:S[40],paddingBottom:S[32]}}>
-      <div style={{textAlign:'center',maxWidth:560,margin:'0 auto 28px'}}>
-        <SectionLabel>{t.about.teamLabel}</SectionLabel>
-        <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>
-          {t.about.teamTitle}
-        </h2>
+    <section style={{...wrap,paddingTop:S[56],paddingBottom:S[32]}}>
+      <div style={{display:'flex',gap:12,flexWrap:'wrap',marginBottom:40}}>
+        {vals.map((v,i)=>(
+          <div key={i} style={{display:'flex',alignItems:'center',gap:8,background:'#fff',border:`1px solid ${C.border}`,borderRadius:R.icon,padding:'8px 14px'}}>
+            <span style={{color:C.blue,display:'flex'}}>{v.icon}</span>
+            <span style={{fontFamily:FB,fontSize:13,color:C.navy,fontWeight:600}}>{v.t}</span>
+            <span style={{fontSize:12.5,color:C.muted}}>— {v.d}</span>
+          </div>
+        ))}
       </div>
       <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18}}>
         {leaders.map((p,i)=>{
@@ -92,12 +78,6 @@ export default function About() {
   const { t } = useLang();
   return (
     <>
-      <PageHero
-        label={t.about.label}
-        title={t.about.title}
-        sub={t.about.sub}
-      />
-      <Values/>
       <Team/>
       <Brokerage/>
       <CTA ctaHref={getWhatsAppHref("hakkimizda")}/>
