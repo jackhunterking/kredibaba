@@ -4,7 +4,7 @@ import {
   ArrowRight, Calculator, CreditCard, FileCheck, Home as HomeIcon,
   Landmark, Percent, PiggyBank, RefreshCw, Wallet,
 } from "lucide-react";
-import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel, AdvisorStrip } from "../theme.jsx";
+import { C, FB, R, S, SHADOW, wrap, whatsAppBtn, WhatsAppIconBadge, PageHero, SectionLabel, AdvisorStrip } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
 const fmt = (n) => '$' + Math.round(n).toLocaleString('en-CA');
@@ -91,9 +91,10 @@ function PaymentCalculator() {
 }
 
 export default function Tools() {
-  const { openForm } = useOutletContext();
+  const { getWhatsAppHref } = useOutletContext();
   const { t } = useLang();
   const tools = t.tools.list.map((item, i) => ({ ...item, icon: LIST_ICONS[i] }));
+  const toolsCtaHref = getWhatsAppHref("araclar");
   return (
     <>
       <PageHero
@@ -112,9 +113,11 @@ export default function Tools() {
             <SectionLabel>{t.tools.roadmapLabel}</SectionLabel>
             <h2 style={{fontFamily:FB,fontSize:'clamp(26px,4vw,34px)',color:C.navy,fontWeight:700,lineHeight:1.16}}>{t.tools.roadmapTitle}</h2>
           </div>
-          <button onClick={openForm} style={primaryBtn({padding:'13px 22px',display:'inline-flex',alignItems:'center',gap:8})}>
-            {t.tools.sendButton} <ArrowRight size={16}/>
-          </button>
+          <a href={toolsCtaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+            <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'12px 18px',display:'inline-flex',alignItems:'center',gap:9})}>
+              <WhatsAppIconBadge size={24} logoSize={17}/> {t.tools.sendButton} <ArrowRight size={16}/>
+            </span>
+          </a>
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
           {tools.map((tool,i)=>(
@@ -132,7 +135,7 @@ export default function Tools() {
         </div>
       </section>
 
-      <AdvisorStrip onCTA={openForm}/>
+      <AdvisorStrip ctaHref={getWhatsAppHref("araclar-advisor")}/>
     </>
   );
 }

@@ -5,7 +5,7 @@ export default {
     tools: "Tools",
     learn: "Learn",
     about: "About",
-    cta: "Open Free Account",
+    cta: "Message on WhatsApp",
     menu: "Menu",
     menuOpen: "Open menu",
     menuClose: "Close menu",
@@ -15,7 +15,7 @@ export default {
 
   topPromo: {
     text: "Free mortgage estimate",
-    cta: "Get started",
+    cta: "Message on WhatsApp",
   },
 
   mega: {
@@ -37,12 +37,9 @@ export default {
           title: "What do we help with?",
           className: "kb-mega-what",
           items: [
-            { label: "Buying a home", desc: "Budget and mortgage options", href: "/cozumler#ev-almak" },
-            { label: "Renewing my mortgage", desc: "Renewal and refinance options", href: "/cozumler#ev-kredimi-yenilemek" },
-            { label: "Renovation financing", desc: "Plan using your home equity", href: "/cozumler#tadilat-finansmani" },
-            { label: "Easing debt payments", desc: "Debt consolidation options", href: "/cozumler#borc-odemelerini-rahatlatmak" },
-            { label: "Using your home equity", desc: "HELOC / second mortgage", href: "/cozumler#ev-degerinden-yararlanmak" },
-            { label: "Exploring mortgage options", desc: "See rates and products that fit you", href: "/cozumler#mortgage-seceneklerini-incelemek" },
+            { label: "New Mortgage", desc: "Pre-approval, budget, and purchase path", href: "/cozumler#yeni-mortgage" },
+            { label: "Renew / Switch", desc: "Compare your renewal or switch options", href: "/cozumler#yenile-tasi" },
+            { label: "Refinance", desc: "Use equity, consolidate debt, or access HELOC options", href: "/cozumler#refinansman" },
           ],
         },
       ],
@@ -122,7 +119,7 @@ export default {
     hero: {
       title: "Mortgages made clear",
       cardTitle: "Canada's lowest mortgage rate of the day",
-      btnRates: "Get Qualified Now",
+      btnRates: "Message on WhatsApp",
       btnDisclosure: "Disclosure",
       imgAlt: "A modern home in Canada",
       advisorName: "Jack Hunter",
@@ -143,19 +140,18 @@ export default {
     journeyCardCta: "Start Now",
     journeys: {
       label: "Journeys",
-      title: "Why are you seeking financing?",
-      sub: "The goal here is not to label you, but to clarify which financing need you are starting with.",
+      title: "What mortgage journey are you starting?",
+      sub: "Every path starts from one of three clean options, then we organize the right next steps around your file.",
       items: [
-        { title: "I want to buy a home", sub: "Budget, pre-approval, and suitable mortgage options" },
-        { title: "Renew my mortgage", sub: "Review your current offer or look for a better payment" },
-        { title: "I'm looking for renovation financing", sub: "Plan a renovation budget using your home equity" },
-        { title: "I want to ease my debt payments", sub: "Making high-interest payments more manageable" },
+        { title: "New Mortgage", sub: "Get pre-approved, understand your budget, and prepare for a purchase" },
+        { title: "Renew / Switch", sub: "Review your renewal offer and compare switching options before you decide" },
+        { title: "Refinance", sub: "Use home equity for refinancing, debt consolidation, renovation, HELOC, or a second mortgage" },
       ],
     },
     who: {
       label: "Who do we help?",
       title: "Your situation may differ; the path should still be simple.",
-      button: "Show me my path",
+      button: "Get help on WhatsApp",
       items: [
         { title: "First-time buyers", text: "See the budget, costs, and steps clearly on your first purchase." },
         { title: "Homeowners", text: "Renewal, payment restructuring, or using your home equity." },
@@ -182,7 +178,7 @@ export default {
       items: [
         { title: "What is pre-approval?", text: "Seeing your approximate buying power before starting the process." },
         { title: "Renewal or refinance?", text: "The difference between an expiring mortgage and restructuring." },
-        { title: "Easing debt payments", text: "Options to make different payments more manageable." },
+        { title: "What starts as refinance?", text: "Equity access, debt consolidation, renovation financing, HELOC, or a second mortgage." },
       ],
     },
     testimonials: {
@@ -197,13 +193,13 @@ export default {
       title: "Ask us your questions directly.",
       body: "There are real people behind Kredibaba: Jack and Tara. We're with you at every step, in Turkish and English.",
       btnTalk: "Message on WhatsApp",
-      btnAccount: "Open Free Account",
+      btnAccount: "Message on WhatsApp",
     },
     finalCta: {
       title: "Let's clarify the right options for your file together.",
-      sub: "The free starting form is not an approval or rate guarantee; it is only used to identify the right journey and required documents.",
-      btnAccount: "Open Free Account",
-      btnRates: "Get Qualified Now",
+      sub: "Message us on WhatsApp; we will understand your situation and clarify the right next step together. This is not an approval or rate guarantee.",
+      btnAccount: "Message on WhatsApp",
+      btnRates: "View Rates",
     },
   },
 
@@ -212,7 +208,7 @@ export default {
     title: "Today's featured mortgage rates.",
     sub: "Clear conditions. Plain explanation. Not a guarantee; a starting indicator.",
     cardTitle: "Today's Lowest Mortgage Rates in Canada",
-    cardCtaLabel: "Get Qualified Now",
+    cardCtaLabel: "Ask on WhatsApp",
     disclosure: {
       aria: "Rate disclosure",
       label: "Disclosure",
@@ -248,8 +244,8 @@ export default {
     },
     cta: {
       title: "What might your rate be?",
-      sub: "A 2-minute starting form.",
-      btnAccount: "Open Free Account",
+      sub: "Message us on WhatsApp; we will clarify what information is needed for your file.",
+      btnAccount: "Message on WhatsApp",
       btnCalc: "Calculate",
     },
     lowestRate: {
@@ -285,7 +281,7 @@ export default {
     },
     roadmapLabel: "Roadmap",
     roadmapTitle: "Next tools",
-    sendButton: "Send results",
+    sendButton: "Send on WhatsApp",
     list: [
       { id: "mortgage-yol-bulucu", t: "Mortgage pathfinder", d: "Personalized starting point" },
       { id: "on-onay", t: "Pre-approval", d: "See your approximate buying power" },
@@ -326,13 +322,13 @@ export default {
     guidesLabel: "Guides",
     guidesTitle: "Your roadmap.",
     guides: [
-      { title: "Buying a home", text: "Budget → pre-approval → offer" },
-      { title: "Renewal / payment restructuring", text: "Offer → review → decision" },
-      { title: "Easing debt payments", text: "Payment burden → option → plan" },
+      { title: "New Mortgage", text: "Budget → pre-approval → purchase option" },
+      { title: "Renew / Switch", text: "Current offer → comparison → decision" },
+      { title: "Refinance", text: "Property equity → options → funding plan" },
     ],
     faqLabel: "FAQ",
     faqTitle: "Short answers.",
-    faqButton: "Open Free Account",
+    faqButton: "Ask on WhatsApp",
     faq: [
       { q: "Is Kredibaba a bank?", a: "No. It helps you find the right path in the mortgage process." },
       { q: "Is pre-approval final?", a: "No. Final approval comes with written lender conditions." },
@@ -381,22 +377,29 @@ export default {
     brokerageText: "Kredibaba is offered through {BROKERAGE}. FSRA licence info: {LICENSE}. Principal Broker compliance approval is required before publication.",
     cta: {
       title: "Let's start in Turkish.",
-      btnAccount: "Open Free Account",
+      btnAccount: "Message on WhatsApp",
       btnWhatsapp: "WhatsApp",
     },
   },
 
+  contact: {
+    title: "For your mortgage question, message us directly on WhatsApp.",
+    sub: "Send a WhatsApp message and we will handle your mortgage situation directly with you.",
+    button: "Message on WhatsApp",
+    note: "This first conversation is not a credit approval or rate guarantee. Required information and documents will be clarified in writing.",
+  },
+
   solutions: {
     label: "Solutions",
-    title: "Choose your situation. See the next step.",
-    sub: "Few words, a clear path: who we help and what we start with.",
+    title: "Start with the right mortgage journey.",
+    sub: "Personas can differ, but every file starts from one of three clean options.",
     whoLabel: "Who do we help?",
     whoHeading: "Pick the card closest to you.",
-    whatLabel: "What do we help with?",
-    whatHeading: "Choose the task.",
+    whatLabel: "Mortgage journeys",
+    whatHeading: "Choose the path that matches today's goal.",
     ctaTitle: "Which path should we start with?",
-    ctaSub: "Fill out the short form; we'll show you the next step.",
-    ctaButton: "Open Free Account",
+    ctaSub: "Message us on WhatsApp and we will clarify the next step together.",
+    ctaButton: "Message on WhatsApp",
     who: [
       { id: "ilk-ev", title: "First-time buyers", text: "Budget · pre-approval · offer" },
       { id: "ev-sahipleri", title: "Homeowners", text: "Renewal · refinance" },
@@ -405,12 +408,9 @@ export default {
       { id: "yeni-gelenler", title: "Newcomers to Canada", text: "New credit · new job" },
     ],
     what: [
-      { id: "ev-almak", title: "Buying a home", text: "Clarify your budget, down payment, and mortgage path" },
-      { id: "ev-kredimi-yenilemek", title: "Renewing my mortgage", text: "See renewal and refinance options simply" },
-      { id: "tadilat-finansmani", title: "Renovation financing", text: "Plan a renovation budget using your home equity" },
-      { id: "borc-odemelerini-rahatlatmak", title: "Easing debt payments", text: "Make payments more manageable with debt consolidation options" },
-      { id: "ev-degerinden-yararlanmak", title: "Using your home equity", text: "Consider HELOC / second mortgage options" },
-      { id: "mortgage-seceneklerini-incelemek", title: "Exploring mortgage options", text: "Review rates and products that fit you, simply" },
+      { id: "yeni-mortgage", title: "New Mortgage", text: "Start with pre-approval, budget, down payment, and purchase readiness" },
+      { id: "yenile-tasi", title: "Renew / Switch", text: "Compare your renewal offer, payment, rate, and switching options" },
+      { id: "refinansman", title: "Refinance", text: "Use home equity for refinancing, renovation, debt consolidation, HELOC, or a second mortgage" },
     ],
   },
 
@@ -421,7 +421,7 @@ export default {
         title: "Buy your first home with confidence",
         underlineText: "confidence",
         sub: "See what you can afford, move faster with a cleaner process, and start your path to homeownership with more clarity.",
-        ctaLabel: "Get started",
+        ctaLabel: "Start on WhatsApp",
       },
       cards: [
         { title: "Maximize purchasing power", text: "See the budget range you can take into a property search with more confidence.", imageKey: "personaFirst", iconKey: "buyingPower" },
@@ -430,12 +430,12 @@ export default {
       ],
       ratePanel: {
         title: "Featured mortgage rates in Canada",
-        ctaLabel: "Get Qualified Now",
+        ctaLabel: "Ask on WhatsApp",
       },
       finalCta: {
         title: "Let's map out your first-home path together.",
-        sub: "The short starting form helps us understand budget, documents, and next steps. It is not a credit approval or rate guarantee.",
-        ctaLabel: "Open Free Account",
+        sub: "Message us on WhatsApp so we can clarify your budget, documents, and next step together. This is not a credit approval or rate guarantee.",
+        ctaLabel: "Message on WhatsApp",
       },
     },
     "ev-sahipleri": {
@@ -444,7 +444,7 @@ export default {
         title: "The smart way to save money",
         underlineText: "save money",
         sub: "Reduce monthly payments, review renewal options, or use home equity with a simpler path and clearer lender comparisons.",
-        ctaLabel: "Get started",
+        ctaLabel: "Start on WhatsApp",
       },
       cards: [
         { title: "Instant mortgage rate quotes", text: "Review renewal and refinance options without relying on one lender conversation alone.", imageKey: "keys", iconKey: "quotes" },
@@ -453,12 +453,12 @@ export default {
       ],
       ratePanel: {
         title: "Featured mortgage rates in Canada",
-        ctaLabel: "Get Qualified Now",
+        ctaLabel: "Ask on WhatsApp",
       },
       finalCta: {
         title: "Let's review your homeowner options clearly.",
-        sub: "We use the starting form to identify whether renewal, refinance, or equity access is the best next step for your file.",
-        ctaLabel: "Open Free Account",
+        sub: "Message us on WhatsApp so we can clarify whether renewal, refinance, or equity access is the best next step for your file.",
+        ctaLabel: "Message on WhatsApp",
       },
     },
     "yatirimcilar": {
@@ -467,7 +467,7 @@ export default {
         title: "Buy your next rental property sooner",
         underlineText: "sooner",
         sub: "Maximize cash flow, understand your financing options, and plan your next real-estate move with a cleaner advisory path.",
-        ctaLabel: "Get started",
+        ctaLabel: "Start on WhatsApp",
       },
       cards: [
         { title: "Maximize purchasing power", text: "See how far your equity, income, and property strategy can take your next acquisition.", imageKey: "personaInvestor", iconKey: "buyingPower" },
@@ -476,12 +476,12 @@ export default {
       ],
       ratePanel: {
         title: "Featured mortgage rates in Canada",
-        ctaLabel: "Get Qualified Now",
+        ctaLabel: "Ask on WhatsApp",
       },
       finalCta: {
         title: "Let's structure the next investment step together.",
-        sub: "The short form helps us understand your rental income, portfolio, and financing goal before we recommend the next path.",
-        ctaLabel: "Open Free Account",
+        sub: "Message us on WhatsApp so we can understand your rental income, portfolio, and financing goal before we recommend the next path.",
+        ctaLabel: "Message on WhatsApp",
       },
     },
     "serbest-meslek": {
@@ -490,7 +490,7 @@ export default {
         title: "You've got options for your mortgage",
         underlineText: "options",
         sub: "Whether you're on contract, commission, or freelance income, we can help organize the right mortgage path around how you actually earn.",
-        ctaLabel: "Get started",
+        ctaLabel: "Start on WhatsApp",
       },
       cards: [
         { title: "Qualify for more", text: "Look beyond a narrow bank view and see lender options that better fit non-salaried income.", imageKey: "hero", iconKey: "qualify" },
@@ -499,12 +499,12 @@ export default {
       ],
       ratePanel: {
         title: "Featured mortgage rates in Canada",
-        ctaLabel: "Get Qualified Now",
+        ctaLabel: "Ask on WhatsApp",
       },
       finalCta: {
         title: "Let's make your income story easier to present.",
-        sub: "The starting form helps us understand your income structure and document flow before we show the best next step.",
-        ctaLabel: "Open Free Account",
+        sub: "Message us on WhatsApp so we can understand your income structure and document flow before we show the best next step.",
+        ctaLabel: "Message on WhatsApp",
       },
     },
     "yeni-gelenler": {
@@ -513,7 +513,7 @@ export default {
         title: "Settle in to your new home faster",
         underlineText: "faster",
         sub: "See a simpler path to Canadian homeownership, understand what lenders look for, and move sooner with clearer guidance.",
-        ctaLabel: "Get started",
+        ctaLabel: "Start on WhatsApp",
       },
       cards: [
         { title: "Maximize purchasing power", text: "Get a clearer view of what your income, down payment, and newcomer profile can support.", imageKey: "personaNewcomer", iconKey: "buyingPower" },
@@ -522,12 +522,12 @@ export default {
       ],
       ratePanel: {
         title: "Featured mortgage rates in Canada",
-        ctaLabel: "Get Qualified Now",
+        ctaLabel: "Ask on WhatsApp",
       },
       finalCta: {
         title: "Let's simplify your newcomer mortgage path.",
-        sub: "We use the starting form to identify the right next step for your down payment, income proof, and Canadian credit profile.",
-        ctaLabel: "Open Free Account",
+        sub: "Message us on WhatsApp so we can identify the right next step for your down payment, income proof, and Canadian credit profile.",
+        ctaLabel: "Message on WhatsApp",
       },
     },
   },
@@ -544,7 +544,7 @@ export default {
     nameLabel: "Full Name",
     namePlaceholder: "Your full name",
     phoneLabel: "Phone (WhatsApp preferred)",
-    phonePlaceholder: "+1 (416) 000 0000",
+    phonePlaceholder: "+1 647-391-3311",
     emailLabel: "Email (optional)",
     emailPlaceholder: "example@email.com",
     err: "Full name and phone are required.",
@@ -559,10 +559,9 @@ export default {
         q: "What would you like to do about your mortgage?",
         sub: "Choose your starting point.",
         opts: [
-          { v: "buy", e: "🏠", label: "Buy a home", sub: "Budget and pre-approval" },
-          { v: "renew", e: "🔄", label: "Renew", sub: "Review the offer" },
-          { v: "refinance", e: "💰", label: "Refinance", sub: "Payment plan" },
-          { v: "heloc", e: "🔓", label: "HELOC", sub: "Use your home equity" },
+          { v: "buy", e: "🏠", label: "New Mortgage", sub: "Pre-approval and purchase budget" },
+          { v: "renew", e: "🔄", label: "Renew / Switch", sub: "Review your renewal or switch options" },
+          { v: "refinance", e: "💰", label: "Refinance", sub: "Home equity, HELOC, debt, renovation, or second mortgage" },
         ],
       },
       {
@@ -714,7 +713,7 @@ export default {
       crumb: "Dashboard",
       activePlans: "Active Plans ({n})",
       unnamedPlan: "Unnamed Plan",
-      types: { purchase: "Purchase", renewal: "Renewal", refinance: "Refinancing" },
+      types: { purchase: "New Mortgage", renewal: "Renew / Switch", refinance: "Refinance" },
       planStatus: "Plan Status",
       statusNew: "New",
       statuses: {
@@ -731,9 +730,9 @@ export default {
       continue: "Continue",
       whatToday: "What are you looking to do today?",
       actions: {
-        buy: { title: "New Mortgage", desc: "Get pre-approved for a new mortgage, with flexible options at lower rates.", button: "Buy" },
-        renew: { title: "Renew / Switch", desc: "Rate-shop with Kredibaba to make the right call when your mortgage renews.", button: "Renew / Switch" },
-        refinance: { title: "Refinance", desc: "Leverage your home equity through refinancing, second mortgages, HESA, and/or a HELOC.", button: "Refinance" },
+        buy: { title: "New Mortgage", desc: "Get pre-approved, understand your budget, and prepare for a purchase with the right mortgage options.", button: "Start New Mortgage" },
+        renew: { title: "Renew / Switch", desc: "Compare your renewal offer, rate, payment, and switching options before you make the final decision.", button: "Start Renew / Switch" },
+        refinance: { title: "Refinance", desc: "Use your home equity through refinancing, debt consolidation, renovation financing, HELOC, or a second mortgage.", button: "Start Refinance" },
       },
       help: {
         greeting: "Hi {name},",
@@ -828,10 +827,15 @@ export default {
       itemsCount: "{n} item(s)",
       profileIntro: "Please complete your profile. This information helps determine your mortgage eligibility and options.",
       openProfile: "Open Profile",
-      propertyIntro: "Provide the property and mortgage details for this plan. Renewal and refinance plans can use your current property.",
+      propertyIntro: "Provide the property and mortgage details for this plan.",
+      propertyIntroByType: {
+        purchase: "Tell us about the home you want to buy, your purchase budget, down payment, and target closing date.",
+        renewal: "Tell us about your current property and mortgage so we can compare renewal and switching options.",
+        refinance: "Tell us about your current property value, mortgage balance, and the amount you want to access or restructure.",
+      },
       property: "Linked Property",
       noLinkedProperty: "No linked property",
-      address: "Address",
+      address: "Property Address",
       city: "City",
       province: "Province",
       postalCode: "Postal Code",
@@ -839,11 +843,26 @@ export default {
       currentValue: "Estimated Property Value",
       downPayment: "Down Payment",
       requestedAmount: "Requested Mortgage Amount",
+      requestedAmountByType: {
+        purchase: "Target Mortgage Amount",
+        renewal: "Mortgage Balance to Renew / Switch",
+        refinance: "Requested Refinance Amount",
+      },
       closingDate: "Target Closing Date",
+      closingDateByType: {
+        purchase: "Target Closing Date",
+        renewal: "Renewal / Switch Date",
+        refinance: "Target Funding Date",
+      },
       notes: "Notes",
       saveDetails: "Save details",
       saved: "Saved",
       offerIntro: "Enter lender offer summaries manually for this first version, then select the offer you want to proceed with.",
+      offerIntroByType: {
+        purchase: "Compare pre-approval or purchase mortgage offers, then select the option you want to proceed with.",
+        renewal: "Compare renewal and switch offers against your current lender's offer, then select the option you want to proceed with.",
+        refinance: "Compare refinance, HELOC, or second mortgage offers, then select the option you want to proceed with.",
+      },
       noOffers: "No offers yet",
       noOffersLine: "Add a lender offer summary to compare and select an option.",
       addOffer: "Add Offer",

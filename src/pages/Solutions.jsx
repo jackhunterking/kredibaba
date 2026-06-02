@@ -1,19 +1,20 @@
 import { useOutletContext } from "react-router-dom";
 import {
-  ArrowRight, Banknote, Building2, CreditCard, Hammer, Home as HomeIcon,
-  KeyRound, RefreshCw, Search, Unlock,
+  ArrowRight, Banknote, Building2, Home as HomeIcon,
+  KeyRound, PiggyBank, RefreshCw,
 } from "lucide-react";
-import { C, FB, R, S, SHADOW, wrap, primaryBtn, PageHero, SectionLabel, IMG, AdvisorStrip, PersonaPhotoCard } from "../theme.jsx";
+import { C, FB, R, S, SHADOW, wrap, whatsAppBtn, WhatsAppIconBadge, PageHero, SectionLabel, IMG, AdvisorStrip, PersonaPhotoCard } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
 const WHO_ICONS = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Building2 size={20}/>, <Banknote size={20}/>, <KeyRound size={20}/>];
 const WHO_IMAGES = [IMG.personaFirst, IMG.personaOwner, IMG.personaInvestor, IMG.personaSelf, IMG.personaNewcomer];
-const WHAT_ICONS = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <Hammer size={20}/>, <CreditCard size={20}/>, <Unlock size={20}/>, <Search size={20}/>];
+const WHAT_ICONS = [<HomeIcon size={20}/>, <RefreshCw size={20}/>, <PiggyBank size={20}/>];
 
 export default function Solutions() {
-  const { openForm } = useOutletContext();
+  const { getWhatsAppHref } = useOutletContext();
   const { t } = useLang();
   const s = t.solutions;
+  const solutionsCtaHref = getWhatsAppHref("cozumler");
   const personaLinks = t.mega.cozumler.groups[0].items.map((item) => item.href);
   const WHO = s.who.map((it, i) => ({ ...it, icon: WHO_ICONS[i], image: WHO_IMAGES[i], to: personaLinks[i] }));
   const WHAT = s.what.map((it, i) => ({ ...it, icon: WHAT_ICONS[i] }));
@@ -51,7 +52,7 @@ export default function Solutions() {
         </div>
       </section>
 
-      <AdvisorStrip onCTA={openForm}/>
+      <AdvisorStrip ctaHref={getWhatsAppHref("cozumler-advisor")}/>
 
       <section id="ne-yardim" style={{...wrap,paddingTop:S[40],paddingBottom:S[64]}}>
         <div style={{textAlign:'center',maxWidth:650,margin:'0 auto 36px'}}>
@@ -83,9 +84,11 @@ export default function Solutions() {
               </h2>
               <p style={{fontSize:15.5,color:'rgba(255,255,255,0.76)',lineHeight:1.55,maxWidth:560}}>{s.ctaSub}</p>
             </div>
-            <button onClick={openForm} style={primaryBtn({padding:'15px 28px',fontSize:16,display:'inline-flex',alignItems:'center',gap:8,whiteSpace:'nowrap'})}>
-              {s.ctaButton} <ArrowRight size={18}/>
-            </button>
+            <a href={solutionsCtaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+              <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'14px 24px',fontSize:16,display:'inline-flex',alignItems:'center',gap:9,whiteSpace:'nowrap'})}>
+                <WhatsAppIconBadge size={26} logoSize={18}/> {s.ctaButton} <ArrowRight size={18}/>
+              </span>
+            </a>
           </div>
         </div>
       </section>

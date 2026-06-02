@@ -9,7 +9,7 @@ import {
   Scale,
   Search,
 } from "lucide-react";
-import { C, FB, IMG, R, S, SHADOW, primaryBtn, wrap } from "../theme.jsx";
+import { C, FB, IMG, R, S, SHADOW, whatsAppBtn, WhatsAppIconBadge, wrap } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 import SharedRateCard from "../components/rates/SharedRateCard.jsx";
 
@@ -107,9 +107,10 @@ function BenefitCard({ card }) {
 }
 
 export default function SolutionDetail({ slug }) {
-  const { openForm } = useOutletContext();
+  const { getWhatsAppHref } = useOutletContext();
   const { t } = useLang();
   const page = t.solutionPages?.[slug];
+  const ctaHref = getWhatsAppHref(`cozumler-${slug}`);
 
   if (!page) return null;
 
@@ -137,12 +138,11 @@ export default function SolutionDetail({ slug }) {
           }}>
             {page.hero.sub}
           </p>
-          <button
-            onClick={openForm}
-            style={primaryBtn({padding:'14px 28px',fontSize:16,display:'inline-flex',alignItems:'center',gap:8})}
-          >
-            {page.hero.ctaLabel} <ArrowRight size={18}/>
-          </button>
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+            <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'13px 22px',fontSize:16,display:'inline-flex',alignItems:'center',gap:9})}>
+              <WhatsAppIconBadge size={24} logoSize={17}/> {page.hero.ctaLabel} <ArrowRight size={18}/>
+            </span>
+          </a>
         </div>
       </section>
 
@@ -162,7 +162,7 @@ export default function SolutionDetail({ slug }) {
               title={t.rates.cardTitle}
               tabs={t.rates.tabs}
               ctaLabel={page.ratePanel.ctaLabel}
-              onCta={openForm}
+              ctaHref={ctaHref}
               disclosure={t.rates.disclosure}
             />
           </div>
@@ -185,12 +185,11 @@ export default function SolutionDetail({ slug }) {
                 {page.finalCta.sub}
               </p>
             </div>
-            <button
-              onClick={openForm}
-              style={primaryBtn({padding:'14px 24px',fontSize:15.5,display:'inline-flex',alignItems:'center',gap:8,whiteSpace:'nowrap'})}
-            >
-              {page.finalCta.ctaLabel} <ArrowRight size={17}/>
-            </button>
+            <a href={ctaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+              <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'13px 20px',fontSize:15.5,display:'inline-flex',alignItems:'center',gap:9,whiteSpace:'nowrap'})}>
+                <WhatsAppIconBadge size={24} logoSize={17}/> {page.finalCta.ctaLabel} <ArrowRight size={17}/>
+              </span>
+            </a>
           </div>
         </div>
       </section>

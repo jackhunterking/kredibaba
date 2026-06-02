@@ -1,18 +1,18 @@
 import { useOutletContext, Link } from "react-router-dom";
 import {
-  ArrowRight, BookOpen, Calculator, CreditCard, FileCheck,
-  Hammer, Home as HomeIcon, Landmark, Percent, RefreshCw,
+  ArrowRight, BookOpen, Calculator, FileCheck,
+  Home as HomeIcon, Landmark, Percent, PiggyBank, RefreshCw,
   ShieldCheck, TrendingDown, Unlock, Wallet,
 } from "lucide-react";
 import {
   C, FB, R, S, SectionLabel, SHADOW,
-  ghostBtn, IMG, primaryBtn, wrap,
+  ghostBtn, IMG, primaryBtn, whatsAppBtn, WhatsAppIconBadge, wrap,
   AdvisorChip, AdvisorStrip, Testimonials, PersonaPhotoCard, PhotoAvatar, PEOPLE,
 } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 import HeroRateSummary from "../components/rates/HeroRateSummary.jsx";
 
-function Hero({ onCTA }) {
+function Hero({ ctaHref }) {
   const { t } = useLang();
   const h = t.home.hero;
 
@@ -43,7 +43,7 @@ function Hero({ onCTA }) {
               title={t.rates.cardTitle}
               tabs={t.rates.tabs}
               ctaLabel={h.btnRates}
-              onCta={onCTA}
+              ctaHref={ctaHref}
               disclosure={t.rates.disclosure}
             />
           </div>
@@ -115,8 +115,8 @@ function JourneyCard({ icon, title, sub, to, cta }) {
 function JourneySection() {
   const { t } = useLang();
   const j = t.home.journeys;
-  const icons = [<HomeIcon size={22}/>, <RefreshCw size={22}/>, <Hammer size={22}/>, <CreditCard size={22}/>];
-  const tos = ['/cozumler#ev-almak', '/cozumler#ev-kredimi-yenilemek', '/cozumler#tadilat-finansmani', '/cozumler#borc-odemelerini-rahatlatmak'];
+  const icons = [<HomeIcon size={22}/>, <RefreshCw size={22}/>, <PiggyBank size={22}/>];
+  const tos = ['/cozumler#yeni-mortgage', '/cozumler#yenile-tasi', '/cozumler#refinansman'];
   const journeys = j.items.map((it, i) => ({ icon: icons[i], title: it.title, sub: it.sub, to: tos[i] }));
 
   return (
@@ -132,7 +132,7 @@ function JourneySection() {
           </p>
         ) : null}
       </div>
-      <div className="kb-4col" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:16}}>
+      <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
         {journeys.map((journey) => (
           <JourneyCard key={journey.title} {...journey} cta={t.home.journeyCardCta}/>
         ))}
@@ -141,7 +141,7 @@ function JourneySection() {
   );
 }
 
-function WhoWeHelp({ onCTA }) {
+function WhoWeHelp({ ctaHref }) {
   const { t } = useLang();
   const w = t.home.who;
   const heading = w.label || w.title;
@@ -159,9 +159,11 @@ function WhoWeHelp({ onCTA }) {
               {heading}
             </h2>
           </div>
-          <button onClick={onCTA} style={ghostBtn({padding:'13px 18px',display:'inline-flex',alignItems:'center',gap:8})}>
-            {w.button} <ArrowRight size={16}/>
-          </button>
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+            <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'12px 18px',display:'inline-flex',alignItems:'center',gap:9})}>
+              <WhatsAppIconBadge size={24} logoSize={17}/> {w.button} <ArrowRight size={16}/>
+            </span>
+          </a>
         </div>
         <div className="kb-3col" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
           {items.map((item) => (
@@ -285,7 +287,7 @@ function LearnPreview() {
   );
 }
 
-function FinalCTA({ onCTA }) {
+function FinalCTA({ ctaHref }) {
   const { t } = useLang();
   const f = t.home.finalCta;
   return (
@@ -304,9 +306,11 @@ function FinalCTA({ onCTA }) {
           {f.sub}
         </p>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
-          <button onClick={onCTA} style={primaryBtn({padding:'15px 28px',fontSize:16,display:'inline-flex',alignItems:'center',gap:8})}>
-            {f.btnAccount} <ArrowRight size={18}/>
-          </button>
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+            <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'14px 24px',fontSize:16,display:'inline-flex',alignItems:'center',gap:9})}>
+              <WhatsAppIconBadge size={26} logoSize={18}/> {f.btnAccount} <ArrowRight size={18}/>
+            </span>
+          </a>
           <Link to="/oranlar" style={{textDecoration:'none'}}>
             <button style={{
               ...ghostBtn({padding:'15px 24px',fontSize:16}),
@@ -327,17 +331,18 @@ function FinalCTA({ onCTA }) {
 }
 
 export default function Home() {
-  const { openForm } = useOutletContext();
+  const { getWhatsAppHref } = useOutletContext();
+  const homeCtaHref = getWhatsAppHref("home");
   return (
     <>
-      <Hero onCTA={openForm}/>
+      <Hero ctaHref={getWhatsAppHref("home-hero-rates")}/>
       <JourneySection/>
-      <WhoWeHelp onCTA={openForm}/>
+      <WhoWeHelp ctaHref={getWhatsAppHref("home-who-we-help")}/>
       <Testimonials/>
       <QuickTools/>
       <LearnPreview/>
-      <AdvisorStrip onCTA={openForm}/>
-      <FinalCTA onCTA={openForm}/>
+      <AdvisorStrip ctaHref={getWhatsAppHref("home-advisor")}/>
+      <FinalCTA ctaHref={homeCtaHref}/>
     </>
   );
 }

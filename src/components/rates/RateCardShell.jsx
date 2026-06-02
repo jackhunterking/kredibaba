@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { C, FB, R } from "../../theme.jsx";
+import { C, FB, R, WhatsAppIconBadge } from "../../theme.jsx";
 import { RATE_ACCENT } from "./rateUtils.js";
 import RateTabSwitch from "./RateTabSwitch.jsx";
 
@@ -10,6 +10,7 @@ export default function RateCardShell({
   activeTab,
   onTabChange,
   ctaLabel,
+  ctaHref,
   onCta,
   disclosureLabel,
   onDisclosure,
@@ -34,22 +35,26 @@ export default function RateCardShell({
       </div>
 
       <div className={`kb-rate-shell-actions kb-rate-shell-actions--${variant}`}>
-        <button
-          type="button"
+        <a
+          href={ctaHref}
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={onCta}
-          className={`kb-rate-cta kb-rate-cta--${variant}`}
+          className={`kb-rate-cta kb-rate-cta--${variant} kb-whatsapp-button`}
           style={{
-            border: "none",
+            border: `1px solid ${C.waDark}55`,
             borderRadius: R.control + 1,
-            background: C.blue,
-            color: "#fff",
+            background: C.wa,
+            color: C.waText,
             fontFamily: FB,
-            fontWeight: 600,
+            fontWeight: 700,
             cursor: "pointer",
+            textDecoration: "none",
+            gap: 9,
           }}
         >
-          {ctaLabel}
-        </button>
+          <WhatsAppIconBadge size={24} logoSize={17}/> {ctaLabel}
+        </a>
         <button
           type="button"
           onClick={onDisclosure}

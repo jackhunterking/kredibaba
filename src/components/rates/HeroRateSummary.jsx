@@ -27,7 +27,7 @@ function SummaryTile({ label, item }) {
   );
 }
 
-export default function HeroRateSummary({ title, tabs, ctaLabel, onCta, disclosure }) {
+export default function HeroRateSummary({ title, tabs, ctaLabel, ctaHref, onCta, disclosure }) {
   const [showDisclosure, setShowDisclosure] = useState(false);
   const fixedItem = getHeroSummaryItem(tabs.fixed);
   const variableItem = getHeroSummaryItem(tabs.variable);
@@ -38,6 +38,7 @@ export default function HeroRateSummary({ title, tabs, ctaLabel, onCta, disclosu
         title={title}
         variant="hero-summary"
         ctaLabel={ctaLabel}
+        ctaHref={ctaHref}
         onCta={onCta}
         disclosureLabel={disclosure.label}
         onDisclosure={() => setShowDisclosure(true)}

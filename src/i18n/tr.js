@@ -5,7 +5,7 @@ export default {
     tools: "Araçlar",
     learn: "Öğren",
     about: "Hakkımızda",
-    cta: "Ücretsiz Hesap Aç",
+    cta: "WhatsApp’tan Yazın",
     menu: "Menü",
     menuOpen: "Menüyü aç",
     menuClose: "Menüyü kapat",
@@ -15,7 +15,7 @@ export default {
 
   topPromo: {
     text: "Ücretsiz mortgage hesaplaması",
-    cta: "Hemen başla",
+    cta: "WhatsApp’tan yazın",
   },
 
   mega: {
@@ -37,12 +37,9 @@ export default {
           title: "Ne konuda yardım ediyoruz?",
           className: "kb-mega-what",
           items: [
-            { label: "Ev almak", desc: "Bütçe ve mortgage seçenekleri", href: "/cozumler#ev-almak" },
-            { label: "Ev kredimi yenilemek", desc: "Yenileme ve refinansman seçenekleri", href: "/cozumler#ev-kredimi-yenilemek" },
-            { label: "Tadilat finansmanı", desc: "Ev değerinden yararlanarak planlayın", href: "/cozumler#tadilat-finansmani" },
-            { label: "Borç ödemelerini rahatlatmak", desc: "Borç birleştirme seçenekleri", href: "/cozumler#borc-odemelerini-rahatlatmak" },
-            { label: "Ev değerinden yararlanmak", desc: "HELOC / ikinci mortgage", href: "/cozumler#ev-degerinden-yararlanmak" },
-            { label: "Mortgage seçeneklerini incelemek", desc: "Size uygun oran ve ürünleri görün", href: "/cozumler#mortgage-seceneklerini-incelemek" },
+            { label: "Yeni Mortgage", desc: "Ön onay, bütçe ve ev alma yolu", href: "/cozumler#yeni-mortgage" },
+            { label: "Yenile / Taşı", desc: "Yenileme veya taşıma seçeneklerini karşılaştırın", href: "/cozumler#yenile-tasi" },
+            { label: "Refinansman", desc: "Ev sermayesi, borç birleştirme veya HELOC seçenekleri", href: "/cozumler#refinansman" },
           ],
         },
       ],
@@ -122,7 +119,7 @@ export default {
     hero: {
       title: "Mortgage, sade ve net — Türkçe",
       cardTitle: "Kanada’da günün en düşük mortgage faiz oranı",
-      btnRates: "Ön Onay Al",
+      btnRates: "WhatsApp’tan yazın",
       btnDisclosure: "Açıklama",
       imgAlt: "Kanada’da modern bir ev",
       advisorName: "Jack Hunter",
@@ -142,20 +139,19 @@ export default {
     },
     journeyCardCta: "Hemen Başla",
     journeys: {
-      label: "",
-      title: "Ne için kredi lazım?",
-      sub: "",
+      label: "Yolculuklar",
+      title: "Hangi mortgage yolculuğuna başlıyorsunuz?",
+      sub: "Her dosya üç net seçenekten biriyle başlar; sonra doğru adımları dosyanıza göre düzenleriz.",
       items: [
-        { title: "Ev almak istiyorum", sub: "Bütçe, ön onay ve uygun mortgage seçenekleri" },
-        { title: "Ev kredimi yenilemek", sub: "Mevcut teklifinizi inceleyin veya daha uygun ödeme arayın" },
-        { title: "Tadilat için finansman arıyorum", sub: "Ev değerinden yararlanarak tadilat bütçesi planlayın" },
-        { title: "Borç ödemelerimi rahatlatmak istiyorum", sub: "Yüksek faizli ödemeleri daha yönetilebilir hale getirme" },
+        { title: "Yeni Mortgage", sub: "Ön onay alın, bütçenizi görün ve ev alımına hazırlanın" },
+        { title: "Yenile / Taşı", sub: "Yenileme teklifinizi ve taşıma seçeneklerini karar vermeden karşılaştırın" },
+        { title: "Refinansman", sub: "Refinansman, borç birleştirme, tadilat, HELOC veya ikinci mortgage için ev sermayesinden yararlanın" },
       ],
     },
     who: {
       label: "Kime yardım ediyoruz?",
       title: "Durumunuz farklı olabilir; yol yine sade olmalı.",
-      button: "Bana uygun yolu göster",
+      button: "WhatsApp’tan yardım alın",
       items: [
         { title: "İlk ev alıcıları", text: "İlk kez alım yaparken bütçe, masraf ve adımları sade görürsünüz." },
         { title: "Ev sahipleri", text: "Yenileme, ödeme düzenleme veya ev değerinden yararlanma seçenekleri." },
@@ -182,7 +178,7 @@ export default {
       items: [
         { title: "Ön onay nedir?", text: "Sürece başlamadan yaklaşık alım gücünü görmek." },
         { title: "Yenileme mi refinansman mı?", text: "Süresi biten mortgage ile yeniden düzenleme arasındaki fark." },
-        { title: "Borç ödemelerini rahatlatmak", text: "Farklı ödemeleri daha yönetilebilir hale getirme seçenekleri." },
+        { title: "Refinansman nerede başlar?", text: "Ev sermayesi, borç birleştirme, tadilat finansmanı, HELOC veya ikinci mortgage." },
       ],
     },
     testimonials: {
@@ -197,13 +193,13 @@ export default {
       title: "Sorularınızı doğrudan bize sorun.",
       body: "Kredibaba’nın arkasında gerçek insanlar var: Jack ve Tara. Sürecin her adımında Türkçe ve İngilizce yanınızdayız.",
       btnTalk: "WhatsApp’tan yazın",
-      btnAccount: "Ücretsiz Hesap Aç",
+      btnAccount: "WhatsApp’tan yazın",
     },
     finalCta: {
       title: "Dosyanız için uygun seçenekleri beraber netleştirelim.",
-      sub: "Ücretsiz başlangıç formu onay veya oran garantisi değildir; sadece doğru yolculuğu ve gerekli belgeleri belirlemek için kullanılır.",
-      btnAccount: "Ücretsiz Hesap Aç",
-      btnRates: "Ön Onay Al",
+      sub: "WhatsApp’tan yazın; durumunuzu sade şekilde anlayıp doğru sonraki adımı birlikte netleştirelim. Bu bir onay veya oran garantisi değildir.",
+      btnAccount: "WhatsApp’tan yazın",
+      btnRates: "Oranları Gör",
     },
   },
 
@@ -212,7 +208,7 @@ export default {
     title: "Bugünün öne çıkan mortgage oranları.",
     sub: "Net koşullar. Sade açıklama. Garanti değil; başlangıç göstergesi.",
     cardTitle: "Kanada'daki En Düşük Mortgage Oranları",
-    cardCtaLabel: "Ön Onay Al",
+    cardCtaLabel: "WhatsApp’tan oran sorun",
     disclosure: {
       aria: "Oran açıklaması",
       label: "Açıklama",
@@ -248,8 +244,8 @@ export default {
     },
     cta: {
       title: "Sizin oranınız ne olabilir?",
-      sub: "2 dakikalık başlangıç formu.",
-      btnAccount: "Ücretsiz Hesap Aç",
+      sub: "WhatsApp’tan yazın; dosyanıza göre hangi bilgilere ihtiyaç olduğunu birlikte netleştirelim.",
+      btnAccount: "WhatsApp’tan yazın",
       btnCalc: "Hesapla",
     },
     lowestRate: {
@@ -285,7 +281,7 @@ export default {
     },
     roadmapLabel: "Yol haritası",
     roadmapTitle: "Sıradaki araçlar",
-    sendButton: "Sonuçları gönder",
+    sendButton: "WhatsApp’tan gönder",
     list: [
       { id: "mortgage-yol-bulucu", t: "Mortgage yol bulucu", d: "Kişisel başlangıç önerisi" },
       { id: "on-onay", t: "Ön onay", d: "Yaklaşık alım gücünü görün" },
@@ -326,13 +322,13 @@ export default {
     guidesLabel: "Rehberler",
     guidesTitle: "Yol haritanız.",
     guides: [
-      { title: "Ev alma", text: "Bütçe → ön onay → teklif" },
-      { title: "Yenileme / ödeme düzenleme", text: "Teklif → inceleme → karar" },
-      { title: "Borç ödemelerini rahatlatma", text: "Ödeme yükü → seçenek → plan" },
+      { title: "Yeni Mortgage", text: "Bütçe → ön onay → ev alım seçeneği" },
+      { title: "Yenile / Taşı", text: "Mevcut teklif → karşılaştırma → karar" },
+      { title: "Refinansman", text: "Mülk sermayesi → seçenekler → fonlama planı" },
     ],
     faqLabel: "SSS",
     faqTitle: "Kısa cevaplar.",
-    faqButton: "Ücretsiz Hesap Aç",
+    faqButton: "WhatsApp’tan sorun",
     faq: [
       { q: "Kredibaba banka mı?", a: "Hayır. Mortgage sürecinde doğru yolu bulmaya yardımcı olur." },
       { q: "Ön onay kesin mi?", a: "Hayır. Kesin onay yazılı lender koşullarıyla olur." },
@@ -381,22 +377,29 @@ export default {
     brokerageText: "Kredibaba, {BROKERAGE} bünyesinde sunulur. FSRA lisans bilgisi: {LICENSE}. Yayın öncesi Principal Broker uyum onayı gereklidir.",
     cta: {
       title: "Türkçe başlayalım.",
-      btnAccount: "Ücretsiz Hesap Aç",
+      btnAccount: "WhatsApp’tan yazın",
       btnWhatsapp: "WhatsApp",
     },
   },
 
+  contact: {
+    title: "Mortgage sorunuz için doğrudan WhatsApp’tayız.",
+    sub: "Mesajınızı WhatsApp’tan gönderin; mortgage durumunuzu doğrudan sizinle konuşarak netleştirelim.",
+    button: "WhatsApp’tan yazın",
+    note: "Bu ilk görüşme kredi onayı veya oran garantisi değildir. Gerekli bilgiler ve belgeler yazılı şekilde netleştirilir.",
+  },
+
   solutions: {
     label: "Çözümler",
-    title: "Durumunuzu seçin. Sonraki adımı görün.",
-    sub: "",
-    whoLabel: "",
-    whoHeading: "",
-    whatLabel: "Ne konuda yardımcı oluyoruz?",
-    whatHeading: "Yapılacak işi seçin.",
+    title: "Doğru mortgage yolculuğundan başlayın.",
+    sub: "Durumlar farklı olabilir; her dosya üç net seçenekten biriyle başlar.",
+    whoLabel: "Kime yardım ediyoruz?",
+    whoHeading: "Size en yakın kartı seçin.",
+    whatLabel: "Mortgage yolculukları",
+    whatHeading: "Bugünkü hedefinize uygun yolu seçin.",
     ctaTitle: "Hangi yoldan başlayalım?",
-    ctaSub: "Kısa formu doldurun; sıradaki adımı gösterelim.",
-    ctaButton: "Ücretsiz Hesap Aç",
+    ctaSub: "WhatsApp’tan yazın; sıradaki adımı beraber netleştirelim.",
+    ctaButton: "WhatsApp’tan yazın",
     who: [
       { id: "ilk-ev", title: "İlk ev alıcıları", text: "Bütçe · ön onay · teklif" },
       { id: "ev-sahipleri", title: "Ev sahipleri", text: "Yenileme · refinansman" },
@@ -405,12 +408,9 @@ export default {
       { id: "yeni-gelenler", title: "Kanada’ya yeni gelenler", text: "Yeni kredi · yeni iş" },
     ],
     what: [
-      { id: "ev-almak", title: "Ev almak", text: "Bütçe, peşinat ve mortgage yolunuzu netleştirin" },
-      { id: "ev-kredimi-yenilemek", title: "Ev kredimi yenilemek", text: "Yenileme ve refinansman seçeneklerini sade şekilde görün" },
-      { id: "tadilat-finansmani", title: "Tadilat finansmanı", text: "Ev değerinden yararlanarak tadilat bütçesi planlayın" },
-      { id: "borc-odemelerini-rahatlatmak", title: "Borç ödemelerini rahatlatmak", text: "Borç birleştirme seçenekleriyle ödemeleri daha yönetilebilir hale getirin" },
-      { id: "ev-degerinden-yararlanmak", title: "Ev değerinden yararlanmak", text: "HELOC / ikinci mortgage seçeneklerini değerlendirin" },
-      { id: "mortgage-seceneklerini-incelemek", title: "Mortgage seçeneklerini incelemek", text: "Size uygun oran ve ürünleri sade şekilde inceleyin" },
+      { id: "yeni-mortgage", title: "Yeni Mortgage", text: "Ön onay, bütçe, peşinat ve ev alım hazırlığıyla başlayın" },
+      { id: "yenile-tasi", title: "Yenile / Taşı", text: "Yenileme teklifinizi, ödemenizi, oranınızı ve taşıma seçeneklerini karşılaştırın" },
+      { id: "refinansman", title: "Refinansman", text: "Refinansman, tadilat, borç birleştirme, HELOC veya ikinci mortgage için ev sermayesinden yararlanın" },
     ],
   },
 
@@ -421,7 +421,7 @@ export default {
         title: "İlk evinizi güvenle alın",
         underlineText: "güvenle",
         sub: "Bütçenizi daha net görün, süreci daha hızlı başlatın ve ev sahipliğine daha sade bir yoldan ilerleyin.",
-        ctaLabel: "Hemen başla",
+        ctaLabel: "WhatsApp’tan başlayın",
       },
       cards: [
         { title: "Alım gücünü artırın", text: "Ev aramaya çıkmadan önce hangi aralıkta rahat teklif verebileceğinizi görün.", imageKey: "personaFirst", iconKey: "buyingPower" },
@@ -430,12 +430,12 @@ export default {
       ],
       ratePanel: {
         title: "Kanada'da öne çıkan mortgage oranları",
-        ctaLabel: "Ön Onay Al",
+        ctaLabel: "WhatsApp’tan oran sorun",
       },
       finalCta: {
         title: "İlk ev yolunuzu birlikte netleştirelim.",
-        sub: "Kısa başlangıç formu bütçe, belge ve sonraki adımınızı görmek içindir; kredi onayı veya oran garantisi değildir.",
-        ctaLabel: "Ücretsiz Hesap Aç",
+        sub: "WhatsApp’tan yazın; bütçe, belge ve sonraki adımınızı birlikte netleştirelim. Kredi onayı veya oran garantisi değildir.",
+        ctaLabel: "WhatsApp’tan yazın",
       },
     },
     "ev-sahipleri": {
@@ -444,7 +444,7 @@ export default {
         title: "Tasarruf etmenin akıllı yolu",
         underlineText: "akıllı",
         sub: "Aylık ödemenizi azaltın, yenileme seçeneklerini görün veya ev değerinizden yararlanırken daha temiz bir karşılaştırma süreci izleyin.",
-        ctaLabel: "Hemen başla",
+        ctaLabel: "WhatsApp’tan başlayın",
       },
       cards: [
         { title: "Anında mortgage oran görünümü", text: "Yenileme veya refinansman seçeneklerini tek lender görüşmesiyle sınırlı kalmadan karşılaştırın.", imageKey: "keys", iconKey: "quotes" },
@@ -453,12 +453,12 @@ export default {
       ],
       ratePanel: {
         title: "Kanada'da öne çıkan mortgage oranları",
-        ctaLabel: "Ön Onay Al",
+        ctaLabel: "WhatsApp’tan oran sorun",
       },
       finalCta: {
         title: "Ev sahibi seçeneklerinizi sade şekilde gözden geçirelim.",
-        sub: "Başlangıç formu, sizin için yenileme, refinansman veya ev değerinden yararlanma yolunun hangisi olduğunu netleştirmemize yardımcı olur.",
-        ctaLabel: "Ücretsiz Hesap Aç",
+        sub: "WhatsApp’tan yazın; yenileme, refinansman veya ev değerinden yararlanma yolunun hangisi olduğunu birlikte netleştirelim.",
+        ctaLabel: "WhatsApp’tan yazın",
       },
     },
     "yatirimcilar": {
@@ -467,7 +467,7 @@ export default {
         title: "Sonraki yatırım mülkünüzü daha erken alın",
         underlineText: "daha erken",
         sub: "Nakit akışınızı koruyun, finansman seçeneklerinizi net görün ve sonraki gayrimenkul adımınızı daha planlı atın.",
-        ctaLabel: "Hemen başla",
+        ctaLabel: "WhatsApp’tan başlayın",
       },
       cards: [
         { title: "Alım gücünü artırın", text: "Sermaye, gelir ve mülk stratejinizin sıradaki alım için ne kadar alan açtığını görün.", imageKey: "personaInvestor", iconKey: "buyingPower" },
@@ -476,12 +476,12 @@ export default {
       ],
       ratePanel: {
         title: "Kanada'da öne çıkan mortgage oranları",
-        ctaLabel: "Ön Onay Al",
+        ctaLabel: "WhatsApp’tan oran sorun",
       },
       finalCta: {
         title: "Sonraki yatırım adımınızı birlikte yapılandıralım.",
-        sub: "Kısa form; kira geliriniz, portföyünüz ve hedef finansman yapınız için doğru sonraki adımı belirlememize yardımcı olur.",
-        ctaLabel: "Ücretsiz Hesap Aç",
+        sub: "WhatsApp’tan yazın; kira geliriniz, portföyünüz ve hedef finansman yapınız için doğru sonraki adımı birlikte belirleyelim.",
+        ctaLabel: "WhatsApp’tan yazın",
       },
     },
     "serbest-meslek": {
@@ -490,7 +490,7 @@ export default {
         title: "Mortgage için seçenekleriniz var",
         underlineText: "seçenekleriniz",
         sub: "Kontrat, komisyon veya serbest gelirle çalışıyor olsanız da, gelirinize uygun mortgage yolunu daha sade şekilde kurabiliriz.",
-        ctaLabel: "Hemen başla",
+        ctaLabel: "WhatsApp’tan başlayın",
       },
       cards: [
         { title: "Daha fazlasına uygun olun", text: "Maaş bordrosuna dayalı dar banka bakışının ötesine geçip daha uygun lender seçeneklerini görün.", imageKey: "hero", iconKey: "qualify" },
@@ -499,12 +499,12 @@ export default {
       ],
       ratePanel: {
         title: "Kanada'da öne çıkan mortgage oranları",
-        ctaLabel: "Ön Onay Al",
+        ctaLabel: "WhatsApp’tan oran sorun",
       },
       finalCta: {
         title: "Gelir hikayenizi daha kolay anlatılır hale getirelim.",
-        sub: "Başlangıç formu; gelir yapınızı ve belge akışınızı anlayıp sizin için en doğru sonraki adımı belirlememize yardımcı olur.",
-        ctaLabel: "Ücretsiz Hesap Aç",
+        sub: "WhatsApp’tan yazın; gelir yapınızı ve belge akışınızı anlayıp doğru sonraki adımı birlikte belirleyelim.",
+        ctaLabel: "WhatsApp’tan yazın",
       },
     },
     "yeni-gelenler": {
@@ -513,7 +513,7 @@ export default {
         title: "Yeni evinize daha hızlı yerleşin",
         underlineText: "daha hızlı",
         sub: "Kanada'da ev sahipliğine daha sade bir yol görün, lender'ın ne beklediğini anlayın ve daha net bir rehberlikle süreci hızlandırın.",
-        ctaLabel: "Hemen başla",
+        ctaLabel: "WhatsApp’tan başlayın",
       },
       cards: [
         { title: "Alım gücünü artırın", text: "Geliriniz, peşinatınız ve newcomer profilinizle hangi aralığın mümkün olduğunu daha net görün.", imageKey: "personaNewcomer", iconKey: "buyingPower" },
@@ -522,12 +522,12 @@ export default {
       ],
       ratePanel: {
         title: "Kanada'da öne çıkan mortgage oranları",
-        ctaLabel: "Ön Onay Al",
+        ctaLabel: "WhatsApp’tan oran sorun",
       },
       finalCta: {
         title: "Yeni gelen mortgage yolunuzu sadeleştirelim.",
-        sub: "Kısa form; peşinat, gelir kanıtı ve Kanada kredi profilinize göre doğru sonraki adımı belirlememize yardımcı olur.",
-        ctaLabel: "Ücretsiz Hesap Aç",
+        sub: "WhatsApp’tan yazın; peşinat, gelir kanıtı ve Kanada kredi profilinize göre doğru sonraki adımı birlikte netleştirelim.",
+        ctaLabel: "WhatsApp’tan yazın",
       },
     },
   },
@@ -544,7 +544,7 @@ export default {
     nameLabel: "Ad Soyad",
     namePlaceholder: "Adınız ve soyadınız",
     phoneLabel: "Telefon (WhatsApp tercih edilir)",
-    phonePlaceholder: "+1 (416) 000 0000",
+    phonePlaceholder: "+1 647-391-3311",
     emailLabel: "E-posta (isteğe bağlı)",
     emailPlaceholder: "ornek@email.com",
     err: "Ad soyad ve telefon zorunludur.",
@@ -559,10 +559,9 @@ export default {
         q: "Mortgage konusunda ne yapmak istiyorsunuz?",
         sub: "Başlangıç noktanızı seçin.",
         opts: [
-          { v: "buy", e: "🏠", label: "Ev almak", sub: "Bütçe ve ön onay" },
-          { v: "renew", e: "🔄", label: "Yenilemek", sub: "Teklifi incele" },
-          { v: "refinance", e: "💰", label: "Refinansman", sub: "Ödeme planı" },
-          { v: "heloc", e: "🔓", label: "HELOC", sub: "Ev değerinden kullanım" },
+          { v: "buy", e: "🏠", label: "Yeni Mortgage", sub: "Ön onay ve ev alım bütçesi" },
+          { v: "renew", e: "🔄", label: "Yenile / Taşı", sub: "Yenileme veya taşıma seçenekleri" },
+          { v: "refinance", e: "💰", label: "Refinansman", sub: "Ev sermayesi, HELOC, borç, tadilat veya ikinci mortgage" },
         ],
       },
       {
@@ -714,7 +713,7 @@ export default {
       crumb: "Panel",
       activePlans: "Aktif Planlar ({n})",
       unnamedPlan: "İsimsiz Plan",
-      types: { purchase: "Ev Alımı", renewal: "Yenileme", refinance: "Refinansman" },
+      types: { purchase: "Yeni Mortgage", renewal: "Yenile / Taşı", refinance: "Refinansman" },
       planStatus: "Plan Durumu",
       statusNew: "Yeni",
       statuses: {
@@ -731,9 +730,9 @@ export default {
       continue: "Devam Et",
       whatToday: "Bugün ne yapmak istiyorsunuz?",
       actions: {
-        buy: { title: "Yeni Mortgage", desc: "Daha düşük oranlarla ve esnek seçeneklerle yeni mortgage için ön onay alın.", button: "Ev Al" },
-        renew: { title: "Yenile / Taşı", desc: "Mortgage yenileme zamanı geldiğinde doğru kararı vermek için Kredibaba ile oran karşılaştırın.", button: "Yenile / Taşı" },
-        refinance: { title: "Refinansman", desc: "Refinansman, ikinci mortgage, HESA ve/veya HELOC ile ev değerinizden yararlanın.", button: "Refinansman" },
+        buy: { title: "Yeni Mortgage", desc: "Ön onay alın, bütçenizi görün ve doğru mortgage seçenekleriyle ev alımına hazırlanın.", button: "Yeni Mortgage Başlat" },
+        renew: { title: "Yenile / Taşı", desc: "Son kararınızı vermeden yenileme teklifinizi, oranınızı, ödemenizi ve taşıma seçeneklerini karşılaştırın.", button: "Yenile / Taşı Başlat" },
+        refinance: { title: "Refinansman", desc: "Refinansman, borç birleştirme, tadilat finansmanı, HELOC veya ikinci mortgage ile ev sermayenizden yararlanın.", button: "Refinansman Başlat" },
       },
       help: {
         greeting: "Merhaba {name},",
@@ -828,10 +827,15 @@ export default {
       itemsCount: "{n} kayıt",
       profileIntro: "Profilinizi tamamlayın. Bu bilgiler mortgage uygunluğunuzu ve seçeneklerinizi değerlendirmeye yardımcı olur.",
       openProfile: "Profili Aç",
-      propertyIntro: "Bu plan için mülk ve mortgage bilgilerini girin. Yenileme ve refinansman planları mevcut mülkünüzü kullanabilir.",
+      propertyIntro: "Bu plan için mülk ve mortgage bilgilerini girin.",
+      propertyIntroByType: {
+        purchase: "Almak istediğiniz ev, satın alma bütçeniz, peşinatınız ve hedef kapanış tarihiniz hakkında bilgi verin.",
+        renewal: "Yenileme ve taşıma seçeneklerini karşılaştırabilmemiz için mevcut mülk ve mortgage bilgilerinizi girin.",
+        refinance: "Mevcut mülk değerinizi, mortgage bakiyenizi ve erişmek ya da yeniden yapılandırmak istediğiniz tutarı girin.",
+      },
       property: "Bağlı Mülk",
       noLinkedProperty: "Bağlı mülk yok",
-      address: "Adres",
+      address: "Mülk Adresi",
       city: "Şehir",
       province: "Eyalet",
       postalCode: "Posta Kodu",
@@ -839,11 +843,26 @@ export default {
       currentValue: "Tahmini Mülk Değeri",
       downPayment: "Peşinat",
       requestedAmount: "Talep Edilen Mortgage Tutarı",
+      requestedAmountByType: {
+        purchase: "Hedef Mortgage Tutarı",
+        renewal: "Yenilenecek / Taşınacak Mortgage Bakiyesi",
+        refinance: "Talep Edilen Refinansman Tutarı",
+      },
       closingDate: "Hedef Kapanış Tarihi",
+      closingDateByType: {
+        purchase: "Hedef Kapanış Tarihi",
+        renewal: "Yenileme / Taşıma Tarihi",
+        refinance: "Hedef Fonlama Tarihi",
+      },
       notes: "Notlar",
       saveDetails: "Bilgileri kaydet",
       saved: "Kaydedildi",
       offerIntro: "İlk versiyon için lender teklif özetlerini manuel girin, sonra ilerlemek istediğiniz teklifi seçin.",
+      offerIntroByType: {
+        purchase: "Ön onay veya ev alımına yönelik mortgage tekliflerini karşılaştırın, sonra ilerlemek istediğiniz seçeneği seçin.",
+        renewal: "Yenileme ve taşıma tekliflerini mevcut lender teklifinizle karşılaştırın, sonra ilerlemek istediğiniz seçeneği seçin.",
+        refinance: "Refinansman, HELOC veya ikinci mortgage tekliflerini karşılaştırın, sonra ilerlemek istediğiniz seçeneği seçin.",
+      },
       noOffers: "Henüz teklif yok",
       noOffersLine: "Karşılaştırmak ve seçim yapmak için lender teklif özeti ekleyin.",
       addOffer: "Teklif Ekle",

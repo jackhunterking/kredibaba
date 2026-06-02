@@ -82,7 +82,7 @@ export default function TermsOfUse() {
         <Section title="Eligibility">
           <P>
             You must be at least 18 years of age and a resident of Ontario to use our mortgage services. By using
-            our site or submitting a form, you represent that you meet these requirements.
+            our site or contacting us for mortgage guidance, you represent that you meet these requirements.
           </P>
         </Section>
 
@@ -117,7 +117,7 @@ export default function TermsOfUse() {
 
         <Section title="Accuracy of Information You Provide">
           <P>
-            When you submit a starting form or provide any information through our services, you represent
+            When you provide information through WhatsApp, phone, email, or any other service channel, you represent
             and warrant that all information is accurate, truthful, current, and complete to the best of your
             knowledge. Providing false or misleading information in connection with a mortgage application
             may constitute fraud and may be reported to the relevant authorities and lenders.
@@ -182,10 +182,10 @@ export default function TermsOfUse() {
           </P>
         </Section>
 
-        <Section title="Account Inactivity">
+        <Section title="No Public Account">
           <P>
-            If you have created a user account and it remains inactive for 12 or more consecutive months,
-            we may deactivate or delete it without further notice.
+            The current public experience does not provide a user account or dashboard. Mortgage guidance is handled directly
+            through WhatsApp, phone, email, or other agreed communication channels.
           </P>
         </Section>
 

@@ -1,13 +1,14 @@
 import { useOutletContext, Link } from "react-router-dom";
 import { ArrowRight, Calculator } from "lucide-react";
-import { C, FB, R, S, wrap, primaryBtn, ghostBtn, PageHero } from "../theme.jsx";
+import { C, FB, R, S, wrap, ghostBtn, whatsAppBtn, WhatsAppIconBadge, PageHero } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 import SharedRateCard from "../components/rates/SharedRateCard.jsx";
 
 export default function Rates() {
-  const { openForm } = useOutletContext();
+  const { getWhatsAppHref } = useOutletContext();
   const { t } = useLang();
   const r = t.rates;
+  const ratesCtaHref = getWhatsAppHref("oranlar");
   return (
     <>
       <PageHero
@@ -22,7 +23,7 @@ export default function Rates() {
             title={r.cardTitle}
             tabs={r.tabs}
             ctaLabel={r.cardCtaLabel}
-            onCta={openForm}
+            ctaHref={ratesCtaHref}
             disclosure={r.disclosure}
           />
         </div>
@@ -38,9 +39,11 @@ export default function Rates() {
               <p style={{fontSize:15,color:'rgba(255,255,255,0.72)',lineHeight:1.5}}>{r.cta.sub}</p>
             </div>
             <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
-              <button onClick={openForm} style={primaryBtn({padding:'14px 24px',fontSize:15.5,display:'inline-flex',alignItems:'center',gap:8})}>
-                {r.cta.btnAccount} <ArrowRight size={17}/>
-              </button>
+              <a href={ratesCtaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+                <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'13px 22px',fontSize:15.5,display:'inline-flex',alignItems:'center',gap:9})}>
+                  <WhatsAppIconBadge size={24} logoSize={17}/> {r.cta.btnAccount} <ArrowRight size={17}/>
+                </span>
+              </a>
               <Link to="/araclar" style={{textDecoration:'none'}}>
                 <button style={{...ghostBtn({padding:'14px 22px',fontSize:15.5}),background:'rgba(255,255,255,0.1)',color:'#fff',border:'1px solid rgba(255,255,255,0.25)',display:'inline-flex',alignItems:'center',gap:8}}>
                   <Calculator size={17}/> {r.cta.btnCalc}

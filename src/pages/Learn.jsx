@@ -1,15 +1,16 @@
 import { Link, useOutletContext } from "react-router-dom";
 import { ArrowRight, BookOpen, Check, HelpCircle, Info, RefreshCw } from "lucide-react";
-import { C, FB, R, S, wrap, primaryBtn, PageHero, SectionLabel, AdvisorStrip } from "../theme.jsx";
+import { C, FB, R, S, wrap, whatsAppBtn, WhatsAppIconBadge, PageHero, SectionLabel, AdvisorStrip } from "../theme.jsx";
 import { useLang } from "../i18n/LanguageContext.jsx";
 
 const GUIDE_ICONS = [<BookOpen size={21}/>, <RefreshCw size={21}/>, <Info size={21}/>];
 
 export default function Learn() {
-  const { openForm } = useOutletContext();
+  const { getWhatsAppHref } = useOutletContext();
   const { t } = useLang();
   const l = t.learn;
   const guides = l.guides.map((g, i) => ({ ...g, icon: GUIDE_ICONS[i] }));
+  const learnCtaHref = getWhatsAppHref("ogren");
   return (
     <>
       <PageHero
@@ -69,9 +70,11 @@ export default function Learn() {
             <h2 style={{fontFamily:FB,fontSize:'clamp(27px,4vw,36px)',color:C.navy,fontWeight:700,lineHeight:1.16,marginBottom:18}}>
               {l.faqTitle}
             </h2>
-            <button onClick={openForm} style={primaryBtn({padding:'14px 24px',display:'inline-flex',alignItems:'center',gap:8})}>
-              {l.faqButton} <ArrowRight size={16}/>
-            </button>
+            <a href={learnCtaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+              <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'13px 20px',display:'inline-flex',alignItems:'center',gap:9})}>
+                <WhatsAppIconBadge size={24} logoSize={17}/> {l.faqButton} <ArrowRight size={16}/>
+              </span>
+            </a>
           </div>
           <div style={{display:'grid',gap:12}}>
             {l.faq.map((faq,i)=>(
@@ -86,7 +89,7 @@ export default function Learn() {
         </div>
       </section>
 
-      <AdvisorStrip onCTA={openForm}/>
+      <AdvisorStrip ctaHref={getWhatsAppHref("ogren-advisor")}/>
 
       <section style={{background:C.blueFaint,borderTop:`1px solid ${C.border}`}}>
         <div style={{...wrap,paddingTop:S[24],paddingBottom:S[24]}}>

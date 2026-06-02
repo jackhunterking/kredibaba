@@ -4,12 +4,12 @@
 
 - Use MyPerch as the structural North Star: Solutions, Tools, Learn, About, signup flow, calculators, FAQs, buyer/owner journeys.
 - Use original Turkish copy with a bank/financial-institution feel for Turkish-speaking Canadians.
-- Hide `Giriş` in V1; keep `Ücretsiz Hesap Aç` / access request as the main CTA until real auth is built later.
+- Hide `Giriş` and public dashboard access in MVP; keep direct WhatsApp contact as the main CTA until real auth is intentionally reintroduced later.
 - Keep this file as the living source of truth for product, content, compliance, and design decisions.
 
 ## Key Changes
 
-- **Information Architecture:** `Çözümler`, `Araçlar`, `Öğren`, `Hakkımızda`, plus primary CTA `Ücretsiz Hesap Aç`.
+- **Information Architecture:** `Çözümler`, `Araçlar`, `Öğren`, `Hakkımızda`, `İletişim`, plus primary CTA `WhatsApp’tan Yazın`.
 - **Solutions Menu:** keep MyPerch-like grouping, but with original Turkish logic: `Kime yardım ediyoruz?` for personas and `Ne konuda yardım ediyoruz?` for financing intents.
 - **Homepage Flow:** rate-first hero, trust row, intent-based journey cards, persona section, tools preview, Learn preview, and final compliance CTA.
 - **Rates:** maintain approved hero rates through `HERO_RATES`; if a second approved rate is not available, show `Güncelleniyor` instead of inventing a number.
@@ -60,9 +60,9 @@
 
 ## Mega Menu Structure
 
-- **Top Promo Bar:** `🔎 Ücretsiz mortgage hesaplaması` plus CTA `Hemen başla`.
+- **Top Promo Bar:** `🔎 Ücretsiz mortgage hesaplaması` plus CTA `WhatsApp’tan yazın`.
 - **Desktop Navigation:** `Çözümler` and `Araçlar` open hover/click mega panels; `Öğren` and `Hakkımızda` remain direct links.
-- **Mobile Navigation:** logo, `Ücretsiz Hesap Aç`, and `Menü ☰`; open state becomes `Menü ×`.
+- **Mobile Navigation:** logo, `WhatsApp’tan Yazın`, and `Menü ☰`; open state becomes `Menü ×`.
 - **Mobile Drawer:** grouped rows for `Çözümler`, `Araçlar`, `Öğren`, and `Hakkımızda`; expanded lists use short Turkish labels, one-line descriptions, and Kredibaba blue accent bars.
 - **Solutions Grouping:** `Kime yardım ediyoruz?` covers audience types; `Ne konuda yardım ediyoruz?` covers mortgage journey tasks.
 - **Solution Intents:** use `Ev almak`, `Ev kredimi yenilemek`, `Tadilat finansmanı`, `Borç ödemelerini rahatlatmak`, `Ev değerinden yararlanmak`, and `Mortgage seçeneklerini incelemek`.
@@ -86,7 +86,7 @@
 - Do not use pill-style `999px` radius in normal UI; `R.circle` is only for avatars and small status dots.
 - Mobile drawer rows, menu items, buttons, cards, modal options, chips, and badges should use rectangular institutional corners.
 - Page sections should use tokenized vertical spacing and visually balanced top/bottom padding.
-- QA every design-system change on `/`, `/cozumler`, `/araclar`, `/oranlar`, `/ogren`, `/hakkimizda`, both desktop and mobile, plus desktop/mobile menus and the signup modal.
+- QA every design-system change on `/`, `/cozumler`, `/araclar`, `/oranlar`, `/ogren`, `/hakkimizda`, `/iletisim`, both desktop and mobile, plus desktop/mobile menus and WhatsApp CTA links.
 
 ## Compliance Rules
 
@@ -103,12 +103,12 @@
 - Run `npm run build`.
 - Review all rate language for date, conditions, and non-guarantee disclosure.
 - Desktop audit: `/`, `/cozumler`, `/araclar`, `/oranlar`, `/ogren`, `/hakkimizda`, plus `Çözümler` and `Araçlar` mega menus.
-- Mobile audit: homepage, drawer, expanded `Çözümler`, expanded `Araçlar`, final drawer item spacing, hero disclosure modal, and signup modal.
+- Mobile audit: homepage, drawer, expanded `Çözümler`, expanded `Araçlar`, final drawer item spacing, hero disclosure modal, contact page, and WhatsApp CTA links.
 - Confirm `Ön onay` appears under tools and never as a standalone solution intent.
 - Require final legal/compliance review by RMA/Principal Broker before public launch.
 
 ## Assumptions
 
 - RMA Mortgage is the brokerage identity to use, but exact authorized name/licence number remain launch-blocking required fields.
-- Real login/auth is a later phase; V1 signup is a lead/access request experience.
+- Real login/auth is a later phase; MVP lead capture is direct WhatsApp messaging handled manually through WhatsApp Business App.
 - MyPerch is a structural inspiration only; all Kredibaba copy/design is original and Turkish-community specific.

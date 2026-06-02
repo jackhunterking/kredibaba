@@ -77,7 +77,7 @@ export default function AdvertisingDisclosure() {
 
         <Section title="Privacy Disclaimer">
           <p>
-            When you interact with Kredibaba or submit a starting form, we (through {BROKERAGE}) may collect your name,
+            When you interact with Kredibaba through WhatsApp, phone, email, or another channel, we (through {BROKERAGE}) may collect your name,
             contact information, financial information, and property details in order to provide mortgage guidance and
             connect your file with suitable lenders.
           </p>

@@ -5,7 +5,7 @@ import RateDisclosureModal from "./RateDisclosureModal.jsx";
 import VariableRatesBody from "./VariableRatesBody.jsx";
 import { getTabEntries } from "./rateUtils.js";
 
-export default function SharedRateCard({ title, tabs, ctaLabel, onCta, disclosure }) {
+export default function SharedRateCard({ title, tabs, ctaLabel, ctaHref, onCta, disclosure }) {
   const tabEntries = getTabEntries(tabs);
   const [activeTab, setActiveTab] = useState(tabEntries[0]?.key || "fixed");
   const [showDisclosure, setShowDisclosure] = useState(false);
@@ -24,6 +24,7 @@ export default function SharedRateCard({ title, tabs, ctaLabel, onCta, disclosur
         activeTab={activeTab}
         onTabChange={setActiveTab}
         ctaLabel={ctaLabel}
+        ctaHref={ctaHref}
         onCta={onCta}
         disclosureLabel={disclosure.label}
         onDisclosure={() => setShowDisclosure(true)}

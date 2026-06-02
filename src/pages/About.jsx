@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
-import { ArrowRight, Eye, Heart, MessageCircle, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Eye, Heart, ShieldCheck, Users } from "lucide-react";
 import {
-  C, FB, R, S, WA, wrap, primaryBtn, PersonCard, PageHero, SectionLabel, BROKERAGE, LICENSE, PEOPLE,
+  C, FB, R, S, wrap, whatsAppBtn, WhatsAppIconBadge, PersonCard, PageHero, SectionLabel, BROKERAGE, LICENSE, PEOPLE,
 } from "../theme.jsx";
 import { useLang, interp } from "../i18n/LanguageContext.jsx";
 
@@ -67,7 +67,7 @@ function Brokerage() {
   );
 }
 
-function CTA({ onCTA }) {
+function CTA({ ctaHref }) {
   const { t } = useLang();
   return (
     <section style={{background:C.surface,borderTop:`1px solid ${C.border}`}}>
@@ -76,15 +76,10 @@ function CTA({ onCTA }) {
           {t.about.cta.title}
         </h2>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
-          <button onClick={onCTA} style={primaryBtn({padding:'15px 28px',fontSize:16,display:'inline-flex',alignItems:'center',gap:8})}>
-            {t.about.cta.btnAccount} <ArrowRight size={18}/>
-          </button>
-          <a href={`https://wa.me/${WA}`} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
-            <button style={{padding:'15px 26px',fontSize:16,background:'#fff',color:C.navy,cursor:'pointer',
-                            border:`1px solid ${C.border}`,borderRadius:R.control,fontFamily:FB,fontWeight:600,
-                            display:'inline-flex',alignItems:'center',gap:8}}>
-              <MessageCircle size={18}/> {t.about.cta.btnWhatsapp}
-            </button>
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+            <span className="kb-whatsapp-button" style={whatsAppBtn({padding:'14px 24px',fontSize:16,display:'inline-flex',alignItems:'center',gap:9})}>
+              <WhatsAppIconBadge size={26} logoSize={18}/> {t.about.cta.btnAccount} <ArrowRight size={18}/>
+            </span>
           </a>
         </div>
       </div>
@@ -93,7 +88,7 @@ function CTA({ onCTA }) {
 }
 
 export default function About() {
-  const { openForm } = useOutletContext();
+  const { getWhatsAppHref } = useOutletContext();
   const { t } = useLang();
   return (
     <>
@@ -105,7 +100,7 @@ export default function About() {
       <Values/>
       <Team/>
       <Brokerage/>
-      <CTA onCTA={openForm}/>
+      <CTA ctaHref={getWhatsAppHref("hakkimizda")}/>
     </>
   );
 }

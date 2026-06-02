@@ -59,7 +59,7 @@ export default function PrivacyPolicy() {
             protect personal information when you visit <strong>kredibaba.ca</strong> or use our mortgage advisory services.
           </P>
           <P mt={12}>
-            By accessing our website or submitting a form, you consent to the collection and use of your information as
+            By accessing our website or contacting us through WhatsApp, phone, email, or another channel, you consent to the collection and use of your information as
             described in this Policy. This Policy works alongside our{" "}
             <Link to="/kullanim-sartlari" style={{ color: C.blue, textDecoration: "underline" }}>Terms of Use</Link>.
           </P>
@@ -76,10 +76,10 @@ export default function PrivacyPolicy() {
             "Contact information: email address, phone number (WhatsApp preferred), and mailing address.",
             "Financial information: annual household income range, down payment amount, employment type, and approximate credit profile.",
             "Property information: approximate property value, location (city/region), and intended property use.",
-            "Application information: responses to the starting-form questions used to route your file and identify the right mortgage path.",
+            "Intake information: mortgage goals, timing, documents, and other details you choose to share so we can identify the right mortgage path.",
           ]} />
           <P mt={12}>
-            We collect this information directly from you when you submit a starting form, contact us via WhatsApp,
+            We collect this information directly from you when you contact us via WhatsApp,
             email, or phone, or otherwise interact with our services.
           </P>
         </Section>

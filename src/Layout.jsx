@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronUp, Menu, Phone, Search, ShieldCheck, X } from "lucide-react";
-import { C, FB, R, S, SHADOW, TEL, LICENSE, BROKERAGE, wrap } from "./theme.jsx";
+import { C, FB, R, S, SHADOW, TEL, LICENSE, BROKERAGE, WhatsAppIconBadge, buildWhatsAppUrl, wrap } from "./theme.jsx";
 import { useLang, interp } from "./i18n/LanguageContext.jsx";
 import LanguageToggle from "./components/LanguageToggle.jsx";
-import FormModal from "./FormModal.jsx";
 import kredibabaMark from "./assets/kredibaba-mark.svg";
 
 function Logo() {
@@ -23,7 +22,7 @@ function Logo() {
   );
 }
 
-function TopBar({ onCTA }) {
+function TopBar({ ctaHref }) {
   const { t } = useLang();
   return (
     <div className="kb-top-promo">
@@ -31,7 +30,9 @@ function TopBar({ onCTA }) {
         <span className="kb-top-promo-text">
           <Search size={15}/> {t.topPromo.text}
         </span>
-        <button onClick={onCTA} className="kb-top-promo-cta">{t.topPromo.cta}</button>
+        <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="kb-top-promo-cta kb-whatsapp-button">
+          <WhatsAppIconBadge size={22} logoSize={16}/> {t.topPromo.cta}
+        </a>
       </div>
     </div>
   );
@@ -116,7 +117,7 @@ function MobileDrawer({ open, currentGroup, setCurrentGroup, onClose }) {
   );
 }
 
-function Navbar({onCTA}) {
+function Navbar({ctaHref}) {
   const { t } = useLang();
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -173,13 +174,15 @@ function Navbar({onCTA}) {
         </div>
         <div className="kb-desktop-actions">
           <LanguageToggle />
-          <button onClick={onCTA} className="kb-primary-nav-cta">
-            {t.nav.cta}
-          </button>
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="kb-primary-nav-cta kb-whatsapp-button">
+            <WhatsAppIconBadge size={23} logoSize={16}/> {t.nav.cta}
+          </a>
         </div>
         <div className="kb-mobile-actions">
           <LanguageToggle />
-          <button onClick={onCTA} className="kb-primary-nav-cta">{t.nav.cta}</button>
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="kb-primary-nav-cta kb-whatsapp-button">
+            <WhatsAppIconBadge size={23} logoSize={16}/> {t.nav.cta}
+          </a>
           <button
             className="kb-mobile-menu-button"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -272,15 +275,10 @@ function Footer() {
 }
 
 export default function Layout() {
-  const [showForm, setShowForm] = useState(false);
-  const open  = () => setShowForm(true);
-  const close = () => setShowForm(false);
+  const { lang } = useLang();
   const { pathname, hash } = useLocation();
-
-  useEffect(() => {
-    document.body.style.overflow = showForm ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [showForm]);
+  const getWhatsAppHref = (source) => buildWhatsAppUrl({ lang, source: source || pathname || 'site' });
+  const ctaHref = getWhatsAppHref(pathname || 'site');
 
   useEffect(() => {
     if (!hash) {
@@ -309,7 +307,10 @@ export default function Layout() {
         .kb-top-promo{background:${C.navy};color:#fff;}
         .kb-top-promo-inner{min-height:42px;display:flex;align-items:center;justify-content:center;gap:${S[16]}px;font-family:${FB};}
         .kb-top-promo-text{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:600;letter-spacing:0;}
-        .kb-top-promo-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:13.5px;font-weight:600;padding:8px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
+        .kb-top-promo-cta{border:none;border-radius:${R.control}px;background:${C.wa};color:${C.waText};font-family:${FB};font-size:13.5px;font-weight:700;padding:6px 16px;cursor:pointer;box-shadow:0 10px 22px rgba(37,211,102,.18);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid ${C.waDark}55;}
+        .kb-whatsapp-button{transition:transform .15s,background .15s,box-shadow .15s,border-color .15s,filter .15s;}
+        .kb-whatsapp-button:hover{background:${C.waDark}!important;color:#fff!important;filter:none!important;transform:translateY(-1px);box-shadow:0 14px 28px rgba(18,140,126,.24)!important;border-color:${C.waDark}!important;}
+        .kb-whatsapp-button:active{transform:translateY(0);}
         .kb-navbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid ${C.border};}
         .kb-nav-inner{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:18px;}
         .kb-nav-left{display:flex;align-items:center;gap:34px;min-width:0;}
@@ -329,7 +330,7 @@ export default function Layout() {
         .kb-nav-button svg{transition:transform .15s;}
         .kb-nav-button.is-active svg{transform:rotate(180deg);}
         .kb-desktop-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-        .kb-primary-nav-cta{border:none;border-radius:${R.control}px;background:${C.blue};color:#fff;font-family:${FB};font-size:14.5px;font-weight:600;padding:11px 18px;cursor:pointer;box-shadow:${SHADOW.card};}
+        .kb-primary-nav-cta{border:none;border-radius:${R.control}px;background:${C.wa};color:${C.waText};font-family:${FB};font-size:14.5px;font-weight:700;padding:9px 16px;cursor:pointer;box-shadow:0 10px 22px rgba(37,211,102,.18);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid ${C.waDark}55;}
         .kb-lang-toggle{display:inline-flex;align-items:center;gap:4px;padding:3px;background:${C.surface};border:1px solid ${C.border};border-radius:${R.control}px;flex-shrink:0;}
         .kb-lang-flag{display:inline-flex;align-items:center;justify-content:center;width:30px;height:22px;padding:0;border:none;border-radius:5px;background:transparent;cursor:pointer;opacity:.45;filter:grayscale(55%);transition:opacity .15s,filter .15s,box-shadow .15s;}
         .kb-lang-flag img{width:24px;height:16px;object-fit:cover;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(10,37,64,.10);}
@@ -468,12 +469,10 @@ export default function Layout() {
         }
       `}</style>
 
-      <TopBar onCTA={open}/>
-      <Navbar onCTA={open}/>
-      <Outlet context={{ openForm: open }}/>
+      <TopBar ctaHref={ctaHref}/>
+      <Navbar ctaHref={ctaHref}/>
+      <Outlet context={{ getWhatsAppHref, whatsappHref: ctaHref }}/>
       <Footer/>
-
-      {showForm && <FormModal onClose={close}/>}
     </div>
   );
 }
