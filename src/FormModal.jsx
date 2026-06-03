@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X, ChevronLeft, MessageCircle, Check, ArrowRight, Lock } from "lucide-react";
-import { C, FB, R, SHADOW, WA, CAL, LICENSE, BROKERAGE, btn, primaryBtn, ghostBtn, TrustRow } from "./theme.jsx";
+import { C, FB, R, SHADOW, WA, CAL, LICENSE, BROKERAGE, btn, primaryBtn, ghostBtn, TrustRow, buildWhatsAppUrl } from "./theme.jsx";
 import { useLang, interp } from "./i18n/LanguageContext.jsx";
 
 const RESULT_STYLE = {
@@ -16,9 +16,9 @@ function calcResult({employment, credit}) {
 }
 
 function ResultScreen({result, contact, onClose}) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const r = { ...t.form.results[result], ...RESULT_STYLE[result] };
-  const waText = encodeURIComponent(t.form.waText(contact.name));
+  const waUrl = buildWhatsAppUrl({ lang });
   return (
     <div style={{position:'fixed',inset:0,zIndex:1001,background:C.surface,overflow:'auto'}}>
       <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}`}</style>
@@ -55,7 +55,7 @@ function ResultScreen({result, contact, onClose}) {
               {r.cta1} <ArrowRight size={17}/>
             </button>
           </a>
-          <a href={`https://wa.me/${WA}?text=${waText}`} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+          <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
             <button style={{...ghostBtn({width:'100%',padding:'16px',fontSize:16}),display:'flex',alignItems:'center',justifyContent:'center',gap:8,color:C.wa,borderColor:`${C.wa}55`}}>
               <MessageCircle size={17}/> {r.cta2}
             </button>

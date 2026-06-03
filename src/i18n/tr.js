@@ -540,7 +540,7 @@ export default {
     privacy: "Bilgileriniz {BROKERAGE} süreci kapsamında değerlendirilir · {LICENSE}",
     resultAssessment: (name) => `${name} için hazırlanan ilk değerlendirme`,
     resultDisclaimer: "Kredi onayı veya oran garantisi değildir.",
-    waText: (name) => `Merhaba Kredibaba, mortgage konusunda bilgi almak istiyorum. Adım: ${name}`,
+    waText: () => `Merhaba, mortgage konusunda yardım almak istiyorum.`,
     steps: [
       {
         id: "goal",

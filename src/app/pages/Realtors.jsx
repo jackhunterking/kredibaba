@@ -1,5 +1,5 @@
 import { Users, Handshake, TrendingUp, MessageCircle, Check } from "lucide-react";
-import { FB, R, C, WA } from "../../theme.jsx";
+import { FB, R, C, WA, buildWhatsAppUrl } from "../../theme.jsx";
 import { A } from "../appTheme.js";
 import { useLang } from "../../i18n/LanguageContext.jsx";
 import { PageHeading, PanelCard, IconBubble } from "../components/ui.jsx";
@@ -8,7 +8,7 @@ import { appPrimaryBtn } from "../components/ui.jsx";
 const ICONS = [<Handshake size={20} />, <TrendingUp size={20} />, <Users size={20} />];
 
 export default function Realtors() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const r = t.app.realtors;
   const items = r.benefits.map((b, i) => ({ ...b, icon: ICONS[i] }));
 
@@ -22,7 +22,7 @@ export default function Realtors() {
       }}>
         <h2 style={{ fontFamily: FB, fontSize: "clamp(22px,3vw,28px)", fontWeight: 700, margin: "0 0 10px", maxWidth: 620 }}>{r.heroTitle}</h2>
         <p style={{ fontFamily: FB, fontSize: 15, color: "rgba(255,255,255,0.78)", lineHeight: 1.6, margin: "0 0 20px", maxWidth: 600 }}>{r.heroBody}</p>
-        <a href={`https://wa.me/${WA}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href={buildWhatsAppUrl({ lang })} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button style={appPrimaryBtn({ padding: "13px 22px", background: "#fff", color: C.navy })}>
             <MessageCircle size={17} /> {r.cta}
           </button>

@@ -137,11 +137,10 @@ export const CAL = 'https://calendly.com/kredibaba/danisma';
 export const LICENSE = 'FSCO Licence # 10464';
 export const BROKERAGE = 'RMA Mortgage';
 
-export function buildWhatsAppUrl({ lang = 'tr', source = 'site' } = {}) {
-  const page = source || 'site';
+export function buildWhatsAppUrl({ lang = 'tr' } = {}) {
   const message = lang === 'en'
-    ? `Hello Kredibaba, I would like help with a mortgage. Page: ${page}.`
-    : `Merhaba Kredibaba, mortgage konusunda yardım almak istiyorum. Sayfa: ${page}.`;
+    ? `Hi, I would like to get more help on mortgage.`
+    : `Merhaba, mortgage konusunda yardım almak istiyorum.`;
   return `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
 }
 

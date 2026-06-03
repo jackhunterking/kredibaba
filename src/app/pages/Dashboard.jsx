@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Home, RefreshCw, PiggyBank, ArrowRight, MessageCircle, Info, Building2, ShieldCheck,
 } from "lucide-react";
-import { C, FB, R, S, PhotoAvatar, PEOPLE, WA } from "../../theme.jsx";
+import { C, FB, R, S, PhotoAvatar, PEOPLE, WA, buildWhatsAppUrl } from "../../theme.jsx";
 import { A } from "../appTheme.js";
 import { useLang, interp } from "../../i18n/LanguageContext.jsx";
 import { usePlans, useProfile } from "../data/hooks.js";
@@ -64,7 +64,7 @@ function ActionCard({ icon, title, desc, button, onClick, busy }) {
 }
 
 function HelpCard() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const d = t.app.dashboard;
   const { profile } = useProfile();
   const name = profile?.first_name || "";
@@ -85,7 +85,7 @@ function HelpCard() {
         {name ? interp(d.help.greeting, { name }) : d.help.greetingNoName}
       </div>
       <div style={{ fontFamily: FB, fontSize: 21, fontWeight: 700, marginBottom: 16 }}>{d.help.title}</div>
-      <a href={`https://wa.me/${WA}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+      <a href={buildWhatsAppUrl({ lang })} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10,
           background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.18)",

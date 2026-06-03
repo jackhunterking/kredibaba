@@ -268,8 +268,8 @@ function Footer() {
 export default function Layout() {
   const { lang } = useLang();
   const { pathname, hash } = useLocation();
-  const getWhatsAppHref = (source) => buildWhatsAppUrl({ lang, source: source || pathname || 'site' });
-  const ctaHref = getWhatsAppHref(pathname || 'site');
+  const getWhatsAppHref = () => buildWhatsAppUrl({ lang });
+  const ctaHref = getWhatsAppHref();
 
   useEffect(() => {
     if (!hash) {

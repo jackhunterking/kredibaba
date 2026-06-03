@@ -540,7 +540,7 @@ export default {
     privacy: "Your information is handled within the {BROKERAGE} process · {LICENSE}",
     resultAssessment: (name) => `Initial assessment prepared for ${name}`,
     resultDisclaimer: "This is not a credit approval or rate guarantee.",
-    waText: (name) => `Hello Kredibaba, I would like information about a mortgage. My name: ${name}`,
+    waText: () => `Hi, I would like to get more help on mortgage.`,
     steps: [
       {
         id: "goal",

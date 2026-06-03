@@ -21,7 +21,7 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
-import { C, FB, PEOPLE, PhotoAvatar, R, WA } from "../../theme.jsx";
+import { C, FB, PEOPLE, PhotoAvatar, R, WA, buildWhatsAppUrl } from "../../theme.jsx";
 import { A } from "../appTheme.js";
 import { useLang, interp } from "../../i18n/LanguageContext.jsx";
 import {
@@ -161,7 +161,7 @@ function CompletionBar({ step, locked, canComplete, error, labels, onComplete })
 }
 
 function SupportCard() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const d = t.app.dashboard;
   const { profile } = useProfile();
   const name = profile?.first_name || "";
@@ -184,7 +184,7 @@ function SupportCard() {
         {name ? interp(d.help.greeting, { name }) : d.help.greetingNoName}
       </div>
       <div style={{ fontFamily: FB, fontSize: 21, fontWeight: 800, marginBottom: 16 }}>{d.help.title}</div>
-      <a href={`https://wa.me/${WA}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+      <a href={buildWhatsAppUrl({ lang })} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10,
           background: "#fff", color: C.navy, borderRadius: R.control, padding: "12px 14px",

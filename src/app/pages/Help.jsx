@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, MessageCircle, Phone, CalendarClock } from "lucide-react";
-import { FB, R, WA, TEL, TEL_LINK, CAL } from "../../theme.jsx";
+import { FB, R, WA, TEL, TEL_LINK, CAL, buildWhatsAppUrl } from "../../theme.jsx";
 import { A } from "../appTheme.js";
 import { useLang } from "../../i18n/LanguageContext.jsx";
 import { PageHeading, PanelCard, IconBubble } from "../components/ui.jsx";
@@ -22,12 +22,12 @@ function FaqItem({ q, a, open, onToggle }) {
 }
 
 export default function Help() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const h = t.app.help;
   const [open, setOpen] = useState(0);
 
   const contacts = [
-    { icon: <MessageCircle size={20} />, title: h.whatsapp, sub: h.whatsappSub, href: `https://wa.me/${WA}`, tone: "green" },
+    { icon: <MessageCircle size={20} />, title: h.whatsapp, sub: h.whatsappSub, href: buildWhatsAppUrl({ lang }), tone: "green" },
     { icon: <Phone size={20} />, title: h.call, sub: TEL, href: `tel:${TEL_LINK}`, tone: "accent" },
     { icon: <CalendarClock size={20} />, title: h.book, sub: h.bookSub, href: CAL, tone: "accent" },
   ];
